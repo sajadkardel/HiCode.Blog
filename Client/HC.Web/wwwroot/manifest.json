@@ -1,6 +1,6 @@
 {
-  "name": "HC.Ui",
-  "short_name": "HC.Ui",
+  "name": "HC.Web",
+  "short_name": "HC.Web",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",

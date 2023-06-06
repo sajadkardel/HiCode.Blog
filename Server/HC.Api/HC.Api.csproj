@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Client\HC.Ui\HC.Ui.csproj" />
+    <ProjectReference Include="..\..\Client\HC.Web\HC.Web.csproj" />
     <ProjectReference Include="..\..\Shared\HC.Shared\HC.Shared.csproj" />
     <ProjectReference Include="..\HC.Infrastructure\HC.Infrastructure.csproj" />
   </ItemGroup>

@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using static HC.Ui.Pages.FetchData;
+using static HC.Web.Pages.FetchData;
 
 namespace HC.Api.Controllers
 {
