@@ -17,19 +17,19 @@ namespace HC.Infrastructure.PackageConfiguration.Identity;
 
 public static class IdentityConfigurationExtensions
 {
-    public static void AddCustomIdentity(this IServiceCollection services, IdentitySettings settings)
+    public static void AddCustomIdentity(this IServiceCollection services)
     {
         services.AddIdentity<User, Role>(identityOptions =>
         {
             //Password Settings
-            identityOptions.Password.RequireDigit = settings.PasswordRequireDigit;
-            identityOptions.Password.RequiredLength = settings.PasswordRequiredLength;
-            identityOptions.Password.RequireNonAlphanumeric = settings.PasswordRequireNonAlphanumeric; //#@!
-            identityOptions.Password.RequireUppercase = settings.PasswordRequireUppercase;
-            identityOptions.Password.RequireLowercase = settings.PasswordRequireLowercase;
+            identityOptions.Password.RequireDigit = IdentitySettings.Get().PasswordRequireDigit;
+            identityOptions.Password.RequiredLength = IdentitySettings.Get().PasswordRequiredLength;
+            identityOptions.Password.RequireNonAlphanumeric = IdentitySettings.Get().PasswordRequireNonAlphanumeric; //#@!
+            identityOptions.Password.RequireUppercase = IdentitySettings.Get().PasswordRequireUppercase;
+            identityOptions.Password.RequireLowercase = IdentitySettings.Get().PasswordRequireLowercase;
 
             //UserName Settings
-            identityOptions.User.RequireUniqueEmail = settings.RequireUniqueEmail;
+            identityOptions.User.RequireUniqueEmail = IdentitySettings.Get().RequireUniqueEmail;
 
             //Singin Settings
             //identityOptions.SignIn.RequireConfirmedEmail = false;
@@ -44,7 +44,7 @@ public static class IdentityConfigurationExtensions
         .AddDefaultTokenProviders();
     }
 
-    public static void AddJwtAuthentication(this IServiceCollection services, JwtSettings jwtSettings)
+    public static void AddJwtAuthentication(this IServiceCollection services)
     {
         services.AddAuthentication(options =>
         {
@@ -53,8 +53,8 @@ public static class IdentityConfigurationExtensions
             options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
         }).AddJwtBearer(options =>
         {
-            var secretKey = Encoding.UTF8.GetBytes(jwtSettings.SecretKey);
-            var encryptionKey = Encoding.UTF8.GetBytes(jwtSettings.EncryptKey);
+            var secretKey = Encoding.UTF8.GetBytes(JwtSettings.Get().SecretKey);
+            var encryptionKey = Encoding.UTF8.GetBytes(JwtSettings.Get().EncryptKey);
 
             var validationParameters = new TokenValidationParameters
             {
@@ -68,10 +68,10 @@ public static class IdentityConfigurationExtensions
                 ValidateLifetime = true,
 
                 ValidateAudience = true, //default : false
-                ValidAudience = jwtSettings.Audience,
+                ValidAudience = JwtSettings.Get().Audience,
 
                 ValidateIssuer = true, //default : false
-                ValidIssuer = jwtSettings.Issuer,
+                ValidIssuer = JwtSettings.Get().Issuer,
 
                 TokenDecryptionKey = new SymmetricSecurityKey(encryptionKey)
             };

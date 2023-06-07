@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using HC.Common.Markers;
-using HC.Common.Settings;
+using HC.Common.Utilities;
 using HC.DataAccess.Context;
 using HC.DataAccess.Contracts;
 using HC.DataAccess.Repositories;
@@ -16,7 +16,7 @@ public static class AutofacConfigurationExtensions
         //RegisterType > As > Liftetime
         containerBuilder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
 
-        var commonAssembly = typeof(GeneralSettings).Assembly;
+        var commonAssembly = typeof(Assert).Assembly;
         var entitiesAssembly = typeof(IEntity).Assembly;
         var dataAssembly = typeof(ApplicationDbContext).Assembly;
         var servicesAssembly = typeof(JwtService).Assembly;

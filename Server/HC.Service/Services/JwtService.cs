@@ -12,33 +12,30 @@ namespace HC.Service.Services;
 
 public class JwtService : IJwtService, IScopedDependency
 {
-    private readonly GeneralSettings _generalSettings;
     private readonly SignInManager<User> _signInManager;
 
-    public JwtService(IOptionsSnapshot<GeneralSettings> settings, SignInManager<User> signInManager)
+    public JwtService(SignInManager<User> signInManager)
     {
-        _generalSettings = settings.Value;
         _signInManager = signInManager;
     }
 
     public async Task<AccessToken> GenerateAsync(User user)
     {
-
-        byte[] secretKey = Encoding.UTF8.GetBytes(_generalSettings.JwtSettings.SecretKey); // longer that 16 character
+        byte[] secretKey = Encoding.UTF8.GetBytes(JwtSettings.Get().SecretKey); // longer that 16 character
         SigningCredentials signingCredentials = new(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256Signature);
 
-        byte[] encryptionkey = Encoding.UTF8.GetBytes(_generalSettings.JwtSettings.EncryptKey); //must be 16 character
+        byte[] encryptionkey = Encoding.UTF8.GetBytes(JwtSettings.Get().EncryptKey); //must be 16 character
         EncryptingCredentials encryptingCredentials = new(new SymmetricSecurityKey(encryptionkey), SecurityAlgorithms.Aes128KW, SecurityAlgorithms.Aes128CbcHmacSha256);
 
         IEnumerable<Claim> claims = await GetClaimsAsync(user);
 
         SecurityTokenDescriptor descriptor = new()
         {
-            Issuer = _generalSettings.JwtSettings.Issuer,
-            Audience = _generalSettings.JwtSettings.Audience,
+            Issuer = JwtSettings.Get().Issuer,
+            Audience = JwtSettings.Get().Audience,
             IssuedAt = DateTime.Now,
-            NotBefore = DateTime.Now.AddMinutes(_generalSettings.JwtSettings.NotBeforeMinutes),
-            Expires = DateTime.Now.AddMinutes(_generalSettings.JwtSettings.ExpirationMinutes),
+            NotBefore = DateTime.Now.AddMinutes(JwtSettings.Get().NotBeforeMinutes),
+            Expires = DateTime.Now.AddMinutes(JwtSettings.Get().ExpirationMinutes),
             SigningCredentials = signingCredentials,
             EncryptingCredentials = encryptingCredentials,
             Subject = new ClaimsIdentity(claims)

@@ -1,4 +1,5 @@
-﻿
+﻿using HC.Common.Utilities;
+
 namespace HC.Common.Settings;
 
 public class IdentitySettings
@@ -9,4 +10,6 @@ public class IdentitySettings
     public bool PasswordRequireUppercase { get; set; }
     public bool PasswordRequireLowercase { get; set; }
     public bool RequireUniqueEmail { get; set; }
+
+    public static IdentitySettings Get() => ConfigurationExtensions.GetSection<IdentitySettings>(nameof(IdentitySettings));
 }

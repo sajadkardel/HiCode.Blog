@@ -1,5 +1,6 @@
 ﻿using FluentValidation.AspNetCore;
 using HC.Common.Markers;
+using HC.Common.Settings;
 using HC.DataAccess.Context;
 using HC.Infrastructure.PackageConfiguration.FluentValidation;
 using Microsoft.AspNetCore.Mvc;
@@ -15,11 +16,11 @@ namespace HC.Infrastructure.Configuration;
 
 public static class ServiceCollectionExtensions
 {
-    public static void AddDbContext(this IServiceCollection services, IConfiguration configuration)
+    public static void AddDbContext(this IServiceCollection services)
     {
         services.AddDbContext<ApplicationDbContext>(options =>
         {
-            options.UseSqlServer(configuration.GetConnectionString("SqlServer"));
+            options.UseSqlServer(ConnectionStrings.Get().SqlServer);
             //Tips
             //Automatic client evaluation is no longer supported. This event is no longer generated.
             //This line is no longer needed.
@@ -29,8 +30,10 @@ public static class ServiceCollectionExtensions
 
     public static void AddMinimalMvc(this IServiceCollection services)
     {
+        services.AddRazorPages();
+
         //https://github.com/aspnet/AspNetCore/blob/0303c9e90b5b48b309a78c2ec9911db1812e6bf3/src/Mvc/Mvc/src/MvcServiceCollectionExtensions.cs
-        services.AddControllers(options =>
+        services.AddControllersWithViews(options =>
         {
             options.Filters.Add(new AuthorizeFilter()); //Apply AuthorizeFilter as global filter to all actions
 
