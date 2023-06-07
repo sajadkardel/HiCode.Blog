@@ -38,7 +38,7 @@ public static class SwaggerConfigurationExtensions
         //Add services and configuration to use swagger
         services.AddSwaggerGen(options =>
         {
-            var xmlDocPath = Path.Combine(AppContext.BaseDirectory, "Api.xml");
+            var xmlDocPath = Path.Combine(AppContext.BaseDirectory, "HC.Api.xml");
             //show controller XML comments like summary
             options.IncludeXmlComments(xmlDocPath, true);
 
