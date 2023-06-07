@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Hosting;
-using HC.Common.Api;
+using HC.Common.Enums;
 using HC.Common.Exceptions;
 using HC.Infrastructure.Api;
 

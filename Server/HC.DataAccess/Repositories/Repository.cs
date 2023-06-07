@@ -4,10 +4,11 @@ using HC.DataAccess.Contracts;
 using HC.DataAccess.Context;
 using HC.Entity.Common;
 using HC.Common.Utilities;
+using HC.Common.Markers;
 
 namespace HC.DataAccess.Repositories;
 
-public class Repository<TEntity> : IRepository<TEntity>
+public class Repository<TEntity> : IRepository<TEntity>, IScopedDependency
     where TEntity : class, IEntity
 {
     protected readonly ApplicationDbContext DbContext;

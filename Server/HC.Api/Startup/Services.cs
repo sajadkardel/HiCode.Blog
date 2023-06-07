@@ -22,5 +22,7 @@ public class Services
         services.AddCustomApiVersioning();
 
         services.AddSwagger();
+
+        services.AddMarkedServices();
     }
 }

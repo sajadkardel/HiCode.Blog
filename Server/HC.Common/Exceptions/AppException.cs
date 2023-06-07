@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Net;
-using HC.Common.Api;
+using HC.Common.Enums;
 
 namespace HC.Common.Exceptions;
 

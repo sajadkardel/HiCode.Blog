@@ -1,4 +1,4 @@
-﻿using HC.Common.Api;
+﻿using HC.Common.Enums;
 using HC.Common.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;

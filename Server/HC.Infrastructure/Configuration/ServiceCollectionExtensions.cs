@@ -1,8 +1,11 @@
 ﻿using FluentValidation.AspNetCore;
 using HC.Common.Markers;
 using HC.Common.Settings;
+using HC.Common.Utilities;
 using HC.DataAccess.Context;
+using HC.Entity.Common;
 using HC.Infrastructure.PackageConfiguration.FluentValidation;
+using HC.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -84,5 +87,28 @@ public static class ServiceCollectionExtensions
             //options.ApiVersionReader = ApiVersionReader.Combine(new QueryStringApiVersionReader("api-version"), new UrlSegmentApiVersionReader())
             // combine of [querystring] & [urlsegment]
         });
+    }
+
+    public static void AddMarkedServices(this IServiceCollection services)
+    {
+        var commonAssembly = typeof(Assert).Assembly;
+        var entitiesAssembly = typeof(IEntity).Assembly;
+        var dataAssembly = typeof(ApplicationDbContext).Assembly;
+        var servicesAssembly = typeof(JwtService).Assembly;
+
+        services.Scan(scan => scan.FromAssemblies(commonAssembly, entitiesAssembly, dataAssembly, servicesAssembly)
+        .AddClasses(classes => classes.AssignableTo<IScopedDependency>())
+        .AsImplementedInterfaces()
+        .WithScopedLifetime());
+
+        services.Scan(scan => scan.FromAssemblies(commonAssembly, entitiesAssembly, dataAssembly, servicesAssembly)
+        .AddClasses(classes => classes.AssignableTo<ISingletonDependency>())
+        .AsImplementedInterfaces()
+        .WithSingletonLifetime());
+
+        services.Scan(scan => scan.FromAssemblies(commonAssembly, entitiesAssembly, dataAssembly, servicesAssembly)
+        .AddClasses(classes => classes.AssignableTo<ITransientDependency>())
+        .AsImplementedInterfaces()
+        .WithTransientLifetime());
     }
 }

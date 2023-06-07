@@ -1,4 +1,4 @@
-﻿using HC.Common.Api;
+﻿using HC.Common.Enums;
 using HC.Infrastructure.Api;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;

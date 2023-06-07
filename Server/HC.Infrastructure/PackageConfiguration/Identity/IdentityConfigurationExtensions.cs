@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Security.Claims;
 using System.Text;
-using HC.Common.Api;
+using HC.Common.Enums;
 using HC.Common.Exceptions;
 using HC.Common.Settings;
 using HC.Common.Utilities;
