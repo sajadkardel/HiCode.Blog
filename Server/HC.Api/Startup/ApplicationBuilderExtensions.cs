@@ -1,13 +1,9 @@
 ﻿using HC.Common.Utilities;
 using HC.DataAccess.Context;
-using HC.Service.Contracts;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+using HC.Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
-namespace HC.Service.Configuration;
+namespace HC.Api.Startup;
 
 public static class ApplicationBuilderExtensions
 {

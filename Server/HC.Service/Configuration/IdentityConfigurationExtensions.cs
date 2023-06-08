@@ -91,7 +91,7 @@ public static class IdentityConfigurationExtensions
                 OnTokenValidated = async context =>
                 {
                     var signInManager = context.HttpContext.RequestServices.GetRequiredService<SignInManager<User>>();
-                    var userRepository = context.HttpContext.RequestServices.GetRequiredService<IUserRepository>();
+                    var userRepository = context.HttpContext.RequestServices.GetRequiredService<UserManager<User>>();
 
                     var claimsIdentity = context.Principal.Identity as ClaimsIdentity;
                     if (claimsIdentity.Claims?.Any() != true)
@@ -103,7 +103,7 @@ public static class IdentityConfigurationExtensions
 
                     //Find user and token from database and perform your custom validation
                     var userId = claimsIdentity.GetUserId<int>();
-                    var user = await userRepository.GetByIdAsync(context.HttpContext.RequestAborted, userId);
+                    var user = await userRepository.FindByIdAsync(userId.ToString());
 
                     //if (user.SecurityStamp != Guid.Parse(securityStamp))
                     //    context.Fail("Token security stamp is not valid.");
@@ -115,7 +115,8 @@ public static class IdentityConfigurationExtensions
                     if (!user.IsActive)
                         context.Fail("User is not active.");
 
-                    await userRepository.UpdateLastLoginDateAsync(user, context.HttpContext.RequestAborted);
+                    user.LastLoginDate = DateTimeOffset.Now;
+                    await userRepository.UpdateAsync(user);
                 },
                 OnChallenge = context =>
                 {

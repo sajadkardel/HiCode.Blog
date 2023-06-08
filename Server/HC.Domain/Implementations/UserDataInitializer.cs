@@ -1,12 +1,12 @@
 ﻿using HC.Common.Markers;
+using HC.Domain.Contracts;
 using HC.Entity.Identity;
-using HC.Service.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace HC.Service.Implementations;
+namespace HC.Domain.Implementations;
 
-public class UserDataInitializer : IDataInitializer , IScopedDependency
+public class UserDataInitializer : IDataInitializer, IScopedDependency
 {
     private readonly UserManager<User> userManager;
     private readonly RoleManager<Role> roleManager;
