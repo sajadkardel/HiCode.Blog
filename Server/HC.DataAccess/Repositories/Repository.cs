@@ -2,14 +2,14 @@
 using System.Linq.Expressions;
 using HC.DataAccess.Contracts;
 using HC.DataAccess.Context;
-using HC.Entity.Common;
 using HC.Common.Utilities;
 using HC.Common.Markers;
+using HC.Entity;
 
 namespace HC.DataAccess.Repositories;
 
 public class Repository<TEntity> : IRepository<TEntity>, IScopedDependency
-    where TEntity : class, IEntity
+    where TEntity : class
 {
     protected readonly ApplicationDbContext DbContext;
     public DbSet<TEntity> Entities { get; }

@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using HC.Common.Utilities;
-using HC.Entity.Common;
 using HC.Shared.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HC.Entity.Identity;
 
-public class User : IdentityUser<int>, IEntity<int>
+public class User : IdentityUser<int>
 {
     public User()
     {

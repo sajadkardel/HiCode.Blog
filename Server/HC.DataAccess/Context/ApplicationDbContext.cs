@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
-using HC.Entity.Common;
 using HC.Entity.Identity;
 using HC.Common.Utilities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using HC.Entity;
 
 namespace HC.DataAccess.Context;
 
@@ -26,9 +26,9 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, int>
     {
         base.OnModelCreating(modelBuilder);
 
-        var entitiesAssembly = typeof(IEntity).Assembly;
+        var entitiesAssembly = typeof(BaseEntity).Assembly;
 
-        modelBuilder.RegisterAllEntities<IEntity>(entitiesAssembly);
+        modelBuilder.RegisterAllEntities<BaseEntity>(entitiesAssembly);
         modelBuilder.RegisterEntityTypeConfiguration(entitiesAssembly);
         modelBuilder.AddRestrictDeleteBehaviorConvention();
         modelBuilder.AddSequentialGuidForIdConvention();

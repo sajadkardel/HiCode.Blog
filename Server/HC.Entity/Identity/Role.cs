@@ -1,13 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using HC.Common.Utilities;
-using HC.Entity.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HC.Entity.Identity;
 
-public class Role : IdentityRole<int>, IEntity<int>
+public class Role : IdentityRole<int>
 {
     [Required]
     [StringLength(100)]

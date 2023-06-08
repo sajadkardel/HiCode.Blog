@@ -1,10 +1,10 @@
-﻿using HC.Entity.Common;
+﻿using HC.Entity;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace HC.DataAccess.Contracts;
 
-public interface IRepository<TEntity> where TEntity : class, IEntity
+public interface IRepository<TEntity> where TEntity : class
 {
     DbSet<TEntity> Entities { get; }
     IQueryable<TEntity> Table { get; }

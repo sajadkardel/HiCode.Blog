@@ -2,7 +2,7 @@
 using HC.Common.Settings;
 using HC.Common.Utilities;
 using HC.DataAccess.Context;
-using HC.Entity.Common;
+using HC.Entity;
 using HC.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -86,7 +86,7 @@ public static class ServiceCollectionExtensions
     public static void AddMarkedServices(this IServiceCollection services)
     {
         var commonAssembly = typeof(Assert).Assembly;
-        var entitiesAssembly = typeof(IEntity).Assembly;
+        var entitiesAssembly = typeof(BaseEntity).Assembly;
         var dataAssembly = typeof(ApplicationDbContext).Assembly;
         var servicesAssembly = typeof(JwtService).Assembly;
 
