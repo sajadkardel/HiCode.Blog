@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using HC.Infrastructure.Api;
 using HC.DataAccess.Contracts;
 using HC.Entity.Identity;
-using HC.Api.Dto.Identity;
+using HC.Shared.Dtos.Identity;
 
 namespace HC.Api.Controllers.v1
 {
@@ -13,52 +11,75 @@ namespace HC.Api.Controllers.v1
     public class RoleController : BaseController
     {
         private readonly IRepository<Role> _repository;
-        private readonly IMapper _mapper;
 
-        public RoleController(IRepository<Role> repository, IMapper mapper)
+        public RoleController(IRepository<Role> repository)
         {
             _repository = repository;
-            _mapper = mapper;
         }
 
         [HttpGet]
-        public virtual async Task<List<RoleSelectDto>> Get(CancellationToken cancellationToken)
+        public virtual async Task<ApiResult<List<RoleSelectDto>>> Get(CancellationToken cancellationToken)
         {
-            var roles = await _repository.TableNoTracking.ProjectTo<RoleSelectDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);
-            return roles;
+            List<RoleSelectDto> dtos = new();
+
+            var roles = await _repository.TableNoTracking.ToListAsync(cancellationToken);
+            roles.ForEach(role => dtos.Add(new()
+            {
+                Name = role.Name,
+            }));
+
+            return dtos;
         }
 
         [HttpGet("{id:int}")]
-        public virtual async Task<RoleSelectDto> Get(int id, CancellationToken cancellationToken)
+        public virtual async Task<ApiResult<RoleSelectDto>> Get(int id, CancellationToken cancellationToken)
         {
-            var role = await _repository.TableNoTracking.ProjectTo<RoleSelectDto>(_mapper.ConfigurationProvider)
-                .SingleOrDefaultAsync(roleSelectDto => roleSelectDto.Id == id, cancellationToken);
-            return role;
+            var role = await _repository.TableNoTracking.SingleOrDefaultAsync(roleSelectDto => roleSelectDto.Id == id, cancellationToken);
+
+            if (role is null) return NotFound();
+
+            return new RoleSelectDto
+            {
+                Name = role.Name
+            };
         }
 
         [HttpPost]
-        public virtual async Task<RoleSelectDto> Create(RoleDto dto, CancellationToken cancellationToken)
+        public virtual async Task<ApiResult<RoleSelectDto>> Create(RoleDto dto, CancellationToken cancellationToken)
         {
-            var model = dto.ToEntity(_mapper);
+            Role model = new()
+            {
+                Name = dto.Name
+            };
+
             await _repository.Entities.AddAsync(model, cancellationToken);
 
-            var role = await _repository.TableNoTracking.ProjectTo<RoleSelectDto>(_mapper.ConfigurationProvider)
-                .SingleOrDefaultAsync(roleSelectDto => roleSelectDto.Id == model.Id, cancellationToken);
+            RoleSelectDto selectDto = new()
+            {
+                Name = model.Name
+            };
 
-            return role;
+            return selectDto;
         }
 
         [HttpPut]
-        public virtual async Task<RoleSelectDto> Update(int id, RoleDto dto, CancellationToken cancellationToken)
+        public virtual async Task<ApiResult<RoleSelectDto>> Update(int id, RoleDto dto, CancellationToken cancellationToken)
         {
             var model = await _repository.GetByIdAsync(cancellationToken, id);
-            model = dto.ToEntity(_mapper, model);
+
+            model = new()
+            {
+                Name= dto.Name
+            };
+
             await _repository.UpdateAsync(model, cancellationToken);
 
-            var role = await _repository.TableNoTracking.ProjectTo<RoleSelectDto>(_mapper.ConfigurationProvider)
-                .SingleOrDefaultAsync(roleSelectDto => roleSelectDto.Id == model.Id, cancellationToken);
+            RoleSelectDto selectDto = new()
+            {
+                Name = model.Name
+            };
 
-            return role;
+            return selectDto;
         }
 
         [HttpDelete("{id:int}")]

@@ -1,6 +1,5 @@
 ﻿using HC.Infrastructure.Configuration;
 using HC.Infrastructure.Middlewares;
-using HC.Infrastructure.PackageConfiguration.Swagger;
 
 namespace HC.Api.Startup;
 

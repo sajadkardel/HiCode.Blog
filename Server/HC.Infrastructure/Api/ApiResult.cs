@@ -67,6 +67,7 @@ public class ApiResult<TData> : ApiResult
     }
 
     #region Implicit Operators
+
     public static implicit operator ApiResult<TData>(TData data)
     {
         return new ApiResult<TData>(true, ApiResultStatusCode.Success, data);
@@ -112,5 +113,6 @@ public class ApiResult<TData> : ApiResult
     {
         return new ApiResult<TData>(false, ApiResultStatusCode.NotFound, (TData)result.Value);
     }
+
     #endregion
 }

@@ -1,14 +1,15 @@
-﻿using AutoMapper;
-using HC.Api.Dto.Product;
-using HC.DataAccess.Contracts;
-using HC.Entity.Blog;
+﻿using HC.DataAccess.Contracts;
+using HC.Entity.Identity;
 using HC.Infrastructure.Api;
 
 namespace HC.Api.Controllers.v1;
 
-public class ArticleController : CrudController<ArticleDto, ArticleSelectDto, Article, int>
+public class ArticleController : BaseController
 {
-    public ArticleController(IRepository<Article> repository, IMapper mapper) : base(repository, mapper)
+    private readonly IRepository<Role> _repository;
+
+    public ArticleController(IRepository<Role> repository)
     {
+        _repository = repository;
     }
 }

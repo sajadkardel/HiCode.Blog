@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HC.Api.Dto.Identity;
+namespace HC.Shared.Dtos.Identity;
 
 public class TokenRequest
 {

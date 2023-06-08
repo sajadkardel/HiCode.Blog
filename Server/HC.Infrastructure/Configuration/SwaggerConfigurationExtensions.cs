@@ -1,14 +1,18 @@
 ﻿using System.Reflection;
 using HC.Common.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using Pluralize.NET;
 using Swashbuckle.AspNetCore.Filters;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
-namespace HC.Infrastructure.PackageConfiguration.Swagger;
+namespace HC.Infrastructure.Configuration;
 
 public static class SwaggerConfigurationExtensions
 {
@@ -227,5 +231,166 @@ public static class SwaggerConfigurationExtensions
         });
 
         return app;
+    }
+}
+
+public class ApplySummariesOperationFilter : IOperationFilter
+{
+    public void Apply(OpenApiOperation operation, OperationFilterContext context)
+    {
+        var controllerActionDescriptor = context.ApiDescription.ActionDescriptor as ControllerActionDescriptor;
+        if (controllerActionDescriptor == null) return;
+
+        var pluralizer = new Pluralizer();
+
+        var actionName = controllerActionDescriptor.ActionName;
+        var singularizeName = pluralizer.Singularize(controllerActionDescriptor.ControllerName);
+        var pluralizeName = pluralizer.Pluralize(singularizeName);
+
+        var parameterCount = operation.Parameters.Where(p => p.Name != "version" && p.Name != "api-version").Count();
+
+        if (IsGetAllAction())
+        {
+            if (!operation.Summary.HasValue())
+                operation.Summary = $"Returns all {pluralizeName}";
+        }
+        else if (IsActionName("Post", "Create"))
+        {
+            if (!operation.Summary.HasValue())
+                operation.Summary = $"Creates a {singularizeName}";
+
+            if (!operation.Parameters[0].Description.HasValue())
+                operation.Parameters[0].Description = $"A {singularizeName} representation";
+        }
+        else if (IsActionName("Read", "Get"))
+        {
+            if (!operation.Summary.HasValue())
+                operation.Summary = $"Retrieves a {singularizeName} by unique id";
+
+            if (!operation.Parameters[0].Description.HasValue())
+                operation.Parameters[0].Description = $"a unique id for the {singularizeName}";
+        }
+        else if (IsActionName("Put", "Edit", "Update"))
+        {
+            if (!operation.Summary.HasValue())
+                operation.Summary = $"Updates a {singularizeName} by unique id";
+
+            //if (!operation.Parameters[0].Description.HasValue())
+            //    operation.Parameters[0].Description = $"A unique id for the {singularizeName}";
+
+            if (!operation.Parameters[0].Description.HasValue())
+                operation.Parameters[0].Description = $"A {singularizeName} representation";
+        }
+        else if (IsActionName("Delete", "Remove"))
+        {
+            if (!operation.Summary.HasValue())
+                operation.Summary = $"Deletes a {singularizeName} by unique id";
+
+            if (!operation.Parameters[0].Description.HasValue())
+                operation.Parameters[0].Description = $"A unique id for the {singularizeName}";
+        }
+
+        #region Local Functions
+        bool IsGetAllAction()
+        {
+            foreach (var name in new[] { "Get", "Read", "Select" })
+            {
+                if (actionName.Equals(name, StringComparison.OrdinalIgnoreCase) && parameterCount == 0 ||
+                    actionName.Equals($"{name}All", StringComparison.OrdinalIgnoreCase) ||
+                    actionName.Equals($"{name}{pluralizeName}", StringComparison.OrdinalIgnoreCase) ||
+                    actionName.Equals($"{name}All{singularizeName}", StringComparison.OrdinalIgnoreCase) ||
+                    actionName.Equals($"{name}All{pluralizeName}", StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        bool IsActionName(params string[] names)
+        {
+            foreach (var name in names)
+            {
+                if (actionName.Equals(name, StringComparison.OrdinalIgnoreCase) ||
+                    actionName.Equals($"{name}ById", StringComparison.OrdinalIgnoreCase) ||
+                    actionName.Equals($"{name}{singularizeName}", StringComparison.OrdinalIgnoreCase) ||
+                    actionName.Equals($"{name}{singularizeName}ById", StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        #endregion
+    }
+}
+
+public class RemoveVersionParameters : IOperationFilter
+{
+    public void Apply(OpenApiOperation operation, OperationFilterContext context)
+    {
+        // Remove version parameter from all Operations
+        var versionParameter = operation.Parameters.SingleOrDefault(p => p.Name == "version");
+        if (versionParameter != null)
+            operation.Parameters.Remove(versionParameter);
+    }
+}
+
+public class SetVersionInPaths : IDocumentFilter
+{
+    public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
+    {
+        var updatedPaths = new OpenApiPaths();
+
+        foreach (var entry in swaggerDoc.Paths)
+        {
+            updatedPaths.Add(
+                entry.Key.Replace("v{version}", swaggerDoc.Info.Version),
+                entry.Value);
+        }
+
+        swaggerDoc.Paths = updatedPaths;
+    }
+}
+
+public class UnauthorizedResponsesOperationFilter : IOperationFilter
+{
+    private readonly bool includeUnauthorizedAndForbiddenResponses;
+    private readonly string schemeName;
+
+    public UnauthorizedResponsesOperationFilter(bool includeUnauthorizedAndForbiddenResponses, string schemeName = "Bearer")
+    {
+        this.includeUnauthorizedAndForbiddenResponses = includeUnauthorizedAndForbiddenResponses;
+        this.schemeName = schemeName;
+    }
+
+    public void Apply(OpenApiOperation operation, OperationFilterContext context)
+    {
+        var filters = context.ApiDescription.ActionDescriptor.FilterDescriptors;
+        var metadta = context.ApiDescription.ActionDescriptor.EndpointMetadata;
+
+        var hasAnonymous = filters.Any(p => p.Filter is AllowAnonymousFilter) || metadta.Any(p => p is AllowAnonymousAttribute);
+        if (hasAnonymous) return;
+
+        var hasAuthorize = filters.Any(p => p.Filter is AuthorizeFilter) || metadta.Any(p => p is AuthorizeAttribute);
+        if (!hasAuthorize) return;
+
+        if (includeUnauthorizedAndForbiddenResponses)
+        {
+            operation.Responses.TryAdd("401", new OpenApiResponse { Description = "Unauthorized" });
+            operation.Responses.TryAdd("403", new OpenApiResponse { Description = "Forbidden" });
+        }
+
+        operation.Security.Add(new OpenApiSecurityRequirement
+        {
+            {
+                new OpenApiSecurityScheme
+                {
+                    Scheme = schemeName,
+                    Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "OAuth2" }
+                },
+                Array.Empty<string>() //new[] { "readAccess", "writeAccess" }
+            }
+        });
     }
 }

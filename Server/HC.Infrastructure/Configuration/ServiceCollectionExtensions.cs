@@ -1,10 +1,8 @@
-﻿using FluentValidation.AspNetCore;
-using HC.Common.Markers;
+﻿using HC.Common.Markers;
 using HC.Common.Settings;
 using HC.Common.Utilities;
 using HC.DataAccess.Context;
 using HC.Entity.Common;
-using HC.Infrastructure.PackageConfiguration.FluentValidation;
 using HC.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -13,7 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.Reflection;
 
 namespace HC.Infrastructure.Configuration;
 
@@ -52,9 +49,6 @@ public static class ServiceCollectionExtensions
             option.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             //option.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
             //option.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
-        }).AddFluentValidation(fv =>
-        {
-            fv.RegisterAllDtoValidators<IDtoValidator>(Assembly.GetEntryAssembly());
         });
 
         services.AddSwaggerGenNewtonsoftSupport();

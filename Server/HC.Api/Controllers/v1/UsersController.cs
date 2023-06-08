@@ -1,12 +1,10 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using HC.Api.Dto.Identity;
-using HC.Common.Exceptions;
+﻿using HC.Common.Exceptions;
 using HC.DataAccess.Contracts;
 using HC.Entity.Identity;
 using HC.Infrastructure.Api;
 using HC.Service;
 using HC.Service.Services;
+using HC.Shared.Dtos.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,15 +13,17 @@ using Microsoft.EntityFrameworkCore;
 namespace HC.Api.Controllers.v1
 {
     [ApiVersion("1")]
-    public class UsersController : CrudController<UserDto, UserSelectDto, User, int>
+    public class UsersController : BaseController
     {
         private readonly IJwtService _jwtService;
         private readonly UserManager<User> _userManager;
+        private readonly IRepository<User> _repository;
 
-        public UsersController(IRepository<User> repository, IMapper mapper, IJwtService jwtService, UserManager<User> userManager) : base(repository, mapper)
+        public UsersController(IRepository<User> repository, IJwtService jwtService, UserManager<User> userManager)
         {
             _jwtService = jwtService;
             _userManager = userManager;
+            _repository = repository;
         }
 
         /// <summary>
@@ -61,9 +61,21 @@ namespace HC.Api.Controllers.v1
         [HttpGet("[action]")]
         public virtual async Task<ApiResult<UserSelectDto>> GetByUserName([FromQuery] string userName, CancellationToken cancellationToken)
         {
-            var dto = await Repository.TableNoTracking.ProjectTo<UserSelectDto>(Mapper.ConfigurationProvider)
-                .SingleOrDefaultAsync(p => p.UserName.Equals(userName), cancellationToken);
-            return dto;
+            var model = await _repository.TableNoTracking.SingleOrDefaultAsync(p => p.UserName.Equals(userName), cancellationToken);
+
+            UserSelectDto selectDto = new()
+            {
+                UserName = userName,
+                FullName = model.FullName,
+                Email = model.Email,
+                PhoneNumber = model.PhoneNumber,
+                Age = model.Age,
+                Gender = model.Gender,
+                IsActive = model.IsActive,
+                LastLoginDate = model.LastLoginDate,
+            };
+
+            return selectDto;
         }
 
         /// <summary>
@@ -73,11 +85,11 @@ namespace HC.Api.Controllers.v1
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpDelete("[action]")]
-        public virtual async Task<ApiResult> DeleteByUserName([FromQuery] string userName, CancellationToken cancellationToken)
+        public virtual async Task<IActionResult> DeleteByUserName([FromQuery] string userName, CancellationToken cancellationToken)
         {
             var user = await _userManager.Users.SingleOrDefaultAsync(user1 => user1.UserName == userName, cancellationToken: cancellationToken);
+            if (user is null) return NotFound();
             await _userManager.DeleteAsync(user);
-
             return Ok();
         }
 
@@ -93,16 +105,31 @@ namespace HC.Api.Controllers.v1
         public virtual async Task<ApiResult<UserSelectDto>> UpdateByUserName([FromQuery] string userName, UserDto userDto, CancellationToken cancellationToken)
         {
             var model = await _userManager.Users.SingleOrDefaultAsync(user => user.UserName == userName, cancellationToken: cancellationToken);
-            userDto.Id = model.Id;
 
-            model = userDto.ToEntity(Mapper, model);
+            model = new()
+            {
+                UserName = userName,
+                FullName = userDto.FullName,
+                Email = userDto.Email,
+                Age = userDto.Age,
+                Gender = userDto.Gender,
+            };
 
-            await Repository.UpdateAsync(model, cancellationToken);
+            await _repository.UpdateAsync(model, cancellationToken);
 
-            var resultDto = await Repository.TableNoTracking.ProjectTo<UserSelectDto>(Mapper.ConfigurationProvider)
-                .SingleOrDefaultAsync(p => p.Id.Equals(model.Id), cancellationToken);
+            UserSelectDto selectDto = new()
+            {
+                UserName = userName,
+                FullName = model.FullName,
+                Email = model.Email,
+                PhoneNumber = model.PhoneNumber,
+                Age = model.Age,
+                Gender = model.Gender,
+                IsActive = model.IsActive,
+                LastLoginDate = model.LastLoginDate,
+            };
 
-            return resultDto;
+            return selectDto;
         }
     }
 }
