@@ -1,9 +1,9 @@
-﻿using HC.Common.Markers;
-using HC.Common.Settings;
+﻿using HC.Common.Settings;
 using HC.Common.Utilities;
 using HC.DataAccess.Context;
 using HC.Domain.Implementations;
 using HC.Service.Implementations;
+using HC.Shared.Markers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;

@@ -1,8 +1,8 @@
 ﻿using HC.DataAccess.Context;
 using HC.Entity.Identity;
-using HC.Common.Markers;
 using HC.Service.Implementations;
 using HC.Domain.Contracts;
+using HC.Shared.Markers;
 
 namespace HC.Domain.Implementations;
 

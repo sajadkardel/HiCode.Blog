@@ -1,6 +1,6 @@
-﻿using HC.Common.Markers;
-using HC.Domain.Contracts;
+﻿using HC.Domain.Contracts;
 using HC.Entity.Identity;
+using HC.Shared.Markers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

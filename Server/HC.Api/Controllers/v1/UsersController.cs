@@ -46,7 +46,7 @@ namespace HC.Api.Controllers.v1
             if (!isPasswordValid)
                 throw new BadRequestException("نام کاربری یا رمز عبور اشتباه است");
 
-            var jwt = await _jwtService.GenerateAsync(user);
+            var jwt = await _jwtService.GenerateTokenAsync(user);
             return jwt;
         }
 

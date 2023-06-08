@@ -1,5 +1,4 @@
-﻿
-namespace HC.Shared.Configurations;
+﻿namespace HC.Shared.Startup;
 
 public static class ServiceCollectionExtensions
 {

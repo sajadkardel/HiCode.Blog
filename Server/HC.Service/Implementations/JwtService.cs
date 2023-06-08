@@ -1,11 +1,11 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using HC.Common.Markers;
-using HC.Common.Models;
 using HC.Common.Settings;
 using HC.Entity.Identity;
 using HC.Service.Contracts;
+using HC.Shared.Dtos.Identity;
+using HC.Shared.Markers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 
@@ -20,7 +20,7 @@ public class JwtService : IJwtService, IScopedDependency
         _signInManager = signInManager;
     }
 
-    public async Task<AccessToken> GenerateAsync(User user)
+    public async Task<AccessToken> GenerateTokenAsync(User user)
     {
         byte[] secretKey = Encoding.UTF8.GetBytes(JwtSettings.Get().SecretKey); // longer that 16 character
         SigningCredentials signingCredentials = new(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256Signature);
@@ -50,6 +50,11 @@ public class JwtService : IJwtService, IScopedDependency
 
         JwtSecurityToken securityToken = tokenHandler.CreateJwtSecurityToken(descriptor);
 
-        return new AccessToken(securityToken);
+        return new AccessToken()
+        {
+            token_type = "Bearer",
+            access_token = $"{securityToken.Header}.{securityToken.Payload}.{securityToken.RawSignature}",
+            expires_in = securityToken.ValidTo
+        };
     }
 }

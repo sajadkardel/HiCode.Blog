@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using HC.Common.Models;
 using HC.Entity.Identity;
+using HC.Shared.Dtos.Identity;
 
 namespace HC.Service.Contracts;
 
 public interface IJwtService
 {
-    Task<AccessToken> GenerateAsync(User user);
+    Task<AccessToken> GenerateTokenAsync(User user);
 }

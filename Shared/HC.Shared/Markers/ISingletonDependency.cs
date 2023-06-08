@@ -1,5 +1,4 @@
-﻿
-namespace HC.Common.Markers;
+﻿namespace HC.Shared.Markers;
 
 public interface ISingletonDependency
 {

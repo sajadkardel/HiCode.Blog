@@ -1,8 +1,7 @@
-﻿
-using HC.Common.Markers;
-using HC.DataAccess.Context;
+﻿using HC.DataAccess.Context;
 using HC.Entity.Blog;
 using HC.Service.Implementations;
+using HC.Shared.Markers;
 
 namespace HC.Domain.Implementations;
 
