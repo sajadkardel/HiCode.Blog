@@ -2,7 +2,7 @@
 
 namespace HC.Shared.Dtos.Identity;
 
-public class UserDto
+public class UserRequestDto
 {
     public string UserName { get; set; }
 

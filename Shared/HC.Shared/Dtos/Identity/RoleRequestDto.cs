@@ -2,7 +2,7 @@
 
 namespace HC.Shared.Dtos.Identity;
 
-public class RoleDto
+public class RoleRequestDto
 {
     [Required]
     public string Name { get; set; }

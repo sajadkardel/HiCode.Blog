@@ -85,7 +85,7 @@ public static class ServiceCollectionExtensions
     {
         var commonAssembly = typeof(Assert).Assembly;
         var dataAssembly = typeof(ApplicationDbContext).Assembly;
-        var servicesAssembly = typeof(JwtService).Assembly;
+        var servicesAssembly = typeof(Repository<>).Assembly;
         var domainAssembly = typeof(UserDataInitializer).Assembly;
         var apiAssembly = typeof(Program).Assembly;
 

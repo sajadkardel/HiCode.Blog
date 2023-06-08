@@ -1,7 +1,7 @@
 ﻿
 namespace HC.Shared.Dtos.Blog;
 
-public class ArticleDto
+public class ArticleRequestDto
 {
 
 }

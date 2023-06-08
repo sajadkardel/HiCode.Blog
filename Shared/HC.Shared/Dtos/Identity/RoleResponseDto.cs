@@ -1,6 +1,6 @@
 ﻿namespace HC.Shared.Dtos.Identity;
 
-public class RoleSelectDto
+public class RoleResponseDto
 {
     public string? Name { get; set; }
 }

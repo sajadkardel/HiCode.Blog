@@ -2,7 +2,7 @@
 
 namespace HC.Shared.Dtos.Identity;
 
-public class TokenRequest
+public class LoginRequestDto
 {
     [Required]
     public string grant_type { get; set; }

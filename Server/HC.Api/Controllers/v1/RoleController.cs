@@ -18,9 +18,9 @@ namespace HC.Api.Controllers.v1
         }
 
         [HttpGet]
-        public virtual async Task<ApiResult<List<RoleSelectDto>>> Get(CancellationToken cancellationToken)
+        public virtual async Task<ApiResult<List<RoleResponseDto>>> Get(CancellationToken cancellationToken)
         {
-            List<RoleSelectDto> dtos = new();
+            List<RoleResponseDto> dtos = new();
 
             var roles = await _repository.TableNoTracking.ToListAsync(cancellationToken);
             roles.ForEach(role => dtos.Add(new()
@@ -32,20 +32,20 @@ namespace HC.Api.Controllers.v1
         }
 
         [HttpGet("{id:int}")]
-        public virtual async Task<ApiResult<RoleSelectDto>> Get(int id, CancellationToken cancellationToken)
+        public virtual async Task<ApiResult<RoleResponseDto>> Get(int id, CancellationToken cancellationToken)
         {
             var role = await _repository.TableNoTracking.SingleOrDefaultAsync(roleSelectDto => roleSelectDto.Id == id, cancellationToken);
 
             if (role is null) return NotFound();
 
-            return new RoleSelectDto
+            return new RoleResponseDto
             {
                 Name = role.Name
             };
         }
 
         [HttpPost]
-        public virtual async Task<ApiResult<RoleSelectDto>> Create(RoleDto dto, CancellationToken cancellationToken)
+        public virtual async Task<ApiResult<RoleResponseDto>> Create(RoleRequestDto dto, CancellationToken cancellationToken)
         {
             Role model = new()
             {
@@ -54,7 +54,7 @@ namespace HC.Api.Controllers.v1
 
             await _repository.Entities.AddAsync(model, cancellationToken);
 
-            RoleSelectDto selectDto = new()
+            RoleResponseDto selectDto = new()
             {
                 Name = model.Name
             };
@@ -63,7 +63,7 @@ namespace HC.Api.Controllers.v1
         }
 
         [HttpPut]
-        public virtual async Task<ApiResult<RoleSelectDto>> Update(int id, RoleDto dto, CancellationToken cancellationToken)
+        public virtual async Task<ApiResult<RoleResponseDto>> Update(int id, RoleRequestDto dto, CancellationToken cancellationToken)
         {
             var model = await _repository.GetByIdAsync(cancellationToken, id);
 
@@ -74,7 +74,7 @@ namespace HC.Api.Controllers.v1
 
             await _repository.UpdateAsync(model, cancellationToken);
 
-            RoleSelectDto selectDto = new()
+            RoleResponseDto selectDto = new()
             {
                 Name = model.Name
             };
