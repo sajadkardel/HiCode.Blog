@@ -1,6 +1,6 @@
 ﻿using HC.Entity.Identity;
 
-namespace HC.DataAccess.Contracts;
+namespace HC.Service.Contracts;
 
 public interface IUserRepository : IRepository<User>
 {

@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using HC.DataAccess.Contracts;
 using HC.DataAccess.Context;
 using HC.Common.Utilities;
 using HC.Common.Markers;
 using HC.Entity;
+using HC.Service.Contracts;
 
-namespace HC.DataAccess.Repositories;
+namespace HC.Service.Implementations;
 
 public class Repository<TEntity> : IRepository<TEntity>, IScopedDependency
     where TEntity : class

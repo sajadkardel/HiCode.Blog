@@ -1,6 +1,5 @@
 ﻿using HC.Common.Exceptions;
 using HC.Common.Models;
-using HC.DataAccess.Contracts;
 using HC.Entity.Identity;
 using HC.Service.Contracts;
 using HC.Shared.Dtos.Identity;
