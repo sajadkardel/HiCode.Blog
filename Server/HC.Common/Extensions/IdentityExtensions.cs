@@ -1,8 +1,9 @@
-﻿using System.Globalization;
+﻿using HC.Shared.Extensions;
+using System.Globalization;
 using System.Security.Claims;
 using System.Security.Principal;
 
-namespace HC.Common.Utilities;
+namespace HC.Common.Extensions;
 
 public static class IdentityExtensions
 {

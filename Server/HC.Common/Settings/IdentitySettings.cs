@@ -1,4 +1,4 @@
-﻿using HC.Common.Utilities;
+﻿using HC.Common.Extensions;
 
 namespace HC.Common.Settings;
 

@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace HC.Common.Utilities;
+namespace HC.Shared.Extensions;
 
 public static class Assert
 {

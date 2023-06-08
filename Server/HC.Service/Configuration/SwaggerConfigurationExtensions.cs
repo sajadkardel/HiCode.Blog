@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using HC.Common.Utilities;
+using HC.Shared.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;

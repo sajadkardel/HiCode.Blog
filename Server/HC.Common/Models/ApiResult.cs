@@ -1,5 +1,5 @@
 ﻿using HC.Common.Enums;
-using HC.Common.Utilities;
+using HC.Shared.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 

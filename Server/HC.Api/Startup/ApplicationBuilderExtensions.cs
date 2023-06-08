@@ -1,6 +1,6 @@
-﻿using HC.Common.Utilities;
-using HC.DataAccess.Context;
+﻿using HC.DataAccess.Context;
 using HC.Domain.Contracts;
+using HC.Shared.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace HC.Api.Startup;

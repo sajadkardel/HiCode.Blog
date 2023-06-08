@@ -1,9 +1,10 @@
 ﻿using System.Reflection;
 using HC.Entity.Identity;
-using HC.Common.Utilities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using HC.Common.Models;
+using HC.Shared.Extensions;
+using HC.Common.Extensions;
 
 namespace HC.DataAccess.Context;
 

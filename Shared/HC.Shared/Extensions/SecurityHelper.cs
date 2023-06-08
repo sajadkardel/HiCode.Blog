@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace HC.Common.Utilities;
+namespace HC.Shared.Extensions;
 
 public static class SecurityHelper
 {

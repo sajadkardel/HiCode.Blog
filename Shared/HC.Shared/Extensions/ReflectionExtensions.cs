@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Reflection;
 
-namespace HC.Common.Utilities;
+namespace HC.Shared.Extensions;
 
 public static class ReflectionHelper
 {

@@ -1,5 +1,4 @@
-﻿
-namespace HC.Common.Utilities;
+﻿namespace HC.Shared.Extensions;
 
 public static class StringExtensions
 {

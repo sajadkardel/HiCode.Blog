@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using HC.Common.Utilities;
 using HC.Shared.Enums;
+using HC.Shared.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

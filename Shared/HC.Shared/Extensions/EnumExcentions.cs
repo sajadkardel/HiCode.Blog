@@ -1,8 +1,8 @@
-﻿using HC.Common.Utilities;
+﻿using HC.Shared.Extensions;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
-namespace HC.Common.Utilities;
+namespace HC.Shared.Extensions;
 
 public static class EnumExtensions
 {
