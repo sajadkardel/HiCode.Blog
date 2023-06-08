@@ -2,12 +2,14 @@
 using System.Security.Claims;
 using System.Text;
 using HC.Common.Markers;
+using HC.Common.Models;
 using HC.Common.Settings;
 using HC.Entity.Identity;
+using HC.Service.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 
-namespace HC.Service.Services;
+namespace HC.Service.Implementations;
 
 public class JwtService : IJwtService, IScopedDependency
 {

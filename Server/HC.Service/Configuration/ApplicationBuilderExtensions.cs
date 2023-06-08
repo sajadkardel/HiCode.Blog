@@ -1,6 +1,6 @@
 ﻿using HC.Common.Utilities;
 using HC.DataAccess.Context;
-using HC.Service.DataInitializer;
+using HC.Service.Contracts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;

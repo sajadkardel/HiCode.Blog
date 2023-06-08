@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Client\HC.Web\HC.Web.csproj" />
-    <ProjectReference Include="..\HC.Service\HC.Service.csproj" />
+    <ProjectReference Include="..\HC.Domain\HC.Domain.csproj" />
   </ItemGroup>
 
 </Project>

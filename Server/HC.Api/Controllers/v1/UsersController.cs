@@ -2,8 +2,7 @@
 using HC.Common.Models;
 using HC.DataAccess.Contracts;
 using HC.Entity.Identity;
-using HC.Service;
-using HC.Service.Services;
+using HC.Service.Contracts;
 using HC.Shared.Dtos.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
