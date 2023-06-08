@@ -1,6 +1,6 @@
-﻿using HC.DataAccess.Contracts;
+﻿using HC.Common.Models;
+using HC.DataAccess.Contracts;
 using HC.Entity.Identity;
-using HC.Infrastructure.Api;
 
 namespace HC.Api.Controllers.v1;
 

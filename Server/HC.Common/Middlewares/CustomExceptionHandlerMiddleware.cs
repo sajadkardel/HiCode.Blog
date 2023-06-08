@@ -8,9 +8,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Hosting;
 using HC.Common.Enums;
 using HC.Common.Exceptions;
-using HC.Infrastructure.Api;
+using HC.Common.Models;
 
-namespace HC.Infrastructure.Middlewares;
+namespace HC.Common.Middlewares;
 
 public static class CustomExceptionHandlerMiddlewareExtensions
 {

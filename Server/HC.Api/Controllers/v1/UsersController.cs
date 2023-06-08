@@ -1,7 +1,7 @@
 ﻿using HC.Common.Exceptions;
+using HC.Common.Models;
 using HC.DataAccess.Contracts;
 using HC.Entity.Identity;
-using HC.Infrastructure.Api;
 using HC.Service;
 using HC.Service.Services;
 using HC.Shared.Dtos.Identity;

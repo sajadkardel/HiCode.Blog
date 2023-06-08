@@ -1,8 +1,8 @@
 ﻿using HC.Common.Markers;
+using HC.Common.Models;
 using HC.Common.Settings;
 using HC.Common.Utilities;
 using HC.DataAccess.Context;
-using HC.Entity;
 using HC.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -12,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace HC.Infrastructure.Configuration;
+namespace HC.Service.Configuration;
 
 public static class ServiceCollectionExtensions
 {

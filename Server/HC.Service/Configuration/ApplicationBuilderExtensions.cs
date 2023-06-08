@@ -1,6 +1,5 @@
 ﻿using HC.Common.Utilities;
 using HC.DataAccess.Context;
-using HC.Infrastructure.Configuration;
 using HC.Service.DataInitializer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace HC.Infrastructure.Configuration;
+namespace HC.Service.Configuration;
 
 public static class ApplicationBuilderExtensions
 {

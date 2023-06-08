@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using HC.Infrastructure.Attributes;
+using HC.Common.Attributes;
 
-namespace HC.Infrastructure.Api;
+namespace HC.Common.Models;
 
 [ApiController]
 [AllowAnonymous]

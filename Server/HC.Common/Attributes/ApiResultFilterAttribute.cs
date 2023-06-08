@@ -1,9 +1,9 @@
 ﻿using HC.Common.Enums;
-using HC.Infrastructure.Api;
+using HC.Common.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace HC.Infrastructure.Attributes;
+namespace HC.Common.Attributes;
 
 public class ApiResultFilterAttribute : ActionFilterAttribute
 {

@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using HC.Infrastructure.Api;
 using HC.DataAccess.Contracts;
 using HC.Entity.Identity;
 using HC.Shared.Dtos.Identity;
+using HC.Common.Models;
 
 namespace HC.Api.Controllers.v1
 {

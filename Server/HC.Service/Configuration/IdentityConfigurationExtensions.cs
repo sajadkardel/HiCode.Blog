@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
-namespace HC.Infrastructure.Configuration;
+namespace HC.Service.Configuration;
 
 public static class IdentityConfigurationExtensions
 {

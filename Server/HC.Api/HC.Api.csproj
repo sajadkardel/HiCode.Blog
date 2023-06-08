@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Client\HC.Web\HC.Web.csproj" />
-    <ProjectReference Include="..\HC.Infrastructure\HC.Infrastructure.csproj" />
+    <ProjectReference Include="..\HC.Service\HC.Service.csproj" />
   </ItemGroup>
 
 </Project>

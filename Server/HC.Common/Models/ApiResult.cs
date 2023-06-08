@@ -3,7 +3,7 @@ using HC.Common.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace HC.Infrastructure.Api;
+namespace HC.Common.Models;
 
 public class ApiResult
 {

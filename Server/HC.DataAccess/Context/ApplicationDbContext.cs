@@ -3,7 +3,7 @@ using HC.Entity.Identity;
 using HC.Common.Utilities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using HC.Entity;
+using HC.Common.Models;
 
 namespace HC.DataAccess.Context;
 

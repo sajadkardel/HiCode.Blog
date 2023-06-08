@@ -1,5 +1,5 @@
-﻿using HC.Infrastructure.Configuration;
-using HC.Infrastructure.Middlewares;
+﻿using HC.Common.Middlewares;
+using HC.Service.Configuration;
 
 namespace HC.Api.Startup;
 
