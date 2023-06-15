@@ -33,8 +33,8 @@ public static class IdentityConfigurationExtensions
             identityOptions.User.RequireUniqueEmail = IdentitySettings.Get().RequireUniqueEmail;
 
             //Singin Settings
-            //identityOptions.SignIn.RequireConfirmedEmail = false;
-            //identityOptions.SignIn.RequireConfirmedPhoneNumber = false;
+            identityOptions.SignIn.RequireConfirmedEmail = false;
+            identityOptions.SignIn.RequireConfirmedPhoneNumber = false;
 
             //Lockout Settings
             //identityOptions.Lockout.MaxFailedAccessAttempts = 5;
@@ -77,55 +77,51 @@ public static class IdentityConfigurationExtensions
                 TokenDecryptionKey = new SymmetricSecurityKey(encryptionKey)
             };
 
+            options.TokenValidationParameters = validationParameters;
+
             options.RequireHttpsMetadata = false;
             options.SaveToken = true;
-            options.TokenValidationParameters = validationParameters;
             options.Events = new JwtBearerEvents
             {
                 OnAuthenticationFailed = context =>
                 {
                     if (context.Exception != null)
-                        throw new AppException(ApiResultStatusCode.UnAuthorized, "Authentication failed.", HttpStatusCode.Unauthorized, context.Exception, null);
+                        throw new AppException(ApiResultStatusCode.UnAuthorized, "Authentication failed.", HttpStatusCode.Unauthorized, context.Exception);
 
                     return Task.CompletedTask;
                 },
                 OnTokenValidated = async context =>
                 {
                     var signInManager = context.HttpContext.RequestServices.GetRequiredService<SignInManager<User>>();
-                    var userRepository = context.HttpContext.RequestServices.GetRequiredService<UserManager<User>>();
+                    var userManager = context.HttpContext.RequestServices.GetRequiredService<UserManager<User>>();
 
-                    var claimsIdentity = context.Principal.Identity as ClaimsIdentity;
-                    if (claimsIdentity.Claims?.Any() != true)
-                        context.Fail("This token has no claims.");
+                    var claimsIdentity = context.Principal?.Identity as ClaimsIdentity;
+                    if (claimsIdentity is null || claimsIdentity.Claims.Any() is false) context.Fail("This token has no claims.");
 
-                    var securityStamp = claimsIdentity.FindFirstValue(new ClaimsIdentityOptions().SecurityStampClaimType);
-                    if (!securityStamp.HasValue())
-                        context.Fail("This token has no security stamp");
+                    var securityStamp = claimsIdentity?.FindFirstValue(new ClaimsIdentityOptions().SecurityStampClaimType);
+                    if (securityStamp is null) context.Fail("This token has no security stamp");
 
-                    //Find user and token from database and perform your custom validation
-                    var userId = claimsIdentity.GetUserId<int>();
-                    var user = await userRepository.FindByIdAsync(userId.ToString());
+                    // Find user and token from database and perform your custom validation
+                    var userId = claimsIdentity?.GetUserId<int>();
+                    if (userId is null) context.Fail("userId is null.");
 
-                    //if (user.SecurityStamp != Guid.Parse(securityStamp))
-                    //    context.Fail("Token security stamp is not valid.");
+                    var user = await userManager.FindByIdAsync(userId.ToString()!);
+                    if (user is null) context.Fail("user is null.");
 
                     var validatedUser = await signInManager.ValidateSecurityStampAsync(context.Principal);
-                    if (validatedUser == null)
-                        context.Fail("Token security stamp is not valid.");
+                    if (validatedUser == null) context.Fail("Token security stamp is not valid.");
 
-                    if (!user.IsActive)
-                        context.Fail("User is not active.");
+                    if (user!.IsActive is false) context.Fail("User is not active.");
 
-                    user.LastLoginDate = DateTimeOffset.Now;
-                    await userRepository.UpdateAsync(user);
+                    user!.LastLoginDate = DateTimeOffset.Now;
+                    await userManager.UpdateAsync(user);
                 },
                 OnChallenge = context =>
                 {
                     if (context.AuthenticateFailure != null)
-                        throw new AppException(ApiResultStatusCode.UnAuthorized, "Authenticate failure.", HttpStatusCode.Unauthorized, context.AuthenticateFailure, null);
-                    throw new AppException(ApiResultStatusCode.UnAuthorized, "You are unauthorized to access this resource.", HttpStatusCode.Unauthorized);
+                        throw new AppException(ApiResultStatusCode.UnAuthorized, "Authenticate failure.", HttpStatusCode.Unauthorized, context.AuthenticateFailure);
 
-                    //return Task.CompletedTask;
+                    throw new AppException(ApiResultStatusCode.UnAuthorized, "You are unauthorized to access this resource.", HttpStatusCode.Unauthorized);
                 }
             };
         });

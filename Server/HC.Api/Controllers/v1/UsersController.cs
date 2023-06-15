@@ -24,8 +24,8 @@ public class UsersController : BaseController
 
     [HttpPost]
     [AllowAnonymous]
-    public virtual async Task<ApiResult<LoginResponseDto>> Login([FromForm] LoginRequestDto tokenRequest, CancellationToken cancellationToken)
+    public virtual async Task<ApiResult<LoginResponseDto>> GetToken(LoginRequestDto tokenRequest, CancellationToken cancellationToken)
     {
-        return await _userRepository.Login(tokenRequest, cancellationToken);
+        return await _userRepository.GetToken(tokenRequest, cancellationToken);
     }
 }
