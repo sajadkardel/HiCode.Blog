@@ -1,6 +1,6 @@
 ﻿using HC.Shared.Enums;
 
-namespace HC.Shared.Dtos.Identity;
+namespace HC.Shared.Dtos.User;
 
 public class UserResponseDto
 {
@@ -10,6 +10,7 @@ public class UserResponseDto
     public string? PhoneNumber { get; set; }
     public int? Age { get; set; }
     public GenderType? Gender { get; set; }
-    public bool? IsActive { get; set; }
+    public bool IsActive { get; set; }
     public DateTimeOffset? LastLoginDate { get; set; }
+    public List<string>? Roles { get; set; }
 }

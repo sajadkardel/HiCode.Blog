@@ -1,6 +1,6 @@
 ﻿using HC.Common.Models;
 
-namespace HC.Entity.Blog;
+namespace HC.DataAccess.Entities.Blog;
 
 public class Tag : BaseEntity
 {

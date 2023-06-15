@@ -1,11 +1,11 @@
 ﻿using Azure.Core;
-using HC.Entity.Identity;
-using HC.Shared.Dtos.Identity;
+using HC.DataAccess.Entities.User;
+using HC.Shared.Dtos.User;
 
 namespace HC.Domain.Contracts;
 
 public interface IUserRepository
 {
-    Task<LoginResponseDto> GetToken(LoginRequestDto request, CancellationToken cancellationToken);
+    Task<TokenResponseDto> GetToken(TokenRequestDto request, CancellationToken cancellationToken);
     Task UpdateSecurityStampAsync(User user, CancellationToken cancellationToken);
 }

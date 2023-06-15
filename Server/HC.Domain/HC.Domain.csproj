@@ -7,10 +7,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.31.0" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="..\HC.Service\HC.Service.csproj" />
 	</ItemGroup>
 

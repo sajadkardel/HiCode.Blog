@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HC.Common.Enums;
+namespace HC.Shared.Enums;
 
 public enum ApiResultStatusCode
 {

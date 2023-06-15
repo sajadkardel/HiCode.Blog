@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HC.Service", "Server\HC.Ser
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HC.Web", "Client\HC.Web\HC.Web.csproj", "{53BCB247-E749-4E6D-BBC9-85C19E98CB7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HC.Domain", "Server\HC.Domain\HC.Domain.csproj", "{D107B549-0842-4B2D-9FE2-C92BEDB95721}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HC.Domain", "Server\HC.Domain\HC.Domain.csproj", "{D107B549-0842-4B2D-9FE2-C92BEDB95721}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

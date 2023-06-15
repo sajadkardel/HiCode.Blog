@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
 using System.Net;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Hosting;
-using HC.Common.Enums;
 using HC.Common.Exceptions;
+using HC.Shared.Enums;
+using HC.Shared.Dtos;
 using HC.Common.Models;
+using System.Text.Json;
 
 namespace HC.Common.Middlewares;
 
@@ -64,9 +65,9 @@ public class CustomExceptionHandlerMiddleware
                     dic.Add("InnerException.StackTrace", exception.InnerException.StackTrace);
                 }
                 if (exception.AdditionalData != null)
-                    dic.Add("AdditionalData", JsonConvert.SerializeObject(exception.AdditionalData));
+                    dic.Add("AdditionalData", JsonSerializer.Serialize(exception.AdditionalData));
 
-                message = JsonConvert.SerializeObject(dic);
+                message = JsonSerializer.Serialize(dic);
             }
             else
             {
@@ -97,7 +98,7 @@ public class CustomExceptionHandlerMiddleware
                     ["Exception"] = exception.Message,
                     ["StackTrace"] = exception.StackTrace,
                 };
-                message = JsonConvert.SerializeObject(dic);
+                message = JsonSerializer.Serialize(dic);
             }
             await WriteToResponseAsync();
         }
@@ -107,8 +108,8 @@ public class CustomExceptionHandlerMiddleware
             if (context.Response.HasStarted)
                 throw new InvalidOperationException("The response has already started, the http status code middleware will not be executed.");
 
-            var result = new ApiResult(false, apiStatusCode, message);
-            var json = JsonConvert.SerializeObject(result);
+            var result = new ServerSideApiResult(false, apiStatusCode, message);
+            var json = JsonSerializer.Serialize(result);
 
             context.Response.StatusCode = (int)httpStatusCode;
             context.Response.ContentType = "application/json";
@@ -130,7 +131,7 @@ public class CustomExceptionHandlerMiddleware
                 if (exception is SecurityTokenExpiredException tokenException)
                     dic.Add("Expires", tokenException.Expires.ToString());
 
-                message = JsonConvert.SerializeObject(dic);
+                message = JsonSerializer.Serialize(dic);
             }
         }
     }

@@ -7,8 +7,7 @@ using HC.Shared.Markers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
 
 namespace HC.Api.Startup;
 
@@ -41,15 +40,12 @@ public static class ServiceCollectionExtensions
             //options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
 
             //options.UseYeKeModelBinder();
-        }).AddNewtonsoftJson(option =>
+        }).AddJsonOptions(option =>
         {
-            option.SerializerSettings.Converters.Add(new StringEnumConverter());
-            option.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            //option.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
-            //option.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+            var enumConverter = new JsonStringEnumConverter();
+            option.JsonSerializerOptions.Converters.Add(enumConverter);
+            option.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault | JsonIgnoreCondition.WhenWritingNull;
         });
-
-        services.AddSwaggerGenNewtonsoftSupport();
     }
 
     public static void AddCustomApiVersioning(this IServiceCollection services)

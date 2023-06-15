@@ -1,5 +1,5 @@
-﻿using HC.Domain.Contracts;
-using HC.Entity.Identity;
+﻿using HC.DataAccess.Entities.User;
+using HC.Domain.Contracts;
 using HC.Shared.Markers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

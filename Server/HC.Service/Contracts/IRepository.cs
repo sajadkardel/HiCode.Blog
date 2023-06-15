@@ -1,5 +1,4 @@
-﻿using HC.Entity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace HC.Service.Contracts;

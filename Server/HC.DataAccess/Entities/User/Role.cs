@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace HC.Entity.Identity;
+namespace HC.DataAccess.Entities.User;
 
 public class Role : IdentityRole<int>
 {

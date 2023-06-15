@@ -1,16 +1,16 @@
 ﻿using HC.DataAccess.Context;
-using HC.Entity.Identity;
 using HC.Service.Implementations;
 using HC.Domain.Contracts;
 using HC.Shared.Markers;
-using HC.Shared.Dtos.Identity;
 using HC.Common.Exceptions;
 using Microsoft.AspNetCore.Identity;
-using HC.Common.Settings;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using HC.DataAccess.Entities.User;
+using HC.Shared.Dtos.User;
+using HC.Common.Settings;
 
 namespace HC.Domain.Implementations;
 
@@ -25,14 +25,14 @@ public class UserRepository : Repository<User>, IUserRepository, IScopedDependen
         _signInManager = signInManager;
     }
 
-    public async Task<LoginResponseDto> GetToken(LoginRequestDto request, CancellationToken cancellationToken)
+    public async Task<TokenResponseDto> GetToken(TokenRequestDto request, CancellationToken cancellationToken)
     {
-        if (request.grant_type.Equals("password", StringComparison.OrdinalIgnoreCase) is false) throw new Exception("OAuth flow is not password.");
+        if (request.GrantType.Equals(JwtSettings.Get().GrantType, StringComparison.OrdinalIgnoreCase) is false) throw new Exception("OAuth flow is not password.");
 
-        var user = await _userManager.FindByNameAsync(request.username);
+        var user = await _userManager.FindByNameAsync(request.UserName);
         if (user is null) throw new BadRequestException("نام کاربری یا رمز عبور اشتباه است");
 
-        var isPasswordValid = await _userManager.CheckPasswordAsync(user, request.password);
+        var isPasswordValid = await _userManager.CheckPasswordAsync(user, request.Password);
         if (isPasswordValid is false) throw new BadRequestException("نام کاربری یا رمز عبور اشتباه است");
 
         var jwt = await GenerateTokenAsync(user);
@@ -46,7 +46,7 @@ public class UserRepository : Repository<User>, IUserRepository, IScopedDependen
         return UpdateAsync(user, cancellationToken);
     }
 
-    private async Task<LoginResponseDto> GenerateTokenAsync(User user)
+    private async Task<TokenResponseDto> GenerateTokenAsync(User user)
     {
         byte[] secretKey = Encoding.UTF8.GetBytes(JwtSettings.Get().SecretKey); // longer that 16 character
         SigningCredentials signingCredentials = new(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256Signature);
@@ -76,10 +76,10 @@ public class UserRepository : Repository<User>, IUserRepository, IScopedDependen
 
         JwtSecurityToken securityToken = tokenHandler.CreateJwtSecurityToken(descriptor);
 
-        return new LoginResponseDto()
+        return new TokenResponseDto()
         {
             token_type = "Bearer",
-            access_token = securityToken.,
+            //access_token = securityToken,
             expires_in = securityToken.ValidTo
         };
     }

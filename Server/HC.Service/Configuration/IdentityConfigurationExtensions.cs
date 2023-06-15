@@ -1,13 +1,13 @@
 ﻿using System.Net;
 using System.Security.Claims;
 using System.Text;
-using HC.Common.Enums;
 using HC.Common.Exceptions;
 using HC.Common.Extensions;
 using HC.Common.Settings;
 using HC.DataAccess.Context;
-using HC.Entity.Identity;
+using HC.DataAccess.Entities.User;
 using HC.Service.Contracts;
+using HC.Shared.Enums;
 using HC.Shared.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;

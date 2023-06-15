@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using HC.DataAccess.Context;
-using HC.Entity;
 using HC.Service.Contracts;
 using HC.Shared.Markers;
 using HC.Shared.Extensions;

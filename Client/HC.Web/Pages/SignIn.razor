@@ -1,0 +1,21 @@
+﻿@page "/sign-in"
+
+<h3>SignIn</h3>
+
+<EditForm Model="_signInModel" OnValidSubmit="DoSignIn">
+
+    <div>
+        <label>UserName</label>
+        <InputText @bind-Value="_signInModel.UserName" />
+        <ValidationMessage For="@(() => _signInModel.UserName)" />
+    </div>
+
+    <div>
+        <label>Password</label>
+        <InputText @bind-Value="_signInModel.Password" />
+        <ValidationMessage For="@(() => _signInModel.Password)" />
+    </div>
+
+    <button type="submit" class="accordion-button">SignIn</button>
+
+</EditForm>

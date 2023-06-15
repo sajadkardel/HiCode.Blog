@@ -1,5 +1,5 @@
 ﻿using HC.DataAccess.Context;
-using HC.Entity.Blog;
+using HC.DataAccess.Entities.Blog;
 using HC.Service.Implementations;
 using HC.Shared.Markers;
 

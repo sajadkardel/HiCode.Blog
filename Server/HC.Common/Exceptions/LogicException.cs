@@ -1,5 +1,5 @@
 ﻿using System;
-using HC.Common.Enums;
+using HC.Shared.Enums;
 
 namespace HC.Common.Exceptions;
 
