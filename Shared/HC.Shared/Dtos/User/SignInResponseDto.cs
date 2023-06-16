@@ -1,6 +1,6 @@
 ﻿namespace HC.Shared.Dtos.User;
 
-public class TokenResponseDto
+public class SignInResponseDto
 {
     public string access_token { get; set; } = default!;
     public string? refresh_token { get; set; }

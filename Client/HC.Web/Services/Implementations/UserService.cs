@@ -1,5 +1,6 @@
 ﻿using HC.Shared.Dtos.User;
 using HC.Shared.Markers;
+using HC.Web.Models;
 using HC.Web.Services.Contracts;
 
 namespace HC.Web.Services.Implementations;
@@ -17,17 +18,24 @@ public class UserService : IUserService, IScopedDependency
         _appAuthenticationStateProvider = appAuthenticationStateProvider;
     }
 
-    public async Task SignIn(TokenRequestDto dto)
+    public async Task<ClientSideApiResult> SignUp(SignUpRequestDto request)
+    {
+        return await _apiCaller.PostAsync("Auth/SignUp", request);
+    }
+
+    public async Task<ClientSideApiResult<SignInResponseDto>> SignIn(SignInRequestDto dto)
     {
         dto.GrantType = "password";
 
-        var tokenRequest = await _apiCaller.PostAsync<TokenResponseDto, TokenRequestDto>("Auth/GetToken", dto);
+        var signInResponse = await _apiCaller.PostAsync<SignInResponseDto, SignInRequestDto>("Auth/SignIn", dto);
 
-        if (tokenRequest is not null)
+        if (signInResponse.IsSuccess)
         {
-            await _localStorageService.SetToCookieAsync("access_token", tokenRequest.Data.access_token);
+            await _localStorageService.SetToCookieAsync("access_token", signInResponse.Data.access_token);
             await _appAuthenticationStateProvider.RaiseAuthenticationStateHasChanged();
         }
+
+        return signInResponse;
     }
 
     public async Task SignOut()

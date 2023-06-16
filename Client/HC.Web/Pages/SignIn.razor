@@ -3,19 +3,17 @@
 <h3>SignIn</h3>
 
 <EditForm Model="_signInModel" OnValidSubmit="DoSignIn">
-
-    <div>
-        <label>UserName</label>
-        <InputText @bind-Value="_signInModel.UserName" />
+    <div class="form-group">
+        <label for="UserName">UserName</label>
+        <InputText @bind-Value="_signInModel.UserName" id="UserName" class="form-control" />
         <ValidationMessage For="@(() => _signInModel.UserName)" />
     </div>
 
-    <div>
-        <label>Password</label>
-        <InputText @bind-Value="_signInModel.Password" />
+    <div class="form-group">
+        <label for="Password">Password</label>
+        <InputText @bind-Value="_signInModel.Password" id="Password" class="form-control" />
         <ValidationMessage For="@(() => _signInModel.Password)" />
     </div>
 
-    <button type="submit" class="accordion-button">SignIn</button>
-
+    <button type="submit" class="btn btn-success" style="margin-top: 30px;">SignIn</button>
 </EditForm>

@@ -6,6 +6,7 @@ namespace HC.Domain.Contracts;
 
 public interface IUserRepository
 {
-    Task<TokenResponseDto> GetToken(TokenRequestDto request, CancellationToken cancellationToken);
+    Task SignUp(SignUpRequestDto request, CancellationToken cancellationToken);
+    Task<SignInResponseDto> SignIn(SignInRequestDto request, CancellationToken cancellationToken);
     Task UpdateSecurityStampAsync(User user, CancellationToken cancellationToken);
 }

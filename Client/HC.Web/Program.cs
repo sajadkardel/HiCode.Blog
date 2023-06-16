@@ -1,7 +1,5 @@
 using HC.Web;
 using HC.Web.Services.Implementations;
-using HC.Web.Settings;
-using HC.Web.Shared;
 using HC.Web.Startup;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
@@ -15,7 +13,7 @@ builder.Services.AddScoped<AppAuthenticationStateProvider>();
 builder.Services.AddScoped<AuthenticationStateProvider>(sp => sp.GetRequiredService<AppAuthenticationStateProvider>());
 builder.Services.AddAuthorizationCore();
 
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri($"{builder.HostEnvironment.BaseAddress}/{ServerSideSettings.Get().BaseUrl}") });
+builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri($"{builder.HostEnvironment.BaseAddress}api/v1/") });
 
 builder.Services.AddMarkedServices();
 

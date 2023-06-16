@@ -5,14 +5,14 @@ using Microsoft.AspNetCore.Components;
 
 namespace HC.Web.Pages;
 
-public partial class SignIn
+public partial class SignUp
 {
     [Inject] protected IUserService _userService { get; set; } = default!;
 
-	private SignInRequestDto _signInModel = new();
+    private SignUpRequestDto _signUpRequestDto = new();
 
-	private async Task DoSignIn()
-	{
-        await _userService.SignIn(_signInModel);
+    private async Task DoSignUp()
+    {
+        await _userService.SignUp(_signUpRequestDto);
     }
 }

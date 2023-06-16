@@ -1,0 +1,25 @@
+﻿@page "/sign-up"
+
+<h3>SignUp</h3>
+
+<EditForm Model="_signUpRequestDto" OnValidSubmit="DoSignUp">
+    <div class="form-group">
+        <label for="UserName">UserName</label>
+        <InputText @bind-Value="_signUpRequestDto.UserName" id="UserName" class="form-control" />
+        <ValidationMessage For="@(() => _signUpRequestDto.UserName)" />
+    </div>
+
+    <div class="form-group">
+        <label for="UserName">PhoneNumber</label>
+        <InputText @bind-Value="_signUpRequestDto.PhoneNumber" id="PhoneNumber" class="form-control" />
+        <ValidationMessage For="@(() => _signUpRequestDto.PhoneNumber)" />
+    </div>
+
+    <div class="form-group">
+        <label for="Password">Password</label>
+        <InputText @bind-Value="_signUpRequestDto.Password" id="Password" class="form-control" />
+        <ValidationMessage For="@(() => _signUpRequestDto.Password)" />
+    </div>
+
+    <button type="submit" class="btn btn-success" style="margin-top: 30px;">SignIn</button>
+</EditForm>

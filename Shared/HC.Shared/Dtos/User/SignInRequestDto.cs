@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace HC.Shared.Dtos.User;
 
-public class TokenRequestDto
+public class SignInRequestDto
 {
     [Required]
     [JsonPropertyName("grant_type")]

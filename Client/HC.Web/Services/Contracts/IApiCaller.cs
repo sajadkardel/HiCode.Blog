@@ -8,9 +8,17 @@ public interface IApiCaller
         (string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string? contentType = null) 
         where T: class where TU: class;
 
+    public ClientSideApiResult Post<TU>
+        (string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string? contentType = null)
+        where TU : class;
+
     public Task<ClientSideApiResult<T>> PostAsync<T, TU>
         (string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string? contentType = null, CancellationToken cancelationToken = default)
         where T : class where TU : class;
+
+    public Task<ClientSideApiResult> PostAsync<TU>
+        (string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string? contentType = null, CancellationToken cancelationToken = default)
+        where TU : class;
 
     public ClientSideApiResult<T> Put<T, TU>
         (string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string? contentType = null) 

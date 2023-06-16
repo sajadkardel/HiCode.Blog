@@ -19,9 +19,18 @@ public class AuthController : BaseController
 
     [HttpPost]
     [AllowAnonymous]
-    public virtual async Task<ServerSideApiResult<TokenResponseDto>> GetToken(TokenRequestDto tokenRequest, CancellationToken cancellationToken)
+    public virtual async Task<ServerSideApiResult> SignUp(SignUpRequestDto request, CancellationToken cancellationToken)
     {
-        return await _userRepository.GetToken(tokenRequest, cancellationToken);
+        await _userRepository.SignUp(request, cancellationToken);
+        return Ok();
+    }
+
+    [HttpPost]
+    [AllowAnonymous]
+    public virtual async Task<ServerSideApiResult<SignInResponseDto>> SignIn(SignInRequestDto request, CancellationToken cancellationToken)
+    {
+        var result = await _userRepository.SignIn(request, cancellationToken);
+        return result;
     }
 
     [HttpGet]
@@ -49,7 +58,7 @@ public class AuthController : BaseController
     }
 
     [HttpDelete("{id:int}")]
-    public virtual async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
+    public virtual async Task<ServerSideApiResult> Delete(int id, CancellationToken cancellationToken)
     {
         return Ok();
     }

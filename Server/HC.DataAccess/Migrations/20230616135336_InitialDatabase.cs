@@ -12,14 +12,19 @@ namespace HC.DataAccess.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "Identity");
+                name: "User");
 
             migrationBuilder.CreateTable(
                 name: "Articles",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorUserId = table.Column<long>(type: "bigint", nullable: false),
+                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,7 +36,12 @@ namespace HC.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorUserId = table.Column<long>(type: "bigint", nullable: false),
+                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -43,7 +53,12 @@ namespace HC.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorUserId = table.Column<long>(type: "bigint", nullable: false),
+                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -52,7 +67,7 @@ namespace HC.DataAccess.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Roles",
-                schema: "Identity",
+                schema: "User",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -72,7 +87,12 @@ namespace HC.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorUserId = table.Column<long>(type: "bigint", nullable: false),
+                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -81,7 +101,7 @@ namespace HC.DataAccess.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Users",
-                schema: "Identity",
+                schema: "User",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -127,7 +147,7 @@ namespace HC.DataAccess.Migrations
                     table.ForeignKey(
                         name: "FK_AspNetRoleClaims_Roles_RoleId",
                         column: x => x.RoleId,
-                        principalSchema: "Identity",
+                        principalSchema: "User",
                         principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -149,7 +169,7 @@ namespace HC.DataAccess.Migrations
                     table.ForeignKey(
                         name: "FK_AspNetUserClaims_Users_UserId",
                         column: x => x.UserId,
-                        principalSchema: "Identity",
+                        principalSchema: "User",
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -170,7 +190,7 @@ namespace HC.DataAccess.Migrations
                     table.ForeignKey(
                         name: "FK_AspNetUserLogins_Users_UserId",
                         column: x => x.UserId,
-                        principalSchema: "Identity",
+                        principalSchema: "User",
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -189,14 +209,14 @@ namespace HC.DataAccess.Migrations
                     table.ForeignKey(
                         name: "FK_AspNetUserRoles_Roles_RoleId",
                         column: x => x.RoleId,
-                        principalSchema: "Identity",
+                        principalSchema: "User",
                         principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_AspNetUserRoles_Users_UserId",
                         column: x => x.UserId,
-                        principalSchema: "Identity",
+                        principalSchema: "User",
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -217,7 +237,7 @@ namespace HC.DataAccess.Migrations
                     table.ForeignKey(
                         name: "FK_AspNetUserTokens_Users_UserId",
                         column: x => x.UserId,
-                        principalSchema: "Identity",
+                        principalSchema: "User",
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -245,7 +265,7 @@ namespace HC.DataAccess.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
-                schema: "Identity",
+                schema: "User",
                 table: "Roles",
                 column: "NormalizedName",
                 unique: true,
@@ -253,13 +273,13 @@ namespace HC.DataAccess.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
-                schema: "Identity",
+                schema: "User",
                 table: "Users",
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
-                schema: "Identity",
+                schema: "User",
                 table: "Users",
                 column: "NormalizedUserName",
                 unique: true,
@@ -298,11 +318,11 @@ namespace HC.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Roles",
-                schema: "Identity");
+                schema: "User");
 
             migrationBuilder.DropTable(
                 name: "Users",
-                schema: "Identity");
+                schema: "User");
         }
     }
 }

@@ -9,7 +9,6 @@ using HC.DataAccess.Entities.User;
 namespace HC.DataAccess.Context;
 
 public class ApplicationDbContext : IdentityDbContext<User, Role, int>
-//DbContext
 {
     public ApplicationDbContext(DbContextOptions options)
         : base(options)
@@ -27,7 +26,7 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, int>
     {
         base.OnModelCreating(modelBuilder);
 
-        var entitiesAssembly = typeof(BaseEntity).Assembly;
+        var entitiesAssembly = typeof(ApplicationDbContext).Assembly;
 
         modelBuilder.RegisterAllEntities<BaseEntity>(entitiesAssembly);
         modelBuilder.RegisterEntityTypeConfiguration(entitiesAssembly);
