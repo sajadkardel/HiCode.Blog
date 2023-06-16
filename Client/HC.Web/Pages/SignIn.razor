@@ -17,3 +17,8 @@
 
     <button type="submit" class="btn btn-success" style="margin-top: 30px;">SignIn</button>
 </EditForm>
+
+@if (string.IsNullOrEmpty(_message) is false)
+{
+    <h3>@_message</h3>
+}

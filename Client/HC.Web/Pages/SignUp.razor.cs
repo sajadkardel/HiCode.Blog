@@ -15,9 +15,6 @@ public partial class SignUp
     private async Task DoSignUp()
     {
         var result = await _userService.SignUp(_signUpRequestDto);
-        Console.WriteLine("result.IsSuccess" + result.IsSuccess);
-        Console.WriteLine("result.Message" + result.Message);
-        Console.WriteLine("result.StatusCode" + result.StatusCode);
         _message = result.Message;
     }
 }

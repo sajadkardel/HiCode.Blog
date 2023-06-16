@@ -1,5 +1,4 @@
-﻿
-using HC.Shared.Dtos.User;
+﻿using HC.Shared.Dtos.User;
 using HC.Web.Services.Contracts;
 using Microsoft.AspNetCore.Components;
 
@@ -9,10 +8,12 @@ public partial class SignIn
 {
     [Inject] protected IUserService _userService { get; set; } = default!;
 
-	private SignInRequestDto _signInModel = new();
+    private string? _message = null;
+    private SignInRequestDto _signInModel = new();
 
 	private async Task DoSignIn()
 	{
-        await _userService.SignIn(_signInModel);
+        var result = await _userService.SignIn(_signInModel);
+        _message = result.Message;
     }
 }
