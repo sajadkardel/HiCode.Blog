@@ -10,12 +10,6 @@
     </div>
 
     <div class="form-group">
-        <label for="UserName">PhoneNumber</label>
-        <InputText @bind-Value="_signUpRequestDto.PhoneNumber" id="PhoneNumber" class="form-control" />
-        <ValidationMessage For="@(() => _signUpRequestDto.PhoneNumber)" />
-    </div>
-
-    <div class="form-group">
         <label for="Password">Password</label>
         <InputText @bind-Value="_signUpRequestDto.Password" id="Password" class="form-control" />
         <ValidationMessage For="@(() => _signUpRequestDto.Password)" />
@@ -23,3 +17,8 @@
 
     <button type="submit" class="btn btn-success" style="margin-top: 30px;">SignIn</button>
 </EditForm>
+
+@if (string.IsNullOrEmpty(_message) is false)
+{
+    <h3>@_message</h3>
+}

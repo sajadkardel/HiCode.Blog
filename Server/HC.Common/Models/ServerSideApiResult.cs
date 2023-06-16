@@ -6,9 +6,11 @@ namespace HC.Common.Models;
 
 public class ServerSideApiResult : ApiResult
 {
-    public ServerSideApiResult(bool isSuccess, ApiResultStatusCode statusCode, string? message = null) 
-        : base(isSuccess, statusCode, message)
+    public ServerSideApiResult(bool isSuccess, ApiResultStatusCode statusCode, string? message = null)
     {
+        IsSuccess = isSuccess;
+        StatusCode = statusCode;
+        Message = message;
     }
 
     #region Implicit Operators
@@ -49,8 +51,12 @@ public class ServerSideApiResult : ApiResult
 
 public class ServerSideApiResult<TData> : ApiResult<TData> where TData : class
 {
-    public ServerSideApiResult(bool isSuccess, ApiResultStatusCode statusCode, TData? data = null, string? message = null) : base(isSuccess, statusCode, data, message)
+    public ServerSideApiResult(bool isSuccess, ApiResultStatusCode statusCode, TData? data = null, string? message = null)
     {
+        IsSuccess = isSuccess;
+        StatusCode = statusCode;
+        Message = message;
+        Data = data;
     }
 
     #region Implicit Operators

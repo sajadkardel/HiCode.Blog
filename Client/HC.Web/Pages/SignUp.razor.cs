@@ -8,11 +8,16 @@ namespace HC.Web.Pages;
 public partial class SignUp
 {
     [Inject] protected IUserService _userService { get; set; } = default!;
-
+    
+    private string? _message = null;
     private SignUpRequestDto _signUpRequestDto = new();
 
     private async Task DoSignUp()
     {
-        await _userService.SignUp(_signUpRequestDto);
+        var result = await _userService.SignUp(_signUpRequestDto);
+        Console.WriteLine("result.IsSuccess" + result.IsSuccess);
+        Console.WriteLine("result.Message" + result.Message);
+        Console.WriteLine("result.StatusCode" + result.StatusCode);
+        _message = result.Message;
     }
 }

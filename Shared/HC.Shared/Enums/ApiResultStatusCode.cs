@@ -23,5 +23,8 @@ public enum ApiResultStatusCode
     LogicError = 5,
 
     [Display(Name = "خطای احراز هویت")]
-    UnAuthorized = 6
+    UnAuthorized = 6,
+
+    [Display(Name = "خطا در اتصال به سرور.")]
+    HTTPConnection = 7,
 }

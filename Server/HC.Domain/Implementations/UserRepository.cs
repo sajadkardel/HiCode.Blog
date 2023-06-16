@@ -31,7 +31,7 @@ public class UserRepository : Repository<User>, IUserRepository, IScopedDependen
         var existingUser = await _userManager.FindByNameAsync(request.UserName);
         if (existingUser is not null) throw new BadRequestException("کاربری با این نام کاربری قبلا ثبت شده.");
 
-        var result = await _userManager.CreateAsync(new User { UserName = request.UserName, PhoneNumber = request.PhoneNumber }, request.Password);
+        var result = await _userManager.CreateAsync(new User() { UserName = request.UserName, }, request.Password);
 
         if (result.Succeeded is false) throw new BadRequestException(result.Errors.First().Description);
     }
