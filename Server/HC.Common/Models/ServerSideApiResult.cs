@@ -1,5 +1,6 @@
 ﻿using HC.Shared.Dtos;
 using HC.Shared.Enums;
+using HC.Shared.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HC.Common.Models;
@@ -10,7 +11,7 @@ public class ServerSideApiResult : ApiResult
     {
         IsSuccess = isSuccess;
         StatusCode = statusCode;
-        Message = message;
+        Message = message ?? statusCode.ToDisplay();
     }
 
     #region Implicit Operators

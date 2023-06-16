@@ -22,7 +22,8 @@ public class AuthController : BaseController
     public virtual async Task<ServerSideApiResult> SignUp(SignUpRequestDto request, CancellationToken cancellationToken)
     {
         await _userRepository.SignUp(request, cancellationToken);
-        return Ok();
+        ServerSideApiResult a = Ok();
+        return a;
     }
 
     [HttpPost]

@@ -16,17 +16,17 @@ public class StorageService : IStorageService, IScopedDependency
     // Local Storage
     public async Task<string> GetFromLocalStorageAsync(string key)
     {
-        return await _jSRuntime.InvokeAsync<string>("", key);
+        return await _jSRuntime.InvokeAsync<string>("localStorage.getItem", key);
     }
 
     public async Task SetToLocalStorageAsync(string key, string value)
     {
-        await _jSRuntime.InvokeVoidAsync("", key, value);
+        await _jSRuntime.InvokeVoidAsync("localStorage.setItem", key, value);
     }
 
     public async Task RemoveFromLocalStorageAsync(string key)
     {
-        await _jSRuntime.InvokeVoidAsync("", key);
+        await _jSRuntime.InvokeVoidAsync("localStorage.removeItem", key);
     }
 
     // Cookie

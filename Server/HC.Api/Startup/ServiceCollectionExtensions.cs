@@ -40,11 +40,6 @@ public static class ServiceCollectionExtensions
             //options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
 
             //options.UseYeKeModelBinder();
-        }).AddJsonOptions(option =>
-        {
-            var enumConverter = new JsonStringEnumConverter();
-            option.JsonSerializerOptions.Converters.Add(enumConverter);
-            option.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault | JsonIgnoreCondition.WhenWritingNull;
         });
     }
 
