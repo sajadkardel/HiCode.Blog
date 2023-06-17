@@ -30,9 +30,9 @@ public class StorageService : IStorageService, IScopedDependency
     }
 
     // Cookie
-    public async Task SetToCookieAsync(string key, string value)
+    public async Task SetToCookieAsync(string key, string value, long expiresIn)
     {
-        await _jSRuntime.InvokeVoidAsync("App.setCookie", key, value);
+        await _jSRuntime.InvokeVoidAsync("App.setCookie", key, value, expiresIn);
     }
 
     public async Task<string> GetFromCookieAsync(string key)

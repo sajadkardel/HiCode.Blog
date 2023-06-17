@@ -12,5 +12,5 @@ public abstract class ApiResult
 public abstract class ApiResult<TData> : ApiResult
     where TData : class
 {
-    public TData? Data { get; set; } = default!;
+    public TData Data { get; set; } = default!;
 }

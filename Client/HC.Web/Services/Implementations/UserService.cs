@@ -31,7 +31,7 @@ public class UserService : IUserService, IScopedDependency
 
         if (signInResponse.IsSuccess)
         {
-            await _localStorageService.SetToCookieAsync("access_token", signInResponse.Data.access_token);
+            await _localStorageService.SetToCookieAsync("access_token", signInResponse.Data.access_token, (DateTime.Now.Second - signInResponse.Data.expires_in.Second));
             await _appAuthenticationStateProvider.RaiseAuthenticationStateHasChanged();
         }
 

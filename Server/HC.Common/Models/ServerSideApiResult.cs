@@ -52,7 +52,7 @@ public class ServerSideApiResult : ApiResult
 
 public class ServerSideApiResult<TData> : ApiResult<TData> where TData : class
 {
-    public ServerSideApiResult(bool isSuccess, ApiResultStatusCode statusCode, TData? data = null, string? message = null)
+    public ServerSideApiResult(bool isSuccess, ApiResultStatusCode statusCode, TData data = default!, string? message = null)
     {
         IsSuccess = isSuccess;
         StatusCode = statusCode;
@@ -69,17 +69,17 @@ public class ServerSideApiResult<TData> : ApiResult<TData> where TData : class
 
     public static implicit operator ServerSideApiResult<TData>(OkResult result)
     {
-        return new ServerSideApiResult<TData>(true, ApiResultStatusCode.Success, null);
+        return new ServerSideApiResult<TData>(true, ApiResultStatusCode.Success, default!);
     }
 
     public static implicit operator ServerSideApiResult<TData>(OkObjectResult result)
     {
-        return new ServerSideApiResult<TData>(true, ApiResultStatusCode.Success, result.Value as TData);
+        return new ServerSideApiResult<TData>(true, ApiResultStatusCode.Success, result.Value as TData ?? default!);
     }
 
     public static implicit operator ServerSideApiResult<TData>(BadRequestResult result)
     {
-        return new ServerSideApiResult<TData>(false, ApiResultStatusCode.BadRequest, null);
+        return new ServerSideApiResult<TData>(false, ApiResultStatusCode.BadRequest, default!);
     }
 
     public static implicit operator ServerSideApiResult<TData>(BadRequestObjectResult result)
@@ -90,22 +90,22 @@ public class ServerSideApiResult<TData> : ApiResult<TData> where TData : class
             var errorMessages = errors.SelectMany(p => (string[])p.Value).Distinct();
             message = string.Join(" | ", errorMessages);
         }
-        return new ServerSideApiResult<TData>(false, ApiResultStatusCode.BadRequest, null, message);
+        return new ServerSideApiResult<TData>(false, ApiResultStatusCode.BadRequest, default!, message);
     }
 
     public static implicit operator ServerSideApiResult<TData>(ContentResult result)
     {
-        return new ServerSideApiResult<TData>(true, ApiResultStatusCode.Success, null, result.Content);
+        return new ServerSideApiResult<TData>(true, ApiResultStatusCode.Success, default!, result.Content);
     }
 
     public static implicit operator ServerSideApiResult<TData>(NotFoundResult result)
     {
-        return new ServerSideApiResult<TData>(false, ApiResultStatusCode.NotFound, null);
+        return new ServerSideApiResult<TData>(false, ApiResultStatusCode.NotFound, default!);
     }
 
     public static implicit operator ServerSideApiResult<TData>(NotFoundObjectResult result)
     {
-        return new ServerSideApiResult<TData>(false, ApiResultStatusCode.NotFound, result.Value as TData);
+        return new ServerSideApiResult<TData>(false, ApiResultStatusCode.NotFound, result.Value as TData ?? default!);
     }
 
     #endregion

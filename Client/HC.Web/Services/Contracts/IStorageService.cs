@@ -9,7 +9,7 @@ public interface IStorageService
     public Task RemoveFromLocalStorageAsync(string key);
 
     // Cookie
-    public Task SetToCookieAsync(string key, string value);
+    public Task SetToCookieAsync(string key, string value, long expiresIn);
     public Task<string> GetFromCookieAsync(string key);
     public Task RemoveFromCookieAsync(string key);
 }

@@ -62,35 +62,26 @@ public class UserRepository : Repository<User>, IUserRepository, IScopedDependen
         byte[] secretKey = Encoding.UTF8.GetBytes(JwtSettings.Get().SecretKey); // longer that 16 character
         SigningCredentials signingCredentials = new(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256Signature);
 
-        byte[] encryptionkey = Encoding.UTF8.GetBytes(JwtSettings.Get().EncryptKey); //must be 16 character
-        EncryptingCredentials encryptingCredentials = new(new SymmetricSecurityKey(encryptionkey), SecurityAlgorithms.Aes128KW, SecurityAlgorithms.Aes128CbcHmacSha256);
+        //byte[] encryptionkey = Encoding.UTF8.GetBytes(JwtSettings.Get().EncryptKey); //must be 16 character
+        //EncryptingCredentials encryptingCredentials = new(new SymmetricSecurityKey(encryptionkey), SecurityAlgorithms.Aes128KW, SecurityAlgorithms.Aes128CbcHmacSha256);
 
         var claims = await _userManager.GetClaimsAsync(user);
 
-        SecurityTokenDescriptor descriptor = new()
-        {
-            Issuer = JwtSettings.Get().Issuer,
-            Audience = JwtSettings.Get().Audience,
-            IssuedAt = DateTime.Now,
-            NotBefore = DateTime.Now.AddMinutes(JwtSettings.Get().NotBeforeMinutes),
-            Expires = DateTime.Now.AddMinutes(JwtSettings.Get().ExpirationMinutes),
-            SigningCredentials = signingCredentials,
-            EncryptingCredentials = encryptingCredentials,
-            Subject = new ClaimsIdentity(claims)
-        };
+        JwtSecurityToken securityToken = new(
+            issuer: JwtSettings.Get().Issuer,
+            audience: JwtSettings.Get().Audience,
+            signingCredentials: signingCredentials,
+            expires: DateTime.Now.AddMinutes(JwtSettings.Get().ExpirationMinutes),
+            notBefore: DateTime.Now.AddMinutes(JwtSettings.Get().NotBeforeMinutes),
+            claims: claims
+            );
 
-        //JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-        //JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
-        //JwtSecurityTokenHandler.DefaultOutboundClaimTypeMap.Clear();
-
-        JwtSecurityTokenHandler tokenHandler = new();
-
-        JwtSecurityToken securityToken = tokenHandler.CreateJwtSecurityToken(descriptor);
+        string accessToken = new JwtSecurityTokenHandler().WriteToken(securityToken);
 
         return new SignInResponseDto()
         {
             token_type = "Bearer",
-            //access_token = securityToken,
+            access_token = accessToken,
             expires_in = securityToken.ValidTo
         };
     }
