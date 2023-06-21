@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace HC.Shared.Extensions;
+namespace HC.Common.Extensions;
 
 public class ConfigurationExtensions
 {

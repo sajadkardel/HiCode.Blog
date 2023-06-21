@@ -1,4 +1,5 @@
-﻿
+﻿using HC.Common.Extensions;
+
 namespace HC.Common.Settings;
 
 public class IdentitySettings
@@ -13,7 +14,7 @@ public class IdentitySettings
     public static IdentitySettings Get()
     {
         var appSettingPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory())?.FullName ?? "", "HC.Api", "appsettings.json");
-        IdentitySettings settings = Shared.Extensions.ConfigurationExtensions.GetSection<IdentitySettings>(appSettingPath, nameof(IdentitySettings)) ?? new();
+        IdentitySettings settings = ConfigurationExtensions.GetSection<IdentitySettings>(appSettingPath, nameof(IdentitySettings)) ?? new();
         return settings;
     }
 }

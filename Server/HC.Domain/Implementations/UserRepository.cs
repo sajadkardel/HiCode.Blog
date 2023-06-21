@@ -10,6 +10,7 @@ using System.Text;
 using HC.DataAccess.Entities.User;
 using HC.Shared.Dtos.User;
 using HC.Common.Settings;
+using System.Security.Claims;
 
 namespace HC.Domain.Implementations;
 
@@ -61,18 +62,26 @@ public class UserRepository : Repository<User>, IUserRepository, IScopedDependen
         byte[] secretKey = Encoding.UTF8.GetBytes(JwtSettings.Get().SecretKey); // longer that 16 character
         SigningCredentials signingCredentials = new(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256);
 
+        byte[] encryptionkey = Encoding.UTF8.GetBytes(JwtSettings.Get().EncryptKey); //must be 16 character
+        EncryptingCredentials encryptingCredentials = new(new SymmetricSecurityKey(encryptionkey), SecurityAlgorithms.Aes128KW, SecurityAlgorithms.Aes128CbcHmacSha256);
+
         var claims = await _userManager.GetClaimsAsync(user);
 
-        JwtSecurityToken securityToken = new(
-            issuer: JwtSettings.Get().Issuer,
-            audience: JwtSettings.Get().Audience,
-            signingCredentials: signingCredentials,
-            notBefore: DateTime.Now.AddMinutes(JwtSettings.Get().NotBeforeMinutes),
-            expires: DateTime.Now.AddMinutes(JwtSettings.Get().ExpirationMinutes),
-            claims: claims
-            );
+        JwtSecurityTokenHandler tokenHandler = new();
 
-        string accessToken = new JwtSecurityTokenHandler().WriteToken(securityToken);
+        JwtSecurityToken securityToken = tokenHandler.CreateJwtSecurityToken(new SecurityTokenDescriptor
+        {
+            Issuer = JwtSettings.Get().Issuer,
+            IssuedAt = DateTime.Now,
+            Audience = JwtSettings.Get().Audience,
+            NotBefore = DateTime.Now.AddMinutes(JwtSettings.Get().NotBeforeMinutes),
+            Expires = DateTime.Now.AddMinutes(JwtSettings.Get().ExpirationMinutes),
+            SigningCredentials = signingCredentials,
+            EncryptingCredentials = encryptingCredentials,
+            Subject = new ClaimsIdentity(claims)
+        });
+
+        string accessToken = tokenHandler.WriteToken(securityToken);
 
         return accessToken;
     }

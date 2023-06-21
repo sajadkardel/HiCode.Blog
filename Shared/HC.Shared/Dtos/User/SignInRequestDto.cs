@@ -5,19 +5,11 @@ namespace HC.Shared.Dtos.User;
 
 public class SignInRequestDto
 {
-    [Required]
+    [Required(ErrorMessage = "لطفا نام کاربری را وارد نمایید.")]
     [JsonPropertyName("username")]
     public string UserName { get; set; } = default!;
 
-    [Required]
+    [Required(ErrorMessage = "لطفا پسورد را وارد نمایید.")]
     [JsonPropertyName("password")]
     public string Password { get; set; } = default!;
-
-    [Required]
-    [JsonPropertyName("client_id")]
-    public string? ClientId { get; set; }
-
-    [Required]
-    [JsonPropertyName("client_secret")]
-    public string? ClientSecret { get; set; }
 }

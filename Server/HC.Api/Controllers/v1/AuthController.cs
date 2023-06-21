@@ -22,13 +22,12 @@ public class AuthController : BaseController
     public virtual async Task<ServerSideApiResult> SignUp(SignUpRequestDto request, CancellationToken cancellationToken)
     {
         await _userRepository.SignUp(request, cancellationToken);
-        ServerSideApiResult a = Ok();
-        return a;
+        return Ok();
     }
 
     [HttpPost]
     [AllowAnonymous]
-    public virtual async Task<ServerSideApiResult<SignInResponseDto>> SignIn(SignInRequestDto request, CancellationToken cancellationToken)
+    public virtual async Task<SignInResponseDto> SignIn(SignInRequestDto request, CancellationToken cancellationToken)
     {
         var result = await _userRepository.SignIn(request, cancellationToken);
         return result;
