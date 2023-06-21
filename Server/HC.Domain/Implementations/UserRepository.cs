@@ -6,12 +6,10 @@ using HC.Common.Exceptions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using System.Text;
 using HC.DataAccess.Entities.User;
 using HC.Shared.Dtos.User;
 using HC.Common.Settings;
-using Microsoft.EntityFrameworkCore;
 
 namespace HC.Domain.Implementations;
 
@@ -38,17 +36,18 @@ public class UserRepository : Repository<User>, IUserRepository, IScopedDependen
 
     public async Task<SignInResponseDto> SignIn(SignInRequestDto request, CancellationToken cancellationToken)
     {
-        if (request.GrantType.ToLower() != JwtSettings.Get().GrantType) throw new Exception("OAuth flow is not password.");
-
         var user = await _userManager.FindByNameAsync(request.UserName);
         if (user is null) throw new BadRequestException("نام کاربری یا رمز عبور اشتباه است");
 
         var isPasswordValid = await _userManager.CheckPasswordAsync(user, request.Password);
         if (isPasswordValid is false) throw new BadRequestException("نام کاربری یا رمز عبور اشتباه است");
 
-        var jwt = await GenerateTokenAsync(user);
+        var accessToken = await GenerateTokenAsync(user);
 
-        return jwt;
+        return new SignInResponseDto
+        {
+            access_token = accessToken,
+        };
     }
 
     public Task UpdateSecurityStampAsync(User user, CancellationToken cancellationToken)
@@ -57,13 +56,10 @@ public class UserRepository : Repository<User>, IUserRepository, IScopedDependen
         return UpdateAsync(user, cancellationToken);
     }
 
-    private async Task<SignInResponseDto> GenerateTokenAsync(User user)
+    private async Task<string> GenerateTokenAsync(User user)
     {
         byte[] secretKey = Encoding.UTF8.GetBytes(JwtSettings.Get().SecretKey); // longer that 16 character
-        SigningCredentials signingCredentials = new(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256Signature);
-
-        //byte[] encryptionkey = Encoding.UTF8.GetBytes(JwtSettings.Get().EncryptKey); //must be 16 character
-        //EncryptingCredentials encryptingCredentials = new(new SymmetricSecurityKey(encryptionkey), SecurityAlgorithms.Aes128KW, SecurityAlgorithms.Aes128CbcHmacSha256);
+        SigningCredentials signingCredentials = new(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256);
 
         var claims = await _userManager.GetClaimsAsync(user);
 
@@ -71,18 +67,13 @@ public class UserRepository : Repository<User>, IUserRepository, IScopedDependen
             issuer: JwtSettings.Get().Issuer,
             audience: JwtSettings.Get().Audience,
             signingCredentials: signingCredentials,
-            expires: DateTime.Now.AddMinutes(JwtSettings.Get().ExpirationMinutes),
             notBefore: DateTime.Now.AddMinutes(JwtSettings.Get().NotBeforeMinutes),
+            expires: DateTime.Now.AddMinutes(JwtSettings.Get().ExpirationMinutes),
             claims: claims
             );
 
         string accessToken = new JwtSecurityTokenHandler().WriteToken(securityToken);
 
-        return new SignInResponseDto()
-        {
-            token_type = "Bearer",
-            access_token = accessToken,
-            expires_in = securityToken.ValidTo
-        };
+        return accessToken;
     }
 }

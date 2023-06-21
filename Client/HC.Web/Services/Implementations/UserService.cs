@@ -2,6 +2,7 @@
 using HC.Shared.Markers;
 using HC.Web.Models;
 using HC.Web.Services.Contracts;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace HC.Web.Services.Implementations;
 
@@ -25,14 +26,18 @@ public class UserService : IUserService, IScopedDependency
 
     public async Task<ClientSideApiResult<SignInResponseDto>> SignIn(SignInRequestDto dto)
     {
-        dto.GrantType = "password";
-
         var signInResponse = await _apiCaller.PostAsync<SignInResponseDto, SignInRequestDto>("Auth/SignIn", dto);
 
         if (signInResponse.IsSuccess)
         {
-            await _localStorageService.SetToCookieAsync("access_token", signInResponse.Data.access_token, (DateTime.Now.Second - signInResponse.Data.expires_in.Second));
-            await _appAuthenticationStateProvider.RaiseAuthenticationStateHasChanged();
+            JwtSecurityTokenHandler tokenHandler = new();
+
+            if (tokenHandler.CanReadToken(signInResponse.Data.access_token))
+            {
+                var securityToken = tokenHandler.ReadJwtToken(signInResponse.Data.access_token);
+                await _localStorageService.SetToCookieAsync("access_token", signInResponse.Data.access_token, (DateTime.Now.Second - securityToken.ValidTo.Second));
+                await _appAuthenticationStateProvider.RaiseAuthenticationStateHasChanged();
+            }
         }
 
         return signInResponse;

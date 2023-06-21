@@ -52,77 +52,21 @@ public static class IdentityConfigurationExtensions
             options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+
         }).AddJwtBearer(options =>
         {
             var secretKey = Encoding.UTF8.GetBytes(JwtSettings.Get().SecretKey);
-            var encryptionKey = Encoding.UTF8.GetBytes(JwtSettings.Get().EncryptKey);
 
-            var validationParameters = new TokenValidationParameters
+            options.TokenValidationParameters = new TokenValidationParameters
             {
-                ClockSkew = TimeSpan.Zero, // default: 5 min
-                RequireSignedTokens = true,
-
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(secretKey),
-
-                RequireExpirationTime = true,
-                ValidateLifetime = true,
+                ValidateIssuer = true, //default : false
+                ValidIssuer = JwtSettings.Get().Issuer,
 
                 ValidateAudience = true, //default : false
                 ValidAudience = JwtSettings.Get().Audience,
 
-                ValidateIssuer = true, //default : false
-                ValidIssuer = JwtSettings.Get().Issuer,
-
-                TokenDecryptionKey = new SymmetricSecurityKey(encryptionKey)
-            };
-
-            options.TokenValidationParameters = validationParameters;
-
-            options.RequireHttpsMetadata = false;
-            options.SaveToken = true;
-            options.Events = new JwtBearerEvents
-            {
-                OnAuthenticationFailed = context =>
-                {
-                    if (context.Exception != null)
-                        throw new AppException(ApiResultStatusCode.UnAuthorized, "Authentication failed.", HttpStatusCode.Unauthorized, context.Exception);
-
-                    return Task.CompletedTask;
-                },
-                OnTokenValidated = async context =>
-                {
-                    var signInManager = context.HttpContext.RequestServices.GetRequiredService<SignInManager<User>>();
-                    var userManager = context.HttpContext.RequestServices.GetRequiredService<UserManager<User>>();
-
-                    var claimsIdentity = context.Principal?.Identity as ClaimsIdentity;
-                    if (claimsIdentity is null || claimsIdentity.Claims.Any() is false) context.Fail("This token has no claims.");
-
-                    var securityStamp = claimsIdentity?.FindFirstValue(new ClaimsIdentityOptions().SecurityStampClaimType);
-                    if (securityStamp is null) context.Fail("This token has no security stamp");
-
-                    // Find user and token from database and perform your custom validation
-                    var userId = claimsIdentity?.GetUserId<int>();
-                    if (userId is null) context.Fail("userId is null.");
-
-                    var user = await userManager.FindByIdAsync(userId.ToString()!);
-                    if (user is null) context.Fail("user is null.");
-
-                    var validatedUser = await signInManager.ValidateSecurityStampAsync(context.Principal);
-                    if (validatedUser == null) context.Fail("Token security stamp is not valid.");
-
-                    if (user!.IsActive is false) context.Fail("User is not active.");
-
-                    user!.LastLoginDate = DateTimeOffset.Now;
-                    await userManager.UpdateAsync(user);
-                },
-                OnChallenge = context =>
-                {
-                    if (context.AuthenticateFailure != null)
-                        throw new AppException(ApiResultStatusCode.UnAuthorized, "Authenticate failure.", HttpStatusCode.Unauthorized, context.AuthenticateFailure);
-
-                    throw new AppException(ApiResultStatusCode.UnAuthorized, "You are unauthorized to access this resource.", HttpStatusCode.Unauthorized);
-                }
+                ValidateIssuerSigningKey = true, //default : false
+                IssuerSigningKey = new SymmetricSecurityKey(secretKey)
             };
         });
     }
