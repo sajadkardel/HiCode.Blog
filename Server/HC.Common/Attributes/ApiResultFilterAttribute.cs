@@ -57,10 +57,9 @@ public class ApiResultFilterAttribute : ActionFilterAttribute
             var apiResult = new ServerSideApiResult(true, ApiResultStatusCode.Success, contentResult.Content);
             context.Result = new JsonResult(apiResult) { StatusCode = contentResult.StatusCode };
         }
-        else if (context.Result is ObjectResult objectResult && objectResult.StatusCode == null
-            && !(objectResult.Value is ServerSideApiResult))
+        else if (context.Result is ObjectResult objectResult && objectResult.StatusCode == null && objectResult.Value is not ServerSideApiResult)
         {
-            var apiResult = new ServerSideApiResult<object>(true, ApiResultStatusCode.Success, objectResult.Value);
+            var apiResult = new ServerSideApiResult<object>(true, ApiResultStatusCode.Success, objectResult.Value ?? default!);
             context.Result = new JsonResult(apiResult) { StatusCode = objectResult.StatusCode };
         }
 

@@ -24,7 +24,4 @@ public enum ApiResultStatusCode
 
     [Display(Name = "خطای احراز هویت")]
     UnAuthorized = 6,
-
-    [Display(Name = "خطا در اتصال به سرور.")]
-    HTTPConnection = 7,
 }

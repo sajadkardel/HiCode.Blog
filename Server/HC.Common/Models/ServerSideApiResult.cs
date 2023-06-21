@@ -56,7 +56,7 @@ public class ServerSideApiResult<TData> : ApiResult<TData> where TData : class
     {
         IsSuccess = isSuccess;
         StatusCode = statusCode;
-        Message = message;
+        Message = message ?? statusCode.ToDisplay();
         Data = data;
     }
 
