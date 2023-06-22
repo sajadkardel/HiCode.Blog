@@ -9,13 +9,13 @@ public partial class Users
 {
     [Inject] protected IApiCaller _apiCaller { get; set; } = default!;
 
-    UserResponseDto _user = new();
+    List<UserResponseDto> _users = new();
 
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
 
-        var response = await _apiCaller.GetAsync<UserResponseDto>($"{ApiRoutingConstants.Auth.ControllerName}/{ApiRoutingConstants.Auth.GetById}?id={26}");
-        _user = response.Data;
+        var response = await _apiCaller.GetAsync<List<UserResponseDto>>($"{ApiRoutingConstants.Auth.ControllerName}/{ApiRoutingConstants.Auth.Get}");
+        _users = response.Data;
     }
 }

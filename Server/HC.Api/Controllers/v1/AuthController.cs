@@ -36,6 +36,7 @@ public class AuthController : BaseController
         return result;
     }
 
+    [AllowAnonymous]
     [HttpGet(ApiRoutingConstants.Auth.Get)]
     public virtual async Task<List<UserResponseDto>> Get(CancellationToken cancellationToken)
     {
