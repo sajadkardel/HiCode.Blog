@@ -40,7 +40,7 @@ public class UserService : IUserService, IScopedDependency
             if (tokenHandler.CanReadToken(response.Data.access_token))
             {
                 var securityToken = tokenHandler.ReadJwtToken(response.Data.access_token);
-                await _localStorageService.SetToCookieAsync("access_token",response.Data.access_token, (DateTime.Now.Second - securityToken.ValidTo.Second));
+                await _localStorageService.SetToCookieAsync("access_token", response.Data.access_token, (DateTime.Now.Second - securityToken.ValidTo.Second));
                 await _appAuthenticationStateProvider.RaiseAuthenticationStateHasChanged();
             }
         }

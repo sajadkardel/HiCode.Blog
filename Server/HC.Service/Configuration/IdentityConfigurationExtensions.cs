@@ -1,14 +1,7 @@
-﻿using System.Net;
-using System.Security.Claims;
-using System.Text;
-using HC.Common.Exceptions;
-using HC.Common.Extensions;
+﻿using System.Text;
 using HC.Common.Settings;
 using HC.DataAccess.Context;
 using HC.DataAccess.Entities.User;
-using HC.Service.Contracts;
-using HC.Shared.Enums;
-using HC.Shared.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,8 +26,8 @@ public static class IdentityConfigurationExtensions
             identityOptions.User.RequireUniqueEmail = IdentitySettings.Get().RequireUniqueEmail;
 
             //Singin Settings
-            identityOptions.SignIn.RequireConfirmedEmail = false;
-            identityOptions.SignIn.RequireConfirmedPhoneNumber = false;
+            identityOptions.SignIn.RequireConfirmedEmail = IdentitySettings.Get().RequireConfirmedEmail;
+            identityOptions.SignIn.RequireConfirmedPhoneNumber = IdentitySettings.Get().RequireConfirmedPhoneNumber;
 
             //Lockout Settings
             //identityOptions.Lockout.MaxFailedAccessAttempts = 5;
@@ -56,6 +49,7 @@ public static class IdentityConfigurationExtensions
         }).AddJwtBearer(options =>
         {
             var secretKey = Encoding.UTF8.GetBytes(JwtSettings.Get().SecretKey);
+            var encryptionKey = Encoding.UTF8.GetBytes(JwtSettings.Get().EncryptKey);
 
             options.TokenValidationParameters = new TokenValidationParameters
             {
@@ -66,7 +60,9 @@ public static class IdentityConfigurationExtensions
                 ValidAudience = JwtSettings.Get().Audience,
 
                 ValidateIssuerSigningKey = true, //default : false
-                IssuerSigningKey = new SymmetricSecurityKey(secretKey)
+                IssuerSigningKey = new SymmetricSecurityKey(secretKey),
+
+                TokenDecryptionKey = new SymmetricSecurityKey(encryptionKey)
             };
         });
     }

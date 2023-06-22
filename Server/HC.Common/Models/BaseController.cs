@@ -11,5 +11,5 @@ namespace HC.Common.Models;
 public class BaseController : ControllerBase
 {
     //public UserRepository UserRepository { get; set; } => property injection
-    public bool UserIsAuthenticated => HttpContext.User.Identity is { IsAuthenticated: true };
+    //public bool UserIsAuthenticated => HttpContext.User.Identity is { IsAuthenticated: true };
 }

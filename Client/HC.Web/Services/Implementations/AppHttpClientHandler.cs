@@ -17,6 +17,7 @@ public class AppHttpClientHandler : HttpClientHandler
         if (request.Headers.Authorization is null)
         {
             var access_token = await _storageService.GetFromCookieAsync("access_token");
+            Console.WriteLine("access_token: " + access_token);
             if (access_token is not null)
             {
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", access_token);

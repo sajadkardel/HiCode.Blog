@@ -36,7 +36,6 @@ public class AuthController : BaseController
         return result;
     }
 
-    [AllowAnonymous]
     [HttpGet(ApiRoutingConstants.Auth.Get)]
     public virtual async Task<List<UserResponseDto>> Get(CancellationToken cancellationToken)
     {
@@ -44,7 +43,6 @@ public class AuthController : BaseController
         return result;
     }
 
-    [AllowAnonymous]
     [HttpGet(ApiRoutingConstants.Auth.GetById)]
     public virtual async Task<UserResponseDto> GetById([FromQuery]int id, CancellationToken cancellationToken)
     {

@@ -25,7 +25,7 @@ public class Middlewares
 
         app.UseHttpsRedirection();
 
-        app.UseSwaggerAndUI();
+        app.UseSwaggerWithUI();
 
         app.UseBlazorFrameworkFiles();
         app.UseStaticFiles();
