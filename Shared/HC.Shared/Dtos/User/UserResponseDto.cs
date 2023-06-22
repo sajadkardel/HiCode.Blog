@@ -12,5 +12,4 @@ public class UserResponseDto
     public GenderType? Gender { get; set; }
     public bool IsActive { get; set; }
     public DateTimeOffset? LastLoginDate { get; set; }
-    public List<string>? Roles { get; set; }
 }

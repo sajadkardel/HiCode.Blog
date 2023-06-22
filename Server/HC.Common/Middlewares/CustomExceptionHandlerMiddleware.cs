@@ -10,6 +10,7 @@ using HC.Shared.Enums;
 using HC.Shared.Dtos;
 using HC.Common.Models;
 using System.Text.Json;
+using HC.Shared.Constants;
 
 namespace HC.Common.Middlewares;
 
@@ -112,7 +113,7 @@ public class CustomExceptionHandlerMiddleware
             var json = JsonSerializer.Serialize(result);
 
             context.Response.StatusCode = (int)httpStatusCode;
-            context.Response.ContentType = "application/json";
+            context.Response.ContentType = ApiRoutingConstants.ApiContentTypeConst.Json;
             await context.Response.WriteAsync(json);
         }
 

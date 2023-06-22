@@ -5,9 +5,9 @@ using HC.Common.Attributes;
 namespace HC.Common.Models;
 
 [ApiController]
-[AllowAnonymous]
+[Authorize]
 [ApiResultFilter]
-[Route("api/v{version:apiVersion}/[controller]/[action]")]// api/v1/[controller]/[action]
+//[Route("api/v{version:apiVersion}")]
 public class BaseController : ControllerBase
 {
     //public UserRepository UserRepository { get; set; } => property injection

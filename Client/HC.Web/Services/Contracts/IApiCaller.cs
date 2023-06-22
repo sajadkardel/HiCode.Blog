@@ -1,4 +1,5 @@
 ﻿using HC.Web.Models;
+using static HC.Shared.Constants.ApiRoutingConstants;
 
 namespace HC.Web.Services.Contracts;
 
@@ -12,36 +13,20 @@ public interface IApiCaller
         (string url, Dictionary<string, string>? headers = null, CancellationToken cancelationToken = default)
         where T : class;
 
-    public ClientSideApiResult Post<TU>
-        (string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string? contentType = null)
-        where TU : class;
-
     public ClientSideApiResult<T> Post<T, TU>
-        (string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string? contentType = null) 
+        (string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string contentType = ApiContentTypeConst.Json) 
         where T: class where TU: class;
 
-    public Task<ClientSideApiResult> PostAsync<TU>
-        (string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string? contentType = null, CancellationToken cancelationToken = default)
-        where TU : class;
-
     public Task<ClientSideApiResult<T>> PostAsync<T, TU>
-        (string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string? contentType = null, CancellationToken cancelationToken = default)
+        (string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string contentType = ApiContentTypeConst.Json, CancellationToken cancelationToken = default)
         where T : class where TU : class;
-
-    public ClientSideApiResult Put<TU>
-        (string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string? contentType = null)
-        where TU : class;
 
     public ClientSideApiResult<T> Put<T, TU>
-        (string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string? contentType = null) 
+        (string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string contentType = ApiContentTypeConst.Json) 
         where T : class where TU : class;
 
-    public Task<ClientSideApiResult> PutAsync<TU>
-        (string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string? contentType = null, CancellationToken cancelationToken = default)
-        where TU : class;
-
     public Task<ClientSideApiResult<T>> PutAsync<T, TU>
-        (string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string? contentType = null, CancellationToken cancelationToken = default) 
+        (string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string contentType = ApiContentTypeConst.Json, CancellationToken cancelationToken = default) 
         where T : class where TU : class;
 
     public ClientSideApiResult<T> Delete<T>
