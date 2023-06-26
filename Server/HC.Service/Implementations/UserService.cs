@@ -1,4 +1,5 @@
-﻿using HC.DataAccess.Repositories.Contracts;
+﻿using HC.DataAccess.Entities.User;
+using HC.DataAccess.Repositories.Contracts;
 using HC.Service.Contracts;
 using HC.Shared.Dtos.User;
 using HC.Shared.Markers;
@@ -8,9 +9,9 @@ namespace HC.Service.Implementations;
 
 public class UserService : IUserService, IScopedDependency
 {
-    private readonly IUserRepository _userRepository;
+    private readonly IRepository<User> _userRepository;
 
-    public UserService(IUserRepository userRepository)
+    public UserService(IRepository<User> userRepository)
     {
         _userRepository = userRepository;
     }
