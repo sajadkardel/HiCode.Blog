@@ -12,7 +12,7 @@ using Swashbuckle.AspNetCore.Filters;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
-namespace HC.Service.Configuration;
+namespace HC.Service.Configurations;
 
 public static class SwaggerConfigurationExtensions
 {

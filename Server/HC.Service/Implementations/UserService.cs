@@ -49,7 +49,6 @@ public class UserService : IUserService, IScopedDependency
             Gender = result.Gender,
             IsActive = result.IsActive,
             LastLoginDate = result.LastLoginDate
-
         };
 
         return response;
