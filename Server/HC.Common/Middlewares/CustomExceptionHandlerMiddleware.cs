@@ -113,7 +113,7 @@ public class CustomExceptionHandlerMiddleware
             var json = JsonSerializer.Serialize(result);
 
             context.Response.StatusCode = (int)httpStatusCode;
-            context.Response.ContentType = ApiRoutingConstants.ApiContentTypeConst.Json;
+            context.Response.ContentType = HttpRequestContentTypeConstants.Json;
             await context.Response.WriteAsync(json);
         }
 

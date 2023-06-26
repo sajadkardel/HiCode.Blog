@@ -1,12 +1,9 @@
 ﻿using HC.Shared.Constants;
-using HC.Shared.Dtos;
 using HC.Shared.Dtos.User;
 using HC.Shared.Markers;
 using HC.Web.Models;
 using HC.Web.Services.Contracts;
 using System.IdentityModel.Tokens.Jwt;
-using System.Net.Http.Json;
-using System.Text.Json;
 
 namespace HC.Web.Services.Implementations;
 
@@ -25,13 +22,13 @@ public class UserService : IUserService, IScopedDependency
 
     public async Task<ClientSideApiResult<SignUpResponseDto>> SignUp(SignUpRequestDto request)
     {
-        var response = await _apiCaller.PostAsync<SignUpResponseDto, SignUpRequestDto>($"{ApiRoutingConstants.Auth.ControllerName}/{ApiRoutingConstants.Auth.SignUp}", request);
+        var response = await _apiCaller.PostAsync<SignUpResponseDto, SignUpRequestDto>(RoutingConstants.ServerSide.Auth.SignUp, request);
         return response;
     }
 
     public async Task<ClientSideApiResult<SignInResponseDto>> SignIn(SignInRequestDto request)
     {
-        var response = await _apiCaller.PostAsync<SignInResponseDto, SignInRequestDto>($"{ApiRoutingConstants.Auth.ControllerName}/{ApiRoutingConstants.Auth.SignIn}", request);
+        var response = await _apiCaller.PostAsync<SignInResponseDto, SignInRequestDto>(RoutingConstants.ServerSide.Auth.SignIn, request);
 
         if (response?.IsSuccess ?? false)
         {
@@ -56,13 +53,13 @@ public class UserService : IUserService, IScopedDependency
 
     public async Task<ClientSideApiResult<List<UserResponseDto>>> GetAll()
     {
-        var response = await _apiCaller.GetAsync<List<UserResponseDto>>($"{ApiRoutingConstants.Auth.ControllerName}/{ApiRoutingConstants.Auth.Get}");
+        var response = await _apiCaller.GetAsync<List<UserResponseDto>>(RoutingConstants.ServerSide.Auth.GetAll);
         return response;
     }
 
     public async Task<ClientSideApiResult<UserResponseDto>> GetById(int id)
     {
-        var response = await _apiCaller.GetAsync<UserResponseDto>($"{ApiRoutingConstants.Auth.ControllerName}/{ApiRoutingConstants.Auth.GetById}?id={id}");
+        var response = await _apiCaller.GetAsync<UserResponseDto>(RoutingConstants.ServerSide.Auth.GetById);
         return response;
     }
 }

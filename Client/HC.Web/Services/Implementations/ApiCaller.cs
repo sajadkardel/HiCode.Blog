@@ -47,7 +47,7 @@ public class ApiCaller : IApiCaller, IScopedDependency
         return response;
     }
 
-    public ClientSideApiResult<T> Post<T, TU>(string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string contentType = ApiRoutingConstants.ApiContentTypeConst.Json)
+    public ClientSideApiResult<T> Post<T, TU>(string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string contentType = HttpRequestContentTypeConstants.Json)
         where T : class
         where TU : class
     {
@@ -55,12 +55,12 @@ public class ApiCaller : IApiCaller, IScopedDependency
 
         HttpContent httpContent = default!;
 
-        if (contentType is ApiRoutingConstants.ApiContentTypeConst.Json)
+        if (contentType is HttpRequestContentTypeConstants.Json)
         {
             var requestString = JsonSerializer.Serialize(requestModel, _serializerOption);
             httpContent = new StringContent(requestString, Encoding.GetEncoding(encoding), contentType);
         }
-        else if (contentType is ApiRoutingConstants.ApiContentTypeConst.UrlEncode)
+        else if (contentType is HttpRequestContentTypeConstants.UrlEncode)
         {
             var requestUrlEncode = CreateUrlEncode(requestModel);
             httpContent = new FormUrlEncodedContent(requestUrlEncode);
@@ -73,7 +73,7 @@ public class ApiCaller : IApiCaller, IScopedDependency
         return response;
     }
 
-    public async Task<ClientSideApiResult<T>> PostAsync<T, TU>(string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string contentType = ApiRoutingConstants.ApiContentTypeConst.Json, CancellationToken cancelationToken = default)
+    public async Task<ClientSideApiResult<T>> PostAsync<T, TU>(string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string contentType = HttpRequestContentTypeConstants.Json, CancellationToken cancelationToken = default)
         where T : class
         where TU : class
     {
@@ -81,12 +81,12 @@ public class ApiCaller : IApiCaller, IScopedDependency
 
         HttpContent httpContent = default!;
 
-        if (contentType is ApiRoutingConstants.ApiContentTypeConst.Json)
+        if (contentType is HttpRequestContentTypeConstants.Json)
         {
             var requestString = JsonSerializer.Serialize(requestModel, _serializerOption);
             httpContent = new StringContent(requestString, Encoding.GetEncoding(encoding), contentType);
         }
-        else if (contentType is ApiRoutingConstants.ApiContentTypeConst.UrlEncode)
+        else if (contentType is HttpRequestContentTypeConstants.UrlEncode)
         {
             var requestUrlEncode = CreateUrlEncode(requestModel);
             httpContent = new FormUrlEncodedContent(requestUrlEncode);
@@ -99,7 +99,7 @@ public class ApiCaller : IApiCaller, IScopedDependency
         return response;
     }
 
-    public ClientSideApiResult<T> Put<T, TU>(string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string contentType = ApiRoutingConstants.ApiContentTypeConst.Json)
+    public ClientSideApiResult<T> Put<T, TU>(string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string contentType = HttpRequestContentTypeConstants.Json)
         where T : class
         where TU : class
     {
@@ -107,12 +107,12 @@ public class ApiCaller : IApiCaller, IScopedDependency
 
         HttpContent httpContent = default!;
 
-        if (contentType is ApiRoutingConstants.ApiContentTypeConst.Json)
+        if (contentType is HttpRequestContentTypeConstants.Json)
         {
             var requestString = JsonSerializer.Serialize(requestModel, _serializerOption);
             httpContent = new StringContent(requestString, Encoding.GetEncoding(encoding), contentType);
         }
-        else if (contentType is ApiRoutingConstants.ApiContentTypeConst.UrlEncode)
+        else if (contentType is HttpRequestContentTypeConstants.UrlEncode)
         {
             var requestUrlEncode = CreateUrlEncode(requestModel);
             httpContent = new FormUrlEncodedContent(requestUrlEncode);
@@ -125,7 +125,7 @@ public class ApiCaller : IApiCaller, IScopedDependency
         return response;
     }
 
-    public async Task<ClientSideApiResult<T>> PutAsync<T, TU>(string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string contentType = ApiRoutingConstants.ApiContentTypeConst.Json, CancellationToken cancelationToken = default)
+    public async Task<ClientSideApiResult<T>> PutAsync<T, TU>(string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string contentType = HttpRequestContentTypeConstants.Json, CancellationToken cancelationToken = default)
         where T : class
         where TU : class
     {
@@ -133,12 +133,12 @@ public class ApiCaller : IApiCaller, IScopedDependency
 
         HttpContent httpContent = default!;
 
-        if (contentType is ApiRoutingConstants.ApiContentTypeConst.Json)
+        if (contentType is HttpRequestContentTypeConstants.Json)
         {
             var requestString = JsonSerializer.Serialize(requestModel, _serializerOption);
             httpContent = new StringContent(requestString, Encoding.GetEncoding(encoding), contentType);
         }
-        else if (contentType is ApiRoutingConstants.ApiContentTypeConst.UrlEncode)
+        else if (contentType is HttpRequestContentTypeConstants.UrlEncode)
         {
             var requestUrlEncode = CreateUrlEncode(requestModel);
             httpContent = new FormUrlEncodedContent(requestUrlEncode);

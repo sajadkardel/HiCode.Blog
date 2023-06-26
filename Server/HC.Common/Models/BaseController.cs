@@ -7,7 +7,7 @@ namespace HC.Common.Models;
 [ApiController]
 [Authorize]
 [ApiResultFilter]
-//[Route("api/v{version:apiVersion}")]
+[Route("api/v{version:apiVersion}/")]
 public class BaseController : ControllerBase
 {
     //public UserRepository UserRepository { get; set; } => property injection

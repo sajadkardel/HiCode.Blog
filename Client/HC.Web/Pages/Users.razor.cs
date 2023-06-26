@@ -1,5 +1,4 @@
-﻿using HC.Shared.Constants;
-using HC.Shared.Dtos.User;
+﻿using HC.Shared.Dtos.User;
 using HC.Web.Services.Contracts;
 using Microsoft.AspNetCore.Components;
 
@@ -7,7 +6,7 @@ namespace HC.Web.Pages;
 
 public partial class Users
 {
-    [Inject] protected IApiCaller _apiCaller { get; set; } = default!;
+    [Inject] protected IUserService _userService { get; set; } = default!;
 
     List<UserResponseDto> _users = new();
 
@@ -15,7 +14,7 @@ public partial class Users
     {
         await base.OnInitializedAsync();
 
-        var response = await _apiCaller.GetAsync<List<UserResponseDto>>($"{ApiRoutingConstants.Auth.ControllerName}/{ApiRoutingConstants.Auth.Get}");
+        var response = await _userService.GetAll();
         _users = response.Data;
     }
 }
