@@ -1,4 +1,4 @@
-﻿namespace HC.Shared.Dtos.User;
+﻿namespace HC.Shared.Dtos.Auth;
 
 public class SignInResponseDto
 {

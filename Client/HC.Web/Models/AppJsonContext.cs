@@ -1,4 +1,5 @@
-﻿using HC.Shared.Dtos.User;
+﻿using HC.Shared.Dtos.Auth;
+using HC.Shared.Dtos.User;
 using System.Text.Json.Serialization;
 
 namespace HC.Web.Models;

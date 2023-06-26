@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace HC.Shared.Dtos.User;
+namespace HC.Shared.Dtos.Auth;
 
 public class SignInRequestDto
 {

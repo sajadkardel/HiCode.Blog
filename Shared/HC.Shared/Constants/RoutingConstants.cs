@@ -8,9 +8,14 @@ public static class RoutingConstants
     {
         public static class Auth
         {
-            public const string BaseAddress = "auth/";
+            private const string BaseAddress = "auth/";
             public const string SignUp = BaseAddress + "signUp";
             public const string SignIn = BaseAddress + "signIn";
+        }
+
+        public static class User
+        {
+            private const string BaseAddress = "user/";
             public const string GetAll = BaseAddress + "getAll";
             public const string GetById = BaseAddress + "getById";
             public const string Create = BaseAddress + "create";
