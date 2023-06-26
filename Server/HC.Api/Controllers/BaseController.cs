@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using HC.Common.Attributes;
 
-namespace HC.Common.Models;
+namespace HC.Api.Controllers;
 
 [ApiController]
 [Authorize]

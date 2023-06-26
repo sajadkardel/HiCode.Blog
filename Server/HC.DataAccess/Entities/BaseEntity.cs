@@ -1,5 +1,4 @@
-﻿
-namespace HC.Common.Models;
+﻿namespace HC.DataAccess.Entities;
 
 public abstract class BaseEntity<TKey>
 {

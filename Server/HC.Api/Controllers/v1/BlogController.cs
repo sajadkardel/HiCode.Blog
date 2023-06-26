@@ -1,5 +1,4 @@
-﻿using HC.Common.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace HC.Api.Controllers.v1;
 
