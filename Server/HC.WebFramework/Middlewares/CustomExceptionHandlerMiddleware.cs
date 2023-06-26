@@ -12,7 +12,7 @@ using HC.Common.Models;
 using System.Text.Json;
 using HC.Shared.Constants;
 
-namespace HC.Common.Middlewares;
+namespace HC.WebFramework.Middlewares;
 
 public static class CustomExceptionHandlerMiddlewareExtensions
 {

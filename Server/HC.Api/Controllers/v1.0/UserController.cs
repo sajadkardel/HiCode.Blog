@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HC.Api.Controllers.v1;
 
-[ApiVersion("1")]
+[ApiVersion("1.0")]
 public class UserController : BaseController
 {
     private readonly IUserService _userService;

@@ -4,7 +4,7 @@ using HC.Shared.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace HC.Common.Attributes;
+namespace HC.WebFramework.ActionFilters;
 
 public class ApiResultFilterAttribute : ActionFilterAttribute
 {

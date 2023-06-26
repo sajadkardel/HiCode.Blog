@@ -1,4 +1,4 @@
-﻿using HC.Service.Configurations;
+﻿using HC.WebFramework.Configurations;
 
 namespace HC.Api.Startup;
 

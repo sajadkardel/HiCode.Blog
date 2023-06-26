@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using HC.Common.Attributes;
+using HC.WebFramework.ActionFilters;
 
 namespace HC.Api.Controllers;
 
