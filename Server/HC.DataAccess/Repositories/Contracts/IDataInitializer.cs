@@ -1,4 +1,4 @@
-﻿namespace HC.Domain.Contracts;
+﻿namespace HC.DataAccess.Repositories.Contracts;
 
 public interface IDataInitializer
 {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace HC.Service.Contracts;
+namespace HC.DataAccess.Repositories.Contracts;
 
 public interface IRepository<TEntity> where TEntity : class
 {

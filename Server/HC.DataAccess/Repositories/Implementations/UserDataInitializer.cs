@@ -1,10 +1,10 @@
 ﻿using HC.DataAccess.Entities.User;
-using HC.Domain.Contracts;
+using HC.DataAccess.Repositories.Contracts;
 using HC.Shared.Markers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace HC.Domain.Implementations;
+namespace HC.DataAccess.Repositories.Implementations;
 
 public class UserDataInitializer : IDataInitializer, IScopedDependency
 {

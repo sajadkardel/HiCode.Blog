@@ -1,5 +1,5 @@
 ﻿using HC.Common.Models;
-using HC.Domain.Contracts;
+using HC.Service.Contracts;
 using HC.Shared.Constants;
 using HC.Shared.Dtos.User;
 using Microsoft.AspNetCore.Mvc;
@@ -9,24 +9,24 @@ namespace HC.Api.Controllers.v1;
 [ApiVersion("1")]
 public class UserController : BaseController
 {
-    private readonly IUserRepository _userRepository;
+    private readonly IUserService _userService;
 
-    public UserController(IUserRepository userRepository)
+    public UserController(IUserService userService)
     {
-        _userRepository = userRepository;
+        _userService = userService;
     }
 
     [HttpGet(RoutingConstants.ServerSide.User.GetAll)]
     public virtual async Task<List<UserResponseDto>> GetAll(CancellationToken cancellationToken)
     {
-        var result = await _userRepository.GetAllUser(cancellationToken);
+        var result = await _userService.GetAll(cancellationToken);
         return result;
     }
 
     [HttpGet(RoutingConstants.ServerSide.User.GetById)]
     public virtual async Task<UserResponseDto> GetById([FromQuery] int id, CancellationToken cancellationToken)
     {
-        var result = await _userRepository.GetUserById(cancellationToken, id);
+        var result = await _userService.GetById(cancellationToken, id);
         return result;
     }
 

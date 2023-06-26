@@ -1,9 +1,7 @@
 ﻿using HC.Common.Exceptions;
 using HC.Common.Settings;
-using HC.DataAccess.Context;
 using HC.DataAccess.Entities.User;
-using HC.Domain.Contracts;
-using HC.Service.Implementations;
+using HC.Service.Contracts;
 using HC.Shared.Dtos.Auth;
 using HC.Shared.Markers;
 using Microsoft.AspNetCore.Identity;
@@ -12,14 +10,14 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace HC.Domain.Implementations;
+namespace HC.Service.Implementations;
 
-public class AuthRepository  : Repository<User>, IAuthRepository, IScopedDependency
+public class AuthService :  IAuthService, IScopedDependency
 {
     private readonly UserManager<User> _userManager;
     private readonly SignInManager<User> _signInManager;
 
-    public AuthRepository(ApplicationDbContext dbContext, UserManager<User> userManager, SignInManager<User> signInManager) : base(dbContext)
+    public AuthService(UserManager<User> userManager, SignInManager<User> signInManager)
     {
         _userManager = userManager;
         _signInManager = signInManager;

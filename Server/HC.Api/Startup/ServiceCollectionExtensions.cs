@@ -1,7 +1,8 @@
 ﻿using HC.Common.Settings;
 using HC.DataAccess.Context;
-using HC.Domain.Implementations;
+using HC.DataAccess.Repositories.Implementations;
 using HC.Service.Implementations;
+using HC.Shared.Dtos;
 using HC.Shared.Extensions;
 using HC.Shared.Markers;
 using Microsoft.AspNetCore.Mvc;
@@ -74,23 +75,23 @@ public static class ServiceCollectionExtensions
 
     public static void AddMarkedServices(this IServiceCollection services)
     {
-        var commonAssembly = typeof(Assert).Assembly;
-        var dataAssembly = typeof(ApplicationDbContext).Assembly;
-        var servicesAssembly = typeof(Repository<>).Assembly;
-        var domainAssembly = typeof(UserDataInitializer).Assembly;
+        var sharedAssembly = typeof(ApiResult).Assembly;
+        var commonAssembly = typeof(ConnectionStrings).Assembly;
+        var dataAccessAssembly = typeof(ApplicationDbContext).Assembly;
+        var servicesAssembly = typeof(AuthService).Assembly;
         var apiAssembly = typeof(Program).Assembly;
 
-        services.Scan(scan => scan.FromAssemblies(commonAssembly, dataAssembly, servicesAssembly, domainAssembly, apiAssembly)
+        services.Scan(scan => scan.FromAssemblies(sharedAssembly, commonAssembly, dataAccessAssembly, servicesAssembly, apiAssembly)
         .AddClasses(classes => classes.AssignableTo<IScopedDependency>())
         .AsImplementedInterfaces()
         .WithScopedLifetime());
 
-        services.Scan(scan => scan.FromAssemblies(commonAssembly, dataAssembly, servicesAssembly, domainAssembly, apiAssembly)
+        services.Scan(scan => scan.FromAssemblies(sharedAssembly, commonAssembly, dataAccessAssembly, servicesAssembly, apiAssembly)
         .AddClasses(classes => classes.AssignableTo<ISingletonDependency>())
         .AsImplementedInterfaces()
         .WithSingletonLifetime());
 
-        services.Scan(scan => scan.FromAssemblies(commonAssembly, dataAssembly, servicesAssembly, domainAssembly, apiAssembly)
+        services.Scan(scan => scan.FromAssemblies(sharedAssembly, commonAssembly, dataAccessAssembly, servicesAssembly, apiAssembly)
         .AddClasses(classes => classes.AssignableTo<ITransientDependency>())
         .AsImplementedInterfaces()
         .WithTransientLifetime());

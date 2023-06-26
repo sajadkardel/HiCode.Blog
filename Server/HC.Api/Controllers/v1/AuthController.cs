@@ -1,5 +1,5 @@
 ﻿using HC.Common.Models;
-using HC.Domain.Contracts;
+using HC.Service.Contracts;
 using HC.Shared.Constants;
 using HC.Shared.Dtos.Auth;
 using Microsoft.AspNetCore.Authorization;
@@ -10,18 +10,18 @@ namespace HC.Api.Controllers.v1;
 [ApiVersion("1")]
 public class AuthController : BaseController
 {
-    private readonly IAuthRepository _authRepository;
+    private readonly IAuthService _authService;
 
-    public AuthController(IAuthRepository authRepository)
+    public AuthController(IAuthService authRepository)
     {
-        _authRepository = authRepository;
+        _authService = authRepository;
     }
 
     [HttpPost(RoutingConstants.ServerSide.Auth.SignUp)]
     [AllowAnonymous]
     public virtual async Task<ServerSideApiResult> SignUp([FromBody] SignUpRequestDto request, CancellationToken cancellationToken)
     {
-        await _authRepository.SignUp(request, cancellationToken);
+        await _authService.SignUp(request, cancellationToken);
         return Ok();
     }
 
@@ -29,7 +29,7 @@ public class AuthController : BaseController
     [AllowAnonymous]
     public virtual async Task<SignInResponseDto> SignIn([FromBody] SignInRequestDto request, CancellationToken cancellationToken)
     {
-        var result = await _authRepository.SignIn(request, cancellationToken);
+        var result = await _authService.SignIn(request, cancellationToken);
         return result;
     }
 }

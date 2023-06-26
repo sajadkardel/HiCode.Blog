@@ -1,8 +1,8 @@
 ﻿using HC.Shared.Dtos.Auth;
 
-namespace HC.Domain.Contracts;
+namespace HC.Service.Contracts;
 
-public interface IAuthRepository
+public interface IAuthService
 {
     Task SignUp(SignUpRequestDto request, CancellationToken cancellationToken);
     Task<SignInResponseDto> SignIn(SignInRequestDto request, CancellationToken cancellationToken);

@@ -1,5 +1,5 @@
 ﻿using HC.DataAccess.Context;
-using HC.Domain.Contracts;
+using HC.DataAccess.Repositories.Contracts;
 using HC.Shared.Extensions;
 using Microsoft.EntityFrameworkCore;
 
