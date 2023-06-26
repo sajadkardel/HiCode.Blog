@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using HC.Common.Settings;
-using HC.DataAccess.Context;
-using HC.DataAccess.Entities.User;
+using HC.Data.Context;
+using HC.Data.Entities.User;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;

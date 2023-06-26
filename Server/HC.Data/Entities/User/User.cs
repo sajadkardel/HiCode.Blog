@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace HC.DataAccess.Entities.User;
+namespace HC.Data.Entities.User;
 
 public class User : IdentityUser<int>
 {

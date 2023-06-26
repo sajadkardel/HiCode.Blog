@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using HC.Shared.Extensions;
 using HC.Common.Extensions;
-using HC.DataAccess.Entities.User;
-using HC.DataAccess.Entities;
+using HC.Data.Entities.User;
+using HC.Data.Entities;
 
-namespace HC.DataAccess.Context;
+namespace HC.Data.Context;
 
 public class ApplicationDbContext : IdentityDbContext<User, Role, int>
 {

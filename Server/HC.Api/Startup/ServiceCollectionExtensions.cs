@@ -1,6 +1,6 @@
 ﻿using HC.Common.Settings;
-using HC.DataAccess.Context;
-using HC.DataAccess.Repositories.Implementations;
+using HC.Data.Context;
+using HC.Data.Repositories.Implementations;
 using HC.Service.Implementations;
 using HC.Shared.Dtos;
 using HC.Shared.Extensions;

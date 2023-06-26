@@ -1,5 +1,5 @@
-﻿using HC.DataAccess.Entities.User;
-using HC.DataAccess.Repositories.Contracts;
+﻿using HC.Data.Entities.User;
+using HC.Data.Repositories.Contracts;
 using HC.Service.Contracts;
 using HC.Shared.Dtos.User;
 using HC.Shared.Markers;
