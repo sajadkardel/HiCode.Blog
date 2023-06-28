@@ -1,6 +1,6 @@
 ﻿using HC.Common.Exceptions;
 using HC.Common.Settings;
-using HC.Data.Entities.User;
+using HC.Data.Entities.Identity;
 using HC.Service.Contracts;
 using HC.Shared.Dtos.Auth;
 using HC.Shared.Markers;

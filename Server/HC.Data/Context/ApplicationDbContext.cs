@@ -3,8 +3,9 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using HC.Shared.Extensions;
 using HC.Common.Extensions;
-using HC.Data.Entities.User;
 using HC.Data.Entities;
+using HC.Data.Entities.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace HC.Data.Context;
 
@@ -13,26 +14,25 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, int>
     public ApplicationDbContext(DbContextOptions options)
         : base(options)
     {
-
     }
 
-    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //{
-    //    optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=MyApiDb;Integrated Security=true");
-    //    base.OnConfiguring(optionsBuilder);
-    //}
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder builder)
     {
-        base.OnModelCreating(modelBuilder);
+        base.OnModelCreating(builder);
+
+        builder.Entity<IdentityUserRole<int>>().ToTable("UserRoles", typeof(User).GetParentFolderName());
+        builder.Entity<IdentityRoleClaim<int>>().ToTable("RoleClaims", typeof(User).GetParentFolderName());
+        builder.Entity<IdentityUserLogin<int>>().ToTable("UserLogins", typeof(User).GetParentFolderName());
+        builder.Entity<IdentityUserToken<int>>().ToTable("UserTokens", typeof(User).GetParentFolderName());
+        builder.Entity<IdentityUserClaim<int>>().ToTable("UserClaims", typeof(User).GetParentFolderName());
 
         var entitiesAssembly = typeof(ApplicationDbContext).Assembly;
 
-        modelBuilder.RegisterAllEntities<BaseEntity>(entitiesAssembly);
-        modelBuilder.RegisterEntityTypeConfiguration(entitiesAssembly);
-        modelBuilder.AddRestrictDeleteBehaviorConvention();
-        modelBuilder.AddSequentialGuidForIdConvention();
-        modelBuilder.AddPluralizingTableNameConvention();
+        builder.RegisterAllEntities<BaseEntity>(entitiesAssembly);
+        builder.ApplyConfigurationsFromAssembly(entitiesAssembly);
+        builder.AddRestrictDeleteBehaviorConvention();
+        builder.AddSequentialGuidForIdConvention();
+        builder.AddPluralizingTableNameConvention();
     }
 
     public override int SaveChanges()
@@ -61,8 +61,8 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, int>
 
     private void _cleanString()
     {
-        var changedEntities = ChangeTracker.Entries()
-            .Where(x => x.State == EntityState.Added || x.State == EntityState.Modified);
+        var changedEntities = ChangeTracker.Entries().Where(x => x.State == EntityState.Added || x.State == EntityState.Modified);
+
         foreach (var item in changedEntities)
         {
             if (item.Entity == null)

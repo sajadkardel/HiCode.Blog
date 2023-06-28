@@ -9,8 +9,6 @@ public static class SwaggerConfigurationExtensions
 {
     public static void AddSwagger(this IServiceCollection services)
     {
-        var apiVersionDescriptionProvider = services.BuildServiceProvider().GetRequiredService<IApiVersionDescriptionProvider>();
-
         services.AddSwaggerGen(options =>
         {
             var xmlDocPath = Path.Combine(AppContext.BaseDirectory, "HC.Api.xml");
@@ -27,6 +25,7 @@ public static class SwaggerConfigurationExtensions
 
             });
 
+            var apiVersionDescriptionProvider = services.BuildServiceProvider().GetRequiredService<IApiVersionDescriptionProvider>();
             foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions)
             {
                 options.SwaggerDoc(description.GroupName, new OpenApiInfo
@@ -40,12 +39,11 @@ public static class SwaggerConfigurationExtensions
 
     public static IApplicationBuilder UseSwaggerWithUI(this IApplicationBuilder app)
     {
-        var apiVersionDescriptionProvider = app.ApplicationServices.GetRequiredService<IApiVersionDescriptionProvider>();
-
         app.UseSwagger();
 
         app.UseSwaggerUI(option =>
         {
+            var apiVersionDescriptionProvider = app.ApplicationServices.GetRequiredService<IApiVersionDescriptionProvider>();
             foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions)
             {
                 option.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", $"{description.GroupName.ToUpper()} Docs");
