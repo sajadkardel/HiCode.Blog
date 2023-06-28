@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# HC
+/Client/HC.Web/wwwroot/scripts/app*.js
+/**/*.css
+*.map

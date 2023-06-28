@@ -1,0 +1,35 @@
+// Sass isolation approach
+// https://chrissainty.com/get-some-sass-into-your-blazor-app/
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+h1, h2, h3, h4, h5 {
+    margin: 0;
+}
+
+p {
+    margin: 0;
+}
+
+html, body, #app {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+}
+
+// Shared
+@import '../Shared/LoadingComponent.razor.scss';
+@import '../Shared/MainLayout.razor.scss';
+@import '../Shared/NotAuthorizedComponent.razor.scss';
+@import '../Shared/PageNotFound.razor.scss';
+
+// Pages
+@import '../Pages/Index.razor.scss';
+@import '../Pages/SignUp.razor.scss';
+@import '../Pages/SignIn.razor.scss';
+@import '../Pages/Users.razor.scss';
