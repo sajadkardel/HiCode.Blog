@@ -1,6 +1,5 @@
 ﻿using HC.Shared.Constants;
 using HC.Web.Models;
-using static HC.Shared.Constants.RoutingConstants;
 
 namespace HC.Web.Services.Contracts;
 

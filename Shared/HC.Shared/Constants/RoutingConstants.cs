@@ -28,17 +28,10 @@ public static class RoutingConstants
     {
         public static class Page
         {
-            public const string IndexAddress = "/";
-            public const string IndexTitle = "صفحه اصلی";
-
-            public const string SignUpAddress = "/sign-up";
-            public const string SignUpTitle = "ثبت نام";
-
-            public const string SignInAddress = "/sign-in";
-            public const string SignInTitle = "ورود";
-
-            public const string UsersAddress = "/users";
-            public const string UsersTitle = "کاربران";
+            public const string Index = "/";
+            public const string SignUp = "/sign-up";
+            public const string SignIn = "/sign-in";
+            public const string Users = "/users";
         }
     }
 }
