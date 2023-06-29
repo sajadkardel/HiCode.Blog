@@ -4,13 +4,13 @@
 
 <h3>Users</h3>
 
-<button class="btn btn-success">Add</button>
+<button>Add</button>
 <div>
     @foreach (var user in _users)
     {
         <span style="background-color: pink; padding: 5px;"><strong>UserName: </strong>@user.UserName</span>
-        <button class="btn btn-warning">Update</button>
-        <button class="btn btn-danger">Delete</button>
+        <button>Update</button>
+        <button>Delete</button>
         <hr />
     }
 </div>
