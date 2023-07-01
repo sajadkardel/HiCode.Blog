@@ -1,2 +1,20 @@
-﻿body {
+﻿@import '../Styles/abstracts/_colors.scss';
+
+.main-body {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    padding-top: rem(68px);
+    box-sizing: border-box;
+    background-color: $SecondaryColor;
+}
+
+.main-btn {
+    display: inline-block;
+    background-color: #4CAF50; /* Green */
+    border-radius: 4px;
+    color: white;
+    padding: 8px 12px;
+    text-align: center;
+    font-size: 16px;
 }

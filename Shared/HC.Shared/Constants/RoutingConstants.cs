@@ -28,10 +28,12 @@ public static class RoutingConstants
     {
         public static class Page
         {
-            public const string Index = "/";
-            public const string SignUp = "/sign-up";
-            public const string SignIn = "/sign-in";
-            public const string Users = "/users";
+            public static string Index = "/";
+            public static string SignUp = "/sign-up";
+            public static string SignIn = "/sign-in";
+            public static string Post(int PostId) => $"/post/{PostId}";
+            public static string Archive = "/archive";
+            public static string Users = "/users";
         }
     }
 }
