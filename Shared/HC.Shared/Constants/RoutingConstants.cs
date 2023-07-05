@@ -33,6 +33,8 @@ public static class RoutingConstants
             public static string SignIn = "/sign-in";
             public static string Post(int PostId) => $"/post/{PostId}";
             public static string Archive = "/archive";
+            public static string News = "/news";
+            public static string Books = "/books";
             public static string Users = "/users";
         }
     }

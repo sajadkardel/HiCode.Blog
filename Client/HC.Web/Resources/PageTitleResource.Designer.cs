@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HC.Shared.Resources {
+namespace HC.Web.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace HC.Shared.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("HC.Shared.Resources.PageTitleResource", typeof(PageTitleResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("HC.Web.Resources.PageTitleResource", typeof(PageTitleResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

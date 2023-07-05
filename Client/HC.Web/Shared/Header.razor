@@ -1,7 +1,28 @@
 ﻿<div class="main-header">
-    <BitButton ButtonStyle="BitButtonStyle.Standard" Href="@RoutingConstants.ClientSide.Page.Index">صفحه اصلی</BitButton>
-    <BitButton ButtonStyle="BitButtonStyle.Standard" Href="@RoutingConstants.ClientSide.Page.SignUp">ثبت نام</BitButton>
-    <BitButton ButtonStyle="BitButtonStyle.Standard" Href="@RoutingConstants.ClientSide.Page.SignIn">ورود</BitButton>
-    <BitButton ButtonStyle="BitButtonStyle.Standard" Href="@RoutingConstants.ClientSide.Page.Archive">مطالب</BitButton>
-    <BitSearchBox Placeholder="جستجو..."></BitSearchBox>
+
+    <div class="header-items">
+        <div class="item">
+            <BitIcon Class="icon" IconName="BitIconName.AddFriend" />
+            <BitLink Class="text" Href="@RoutingConstants.ClientSide.Page.SignUp">ثبت نام</BitLink>
+        </div>
+        <div class="item">
+            <BitIcon Class="icon" IconName="BitIconName.Signin" />
+            <BitLink Class="text" Href="@RoutingConstants.ClientSide.Page.SignIn">ورود</BitLink>
+        </div>
+        <div class="item">
+            <BitLink Class="text" Href="@RoutingConstants.ClientSide.Page.Archive">مطالب</BitLink>
+        </div>
+        <div class="item">
+            <BitLink Class="text" Href="@RoutingConstants.ClientSide.Page.News">اخبار</BitLink>
+        </div>
+        <div class="item">
+            <BitLink Class="text" Href="@RoutingConstants.ClientSide.Page.Books">کتاب ها</BitLink>
+        </div>
+        <div class="item">
+            <BitSearchBox Placeholder="جستجو..."></BitSearchBox>
+        </div>
+    </div>
+
+    <BitLink Class="header-logo" Href="@RoutingConstants.ClientSide.Page.Index" />
+
 </div>
