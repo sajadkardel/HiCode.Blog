@@ -1,0 +1,27 @@
+﻿<div class="main-nav">
+
+    <div class="nav-items">
+        <div class="nav-item">
+            <BitNav TItem="BitNavOption" OnItemClick="() => isExpandedAccouunt = false">
+                <BitNavOption IconName="BitIconName.Signin" IsExpanded="isExpandedAccouunt">
+                    <BitNavOption Text="ثبت نام" Url="@RoutingConstants.ClientSide.Page.SignUp" />
+                    <BitNavOption Text="ورود" Url="@RoutingConstants.ClientSide.Page.SignIn" />
+                    <BitNavOption Text="پروفایل" Url="@RoutingConstants.ClientSide.Page.Profile" />
+                </BitNavOption>
+            </BitNav>
+        </div>
+        <div class="nav-item">
+            <BitLink Class="text" Href="@RoutingConstants.ClientSide.Page.Archive">مطالب</BitLink>
+        </div>
+        <div class="nav-item">
+            <BitLink Class="text" Href="@RoutingConstants.ClientSide.Page.News">اخبار</BitLink>
+        </div>
+        <div class="nav-item">
+            <BitLink Class="text" Href="@RoutingConstants.ClientSide.Page.Books">کتاب ها</BitLink>
+        </div>
+        <BitSearchBox Class="nav-search" Placeholder="جستجو..."></BitSearchBox>
+    </div>
+
+    <BitLink Class="nav-logo" Href="@RoutingConstants.ClientSide.Page.Index" />
+
+</div>

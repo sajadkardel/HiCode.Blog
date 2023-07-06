@@ -1,0 +1,74 @@
+﻿@import '../Styles/abstracts/_colors.scss';
+@import '../Styles/abstracts/_media-queries.scss';
+
+.main-nav {
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 100%;
+    min-height: rem(80px);
+    padding: rem(7px) rem(16px);
+    box-sizing: border-box;
+    background-color: $Palette1Color;
+    border-bottom: 1px solid $BorderColor;
+
+    .nav-items {
+        display: flex;
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 6px;
+            cursor: pointer;
+            border: 1px solid $BorderColor;
+            border-radius: 6px;
+            padding: 0 5px;
+            min-width: 38px;
+            height: 38px;
+
+            &.account {
+                border-radius: 50%;
+
+                .icon, .text {
+                    color: $White;
+                }
+            }
+
+            .icon, .text {
+                margin: 0 3px;
+                color: $ContentTextColor;
+                font-size: 14px;
+                font-weight: 400;
+            }
+
+            .text {
+                text-decoration: none;
+            }
+        }
+
+        .nav-item:hover {
+            background-color: $HoverColor;
+            border: 0.1px solid $HoverBorderColor;
+        }
+    }
+
+    .nav-search {
+        margin: 0 10px;
+        width: 500px;
+    } 
+    
+    .nav-logo {
+        background-image: url('../wwwroot/images/icons/icon-512.svg');
+        background-size: rem(100px);
+        background-position: center;
+        background-repeat: no-repeat;
+        width: rem(100px);
+        height: rem(52px);
+        border-radius: 10px;
+    }
+}

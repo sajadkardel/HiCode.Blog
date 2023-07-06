@@ -36,6 +36,7 @@ public static class RoutingConstants
             public static string News = "/news";
             public static string Books = "/books";
             public static string Users = "/users";
+            public static string Profile = "/profile";
         }
     }
 }

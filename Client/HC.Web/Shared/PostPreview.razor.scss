@@ -1,0 +1,60 @@
+﻿@import '../Styles/abstracts/_colors.scss';
+
+
+.preview-box {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    min-width: 800px;
+    min-height: 150px;
+    border: 1px solid $BorderColor;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: $Palette2Color;
+    transition: width 0.4s, height 0.4s;
+
+    &:hover {
+        background-color: $HoverColor;
+        width: 810px;
+        height: 160px;
+
+        .photo {
+            .photo-animation {
+                width: 100%;
+                height: 140px;
+            }
+        }
+    }
+
+    .photo {
+        position: relative;
+
+        img {
+            height: 140px;
+            border-radius: 5px;
+        }
+
+        .photo-animation {
+            position: absolute;
+        }
+    }
+
+    .content {
+        display: flex;
+        flex-flow: column nowrap;
+        max-width: 600px;
+
+        .title {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: $TitleTextColor;
+        }
+
+        .text {
+            color: $ContentTextColor;
+        }
+    }
+}

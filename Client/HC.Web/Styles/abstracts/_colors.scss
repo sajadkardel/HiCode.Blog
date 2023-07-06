@@ -3,21 +3,15 @@
 $Black: #000000;
 $White: #FFFFFF;
 
-$Palette1Color: #382933;
-$Palette2Color: #3B5249;
-$Palette3Color: #519872;
-$Palette4Color: #A4B494;
+$Palette1Color: #010409;
+$Palette2Color: #0d1117;
+$Palette3Color: #30363d;
 
-$Palette1RGBColor: rgb(56, 41, 51);
-$Palette2RGBColor: rgb(59, 82, 73);
-$Palette3RGBColor: rgb(81, 152, 114);
-$Palette4RGBColor: rgb(164, 180, 148);
-
-$Palette1RGBAColor: rgba(56, 41, 51, 0.4);
-$Palette2RGBAColor: rgba(59, 82, 73, 0.4);
-$Palette3RGBAColor: rgba(81, 152, 114, 0.4);
-$Palette4RGBAColor: rgba(164, 180, 148, 0.4);
-
-$ContentTextColor: $Palette2Color;
-$TitleTextColor: $Palette1Color;
+$ContentTextColor: #7d8590;
+$TitleTextColor: $White;
 $SubTitleTextColor: $Palette2Color;
+$BorderColor: #666565;
+$HoverBorderColor: #E5E5E5;
+$HoverColor: rgba(177,186,196,0.12);
+
+$InfoColor: #1f6feb;
