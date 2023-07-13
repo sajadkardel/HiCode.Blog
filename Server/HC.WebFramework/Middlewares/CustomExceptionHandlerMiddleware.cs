@@ -7,10 +7,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Hosting;
 using HC.Common.Exceptions;
 using HC.Shared.Enums;
-using HC.Shared.Dtos;
-using HC.Common.Models;
 using System.Text.Json;
 using HC.Shared.Constants;
+using HC.Shared.Models;
 
 namespace HC.WebFramework.Middlewares;
 
@@ -39,7 +38,7 @@ public class CustomExceptionHandlerMiddleware
 
     public async Task Invoke(HttpContext context)
     {
-        string message = null;
+        string message = string.Empty;
         HttpStatusCode httpStatusCode = HttpStatusCode.InternalServerError;
         ApiResultStatusCode apiStatusCode = ApiResultStatusCode.ServerError;
 
@@ -109,7 +108,7 @@ public class CustomExceptionHandlerMiddleware
             if (context.Response.HasStarted)
                 throw new InvalidOperationException("The response has already started, the http status code middleware will not be executed.");
 
-            var result = new ServerSideApiResult(false, apiStatusCode, message);
+            var result = ApiResult.Failed(apiStatusCode, message);
             var json = JsonSerializer.Serialize(result);
 
             context.Response.StatusCode = (int)httpStatusCode;

@@ -1,5 +1,5 @@
-﻿using HC.Shared.Dtos;
-using HC.Shared.Markers;
+﻿using HC.Shared.Markers;
+using HC.Shared.Models;
 
 namespace HC.Web.Startup;
 

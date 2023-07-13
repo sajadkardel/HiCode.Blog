@@ -1,5 +1,4 @@
-﻿using HC.Common.Models;
-using HC.Service.Contracts;
+﻿using HC.Service.Contracts;
 using HC.Shared.Constants;
 using HC.Shared.Dtos.User;
 using Microsoft.AspNetCore.Mvc;
@@ -31,19 +30,19 @@ public class UserController : BaseController
     }
 
     [HttpPost(RoutingConstants.ServerSide.User.Create)]
-    public virtual async Task<ServerSideApiResult<UserResponseDto>> Create([FromBody] UserRequestDto dto, CancellationToken cancellationToken)
+    public virtual async Task<IActionResult> Create([FromBody] UserRequestDto dto, CancellationToken cancellationToken)
     {
         return Ok();
     }
 
     [HttpPut(RoutingConstants.ServerSide.User.Update)]
-    public virtual async Task<ServerSideApiResult<UserResponseDto>> Update([FromQuery] int id, [FromBody] UserRequestDto dto, CancellationToken cancellationToken)
+    public virtual async Task<IActionResult> Update([FromQuery] int id, [FromBody] UserRequestDto dto, CancellationToken cancellationToken)
     {
         return Ok();
     }
 
     [HttpDelete(RoutingConstants.ServerSide.User.Delete)]
-    public virtual async Task<ServerSideApiResult> Delete([FromQuery] int id, CancellationToken cancellationToken)
+    public virtual async Task<IActionResult> Delete([FromQuery] int id, CancellationToken cancellationToken)
     {
         return Ok();
     }

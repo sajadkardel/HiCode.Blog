@@ -1,7 +1,7 @@
 ﻿using HC.Shared.Constants;
 using HC.Shared.Dtos.Auth;
 using HC.Shared.Markers;
-using HC.Web.Models;
+using HC.Shared.Models;
 using HC.Web.Services.Contracts;
 using System.IdentityModel.Tokens.Jwt;
 
@@ -20,17 +20,17 @@ public class AuthService : IAuthService, IScopedDependency
         _apiCaller = apiCaller;
     }
 
-    public async Task<ClientSideApiResult<SignUpResponseDto>> SignUp(SignUpRequestDto request)
+    public async Task<ApiResult<SignUpResponseDto>> SignUp(SignUpRequestDto request)
     {
         var response = await _apiCaller.PostAsync<SignUpResponseDto, SignUpRequestDto>(RoutingConstants.ServerSide.Auth.SignUp, request);
         return response;
     }
 
-    public async Task<ClientSideApiResult<SignInResponseDto>> SignIn(SignInRequestDto request)
+    public async Task<ApiResult<SignInResponseDto>> SignIn(SignInRequestDto request)
     {
         var response = await _apiCaller.PostAsync<SignInResponseDto, SignInRequestDto>(RoutingConstants.ServerSide.Auth.SignIn, request);
 
-        if (response?.IsSuccess ?? false)
+        if (response?.IsSucceed ?? false)
         {
             JwtSecurityTokenHandler tokenHandler = new();
 

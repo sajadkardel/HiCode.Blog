@@ -2,9 +2,9 @@
 using HC.Data.Context;
 using HC.Data.Repositories.Implementations;
 using HC.Service.Implementations;
-using HC.Shared.Dtos;
 using HC.Shared.Extensions;
 using HC.Shared.Markers;
+using HC.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;

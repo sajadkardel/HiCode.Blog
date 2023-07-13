@@ -1,6 +1,6 @@
-﻿using HC.Common.Models;
-using HC.Service.Contracts;
+﻿using HC.Service.Contracts;
 using HC.Shared.Constants;
+using HC.Shared.Dtos;
 using HC.Shared.Dtos.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +19,7 @@ public class AuthController : BaseController
 
     [HttpPost(RoutingConstants.ServerSide.Auth.SignUp)]
     [AllowAnonymous]
-    public virtual async Task<ServerSideApiResult> SignUp([FromBody] SignUpRequestDto request, CancellationToken cancellationToken)
+    public virtual async Task<IActionResult> SignUp([FromBody] SignUpRequestDto request, CancellationToken cancellationToken)
     {
         await _authService.SignUp(request, cancellationToken);
         return Ok();
@@ -27,9 +27,9 @@ public class AuthController : BaseController
 
     [HttpPost(RoutingConstants.ServerSide.Auth.SignIn)]
     [AllowAnonymous]
-    public virtual async Task<SignInResponseDto> SignIn([FromBody] SignInRequestDto request, CancellationToken cancellationToken)
+    public virtual async Task<IActionResult> SignIn([FromBody] SignInRequestDto request, CancellationToken cancellationToken)
     {
         var result = await _authService.SignIn(request, cancellationToken);
-        return result;
+        return Ok(result);
     }
 }
