@@ -1,5 +1,4 @@
-﻿using HC.Common.Exceptions;
-using HC.Common.Settings;
+﻿using HC.Common.Settings;
 using HC.Data.Entities.Identity;
 using HC.Service.Contracts;
 using HC.Shared.Dtos.Auth;
@@ -26,20 +25,20 @@ public class AuthService :  IAuthService, IScopedDependency
     public async Task SignUp(SignUpRequestDto request, CancellationToken cancellationToken)
     {
         var existingUser = await _userManager.FindByNameAsync(request.UserName);
-        if (existingUser is not null) throw new BadRequestException("کاربری با این نام کاربری قبلا ثبت شده.");
+        if (existingUser is not null) throw new Exception("کاربری با این نام کاربری قبلا ثبت شده.");
 
         var result = await _userManager.CreateAsync(new User() { UserName = request.UserName, }, request.Password);
 
-        if (result.Succeeded is false) throw new BadRequestException(result.Errors.First().Description);
+        if (result.Succeeded is false) throw new Exception(result.Errors.First().Description);
     }
 
     public async Task<SignInResponseDto> SignIn(SignInRequestDto request, CancellationToken cancellationToken)
     {
         var user = await _userManager.FindByNameAsync(request.UserName);
-        if (user is null) throw new BadRequestException("نام کاربری یا رمز عبور اشتباه است");
+        if (user is null) throw new Exception("نام کاربری یا رمز عبور اشتباه است");
 
         var isPasswordValid = await _userManager.CheckPasswordAsync(user, request.Password);
-        if (isPasswordValid is false) throw new BadRequestException("نام کاربری یا رمز عبور اشتباه است");
+        if (isPasswordValid is false) throw new Exception("نام کاربری یا رمز عبور اشتباه است");
 
         var accessToken = await GenerateTokenAsync(user);
 
