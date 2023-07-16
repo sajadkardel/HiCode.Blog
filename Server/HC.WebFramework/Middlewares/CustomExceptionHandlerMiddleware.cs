@@ -58,7 +58,7 @@ public class CustomExceptionHandlerMiddleware
                 var dic = new Dictionary<string, string>
                 {
                     ["Exception"] = exception.Message,
-                    ["StackTrace"] = exception.StackTrace,
+                    ["StackTrace"] = exception.StackTrace ?? ""
                 };
                 message = JsonSerializer.Serialize(dic);
             }
@@ -86,7 +86,7 @@ public class CustomExceptionHandlerMiddleware
                 var dic = new Dictionary<string, string>
                 {
                     ["Exception"] = exception.Message,
-                    ["StackTrace"] = exception.StackTrace
+                    ["StackTrace"] = exception.StackTrace ?? ""
                 };
                 if (exception is SecurityTokenExpiredException tokenException)
                     dic.Add("Expires", tokenException.Expires.ToString());
