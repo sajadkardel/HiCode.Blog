@@ -8,5 +8,8 @@ public enum GenderType
     Male = 1,
 
     [Display(Name = "زن")]
-    Female = 2
+    Female = 2,
+
+    [Display(Name = "دیگر جنسیت ها")]
+    Other = 3,
 }
