@@ -1,6 +1,5 @@
-﻿using HC.WebFramework.Configurations;
-using HC.WebFramework.Middlewares;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
+﻿using HC.Infrastructure.Configurations;
+using HC.Infrastructure.Middlewares;
 
 namespace HC.Api.Startup;
 

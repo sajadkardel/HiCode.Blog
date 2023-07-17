@@ -11,7 +11,7 @@ using HC.Shared.Constants;
 using HC.Shared.Models;
 using HC.Shared.Extensions;
 
-namespace HC.WebFramework.Middlewares;
+namespace HC.Infrastructure.Middlewares;
 
 public static class CustomExceptionHandlerMiddlewareExtensions
 {

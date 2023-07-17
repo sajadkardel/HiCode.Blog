@@ -17,7 +17,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Client\HC.Web\HC.Web.csproj" />
-		<ProjectReference Include="..\HC.WebFramework\HC.WebFramework.csproj" />
+		<ProjectReference Include="..\HC.Infrastructure\HC.Infrastructure.csproj" />
 	</ItemGroup>
 
 </Project>

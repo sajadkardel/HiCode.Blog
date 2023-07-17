@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
-namespace HC.WebFramework.Configurations;
+namespace HC.Infrastructure.Configurations;
 
 public static class SwaggerConfigurationExtensions
 {
