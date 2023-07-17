@@ -22,12 +22,12 @@ public class Repository<TEntity> : IRepository<TEntity>, IScopedDependency
     }
 
     #region Async Method
-    public virtual ValueTask<TEntity> GetByIdAsync(CancellationToken cancellationToken, params object[] ids)
+    public virtual ValueTask<TEntity> GetByIdAsync(CancellationToken cancellationToken = default, params object[] ids)
     {
         return Entities.FindAsync(ids, cancellationToken);
     }
 
-    public virtual async Task AddAsync(TEntity entity, CancellationToken cancellationToken, bool saveNow = true)
+    public virtual async Task AddAsync(TEntity entity, bool saveNow = true, CancellationToken cancellationToken = default)
     {
         Assert.NotNull(entity, nameof(entity));
         await Entities.AddAsync(entity, cancellationToken).ConfigureAwait(false);
@@ -35,7 +35,7 @@ public class Repository<TEntity> : IRepository<TEntity>, IScopedDependency
             await DbContext.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
     }
 
-    public virtual async Task AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken, bool saveNow = true)
+    public virtual async Task AddRangeAsync(IEnumerable<TEntity> entities, bool saveNow = true, CancellationToken cancellationToken = default)
     {
         Assert.NotNull(entities, nameof(entities));
         await Entities.AddRangeAsync(entities, cancellationToken).ConfigureAwait(false);
@@ -43,7 +43,7 @@ public class Repository<TEntity> : IRepository<TEntity>, IScopedDependency
             await DbContext.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
     }
 
-    public virtual async Task UpdateAsync(TEntity entity, CancellationToken cancellationToken, bool saveNow = true)
+    public virtual async Task UpdateAsync(TEntity entity, bool saveNow = true, CancellationToken cancellationToken = default)
     {
         Assert.NotNull(entity, nameof(entity));
         Entities.Update(entity);
@@ -51,7 +51,7 @@ public class Repository<TEntity> : IRepository<TEntity>, IScopedDependency
             await DbContext.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
     }
 
-    public virtual async Task UpdateRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken, bool saveNow = true)
+    public virtual async Task UpdateRangeAsync(IEnumerable<TEntity> entities, bool saveNow = true, CancellationToken cancellationToken = default)
     {
         Assert.NotNull(entities, nameof(entities));
         Entities.UpdateRange(entities);
@@ -59,7 +59,7 @@ public class Repository<TEntity> : IRepository<TEntity>, IScopedDependency
             await DbContext.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
     }
 
-    public virtual async Task DeleteAsync(TEntity entity, CancellationToken cancellationToken, bool saveNow = true)
+    public virtual async Task DeleteAsync(TEntity entity, bool saveNow = true, CancellationToken cancellationToken = default)
     {
         Assert.NotNull(entity, nameof(entity));
         Entities.Remove(entity);
@@ -67,7 +67,7 @@ public class Repository<TEntity> : IRepository<TEntity>, IScopedDependency
             await DbContext.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
     }
 
-    public virtual async Task DeleteRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken, bool saveNow = true)
+    public virtual async Task DeleteRangeAsync(IEnumerable<TEntity> entities, bool saveNow = true, CancellationToken cancellationToken = default)
     {
         Assert.NotNull(entities, nameof(entities));
         Entities.RemoveRange(entities);
@@ -149,7 +149,7 @@ public class Repository<TEntity> : IRepository<TEntity>, IScopedDependency
     #endregion
 
     #region Explicit Loading
-    public virtual async Task LoadCollectionAsync<TProperty>(TEntity entity, Expression<Func<TEntity, IEnumerable<TProperty>>> collectionProperty, CancellationToken cancellationToken)
+    public virtual async Task LoadCollectionAsync<TProperty>(TEntity entity, Expression<Func<TEntity, IEnumerable<TProperty>>> collectionProperty, CancellationToken cancellationToken = default)
         where TProperty : class
     {
         Attach(entity);
@@ -168,7 +168,7 @@ public class Repository<TEntity> : IRepository<TEntity>, IScopedDependency
             collection.Load();
     }
 
-    public virtual async Task LoadReferenceAsync<TProperty>(TEntity entity, Expression<Func<TEntity, TProperty>> referenceProperty, CancellationToken cancellationToken)
+    public virtual async Task LoadReferenceAsync<TProperty>(TEntity entity, Expression<Func<TEntity, TProperty>> referenceProperty, CancellationToken cancellationToken = default)
         where TProperty : class
     {
         Attach(entity);

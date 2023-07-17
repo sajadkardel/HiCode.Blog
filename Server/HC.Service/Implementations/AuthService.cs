@@ -22,7 +22,7 @@ public class AuthService :  IAuthService, IScopedDependency
         _signInManager = signInManager;
     }
 
-    public async Task SignUp(SignUpRequestDto request, CancellationToken cancellationToken)
+    public async Task SignUp(SignUpRequestDto request, CancellationToken cancellationToken = default)
     {
         var existingUser = await _userManager.FindByNameAsync(request.UserName);
         if (existingUser is not null) throw new Exception("کاربری با این نام کاربری قبلا ثبت شده.");
@@ -32,7 +32,7 @@ public class AuthService :  IAuthService, IScopedDependency
         if (result.Succeeded is false) throw new Exception(result.Errors.First().Description);
     }
 
-    public async Task<SignInResponseDto> SignIn(SignInRequestDto request, CancellationToken cancellationToken)
+    public async Task<SignInResponseDto> SignIn(SignInRequestDto request, CancellationToken cancellationToken = default)
     {
         var user = await _userManager.FindByNameAsync(request.UserName);
         if (user is null) throw new Exception("نام کاربری یا رمز عبور اشتباه است");

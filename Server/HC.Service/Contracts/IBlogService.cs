@@ -2,7 +2,7 @@
 
 namespace HC.Service.Contracts;
 
-public interface IUserService
+public interface IBlogService
 {
     Task<List<UserResponseDto>> GetAll(CancellationToken cancellationToken = default);
     Task<UserResponseDto> GetById(int id, CancellationToken cancellationToken = default);

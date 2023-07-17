@@ -4,6 +4,6 @@ namespace HC.Service.Contracts;
 
 public interface IAuthService
 {
-    Task SignUp(SignUpRequestDto request, CancellationToken cancellationToken);
-    Task<SignInResponseDto> SignIn(SignInRequestDto request, CancellationToken cancellationToken);
+    Task SignUp(SignUpRequestDto request, CancellationToken cancellationToken = default);
+    Task<SignInResponseDto> SignIn(SignInRequestDto request, CancellationToken cancellationToken = default);
 }

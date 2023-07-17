@@ -16,7 +16,7 @@ public class UserService : IUserService, IScopedDependency
         _userRepository = userRepository;
     }
 
-    public async Task<List<UserResponseDto>> GetAll(CancellationToken cancellationToken)
+    public async Task<List<UserResponseDto>> GetAll(CancellationToken cancellationToken = default)
     {
         var result = await _userRepository.TableNoTracking.ToListAsync(cancellationToken);
 
@@ -36,7 +36,7 @@ public class UserService : IUserService, IScopedDependency
         return response;
     }
 
-    public async Task<UserResponseDto> GetById(CancellationToken cancellationToken, int id)
+    public async Task<UserResponseDto> GetById(int id, CancellationToken cancellationToken = default)
     {
         var result = await _userRepository.GetByIdAsync(cancellationToken, id);
 

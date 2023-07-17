@@ -22,6 +22,16 @@ public static class RoutingConstants
             public const string Update = BaseAddress + "update";
             public const string Delete = BaseAddress + "delete";
         }
+
+        public static class Blog
+        {
+            private const string BaseAddress = "blog/";
+            public const string GetAll = BaseAddress + "getAll";
+            public const string GetById = BaseAddress + "getById";
+            public const string Create = BaseAddress + "create";
+            public const string Update = BaseAddress + "update";
+            public const string Delete = BaseAddress + "delete";
+        }
     }
 
     public static class ClientSide

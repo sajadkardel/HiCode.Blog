@@ -12,7 +12,7 @@ public class AppHttpClientHandler : HttpClientHandler
         _storageService = storageService;
     }
 
-    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken = default)
     {
         if (request.Headers.Authorization is null)
         {

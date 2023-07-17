@@ -17,19 +17,19 @@ public class AuthController : BaseController
         _authService = authRepository;
     }
 
-    [HttpPost(RoutingConstants.ServerSide.Auth.SignUp)]
     [AllowAnonymous]
-    public virtual async Task<ApiResult> SignUp([FromBody] SignUpRequestDto request, CancellationToken cancellationToken)
+    [HttpPost(RoutingConstants.ServerSide.Auth.SignUp)]
+    public virtual async Task<ApiResult> SignUp([FromBody] SignUpRequestDto request, CancellationToken cancellationToken = default)
     {
         await _authService.SignUp(request, cancellationToken);
         return ApiResult.Success();
     }
 
-    [HttpPost(RoutingConstants.ServerSide.Auth.SignIn)]
     [AllowAnonymous]
-    public virtual async Task<ApiResult<SignInResponseDto>> SignIn([FromBody] SignInRequestDto request, CancellationToken cancellationToken)
+    [HttpPost(RoutingConstants.ServerSide.Auth.SignIn)]
+    public virtual async Task<ApiResult<SignInResponseDto>> SignIn([FromBody] SignInRequestDto request, CancellationToken cancellationToken = default)
     {
         var result = await _authService.SignIn(request, cancellationToken);
-        return ApiResult<SignInResponseDto>.Success(result);
+        return ApiResult.Success(result);
     }
 }
