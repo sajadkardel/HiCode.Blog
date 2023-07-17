@@ -18,12 +18,15 @@ public class UserService : IUserService, IScopedDependency
     public async Task<ApiResult<List<UserResponseDto>>> GetAll()
     {
         var response = await _apiCaller.GetAsync<List<UserResponseDto>>(RoutingConstants.ServerSide.User.GetAll);
+        if (response.IsSucceed is false) return ApiResult.Failed<List<UserResponseDto>>(response.Message);
+
         return response;
     }
 
     public async Task<ApiResult<UserResponseDto>> GetById(int id)
     {
         var response = await _apiCaller.GetAsync<UserResponseDto>(RoutingConstants.ServerSide.User.GetById);
+        if (response.IsSucceed is false) return ApiResult.Failed<UserResponseDto>(response.Message);
         return response;
     }
 }
