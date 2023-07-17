@@ -3,7 +3,7 @@
 .index-container {
     display: flex;
     flex-flow: column nowrap;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     padding: 20px;
 
@@ -12,6 +12,7 @@
         flex-flow: column nowrap;
         justify-content: center;
         align-items: center;
+        width: 100%;
 
         .title {
             font-size: 20px;

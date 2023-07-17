@@ -14,10 +14,14 @@
     padding: rem(7px) rem(16px);
     box-sizing: border-box;
     background-color: $HeaderColor;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8.1px);
+    -webkit-backdrop-filter: blur(8.1px);
     border-bottom: 1px solid $BorderColor;
 
     .nav-items {
         display: flex;
+        align-items: center;
 
         .nav-item {
             display: flex;
@@ -26,18 +30,10 @@
             margin: 0 6px;
             cursor: pointer;
             border: 1px solid $BorderColor;
-            border-radius: 6px;
+            border-radius: 2px;
             padding: 0 5px;
             min-width: 38px;
             height: 38px;
-
-            &.account {
-                border-radius: 50%;
-
-                .icon, .text {
-                    color: $White;
-                }
-            }
 
             .icon, .text {
                 margin: 0 3px;
