@@ -2,23 +2,26 @@
 
 <PageTitle>@PageTitleResource.SignIn</PageTitle>
 
-<EditForm Model="_signInModel" OnValidSubmit="DoSignIn">
-    <div class="form-group">
-        <label for="UserName">UserName</label>
-        <InputText @bind-Value="_signInModel.UserName" id="UserName" class="form-control" />
-        <ValidationMessage For="@(() => _signInModel.UserName)" />
-    </div>
+<div class="signin-container">
+    <EditForm Model="_signInModel" OnValidSubmit="DoSignIn">
 
-    <div class="form-group">
-        <label for="Password">Password</label>
-        <InputText @bind-Value="_signInModel.Password" id="Password" class="form-control" />
-        <ValidationMessage For="@(() => _signInModel.Password)" />
-    </div>
+        <div>
+            <BitLabel For="UserName">UserName</BitLabel>
+            <BitTextField @bind-Value="_signInModel.UserName" id="UserName" />
+            <ValidationMessage For="@(() => _signInModel.UserName)" />
+        </div>
 
-    <button type="submit" class="btn btn-success" style="margin-top: 30px;">SignIn</button>
-</EditForm>
+        <div>
+            <BitLabel For="Password">Password</BitLabel>
+            <BitTextField @bind-Value="_signInModel.Password" id="Password" />
+            <ValidationMessage For="@(() => _signInModel.Password)" />
+        </div>
 
-@if (string.IsNullOrEmpty(_message) is false)
-{
-    <h3>@_message</h3>
-}
+        <BitButton ButtonType="BitButtonType.Submit">SignIn</BitButton>
+    </EditForm>
+
+    @if (string.IsNullOrEmpty(_message) is false)
+    {
+        <h3>@_message</h3>
+    }
+</div>

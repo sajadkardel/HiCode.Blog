@@ -12,28 +12,4 @@
             <PostPreview />
         }
     </div>
-
-    <div class="activity">
-        <div class="activity-year">
-            <span class="year">1400</span>
-            <span class="year">1401</span>
-            <span class="year selected">1402</span>
-            <span class="year">1403</span>
-        </div>
-
-        <div class="activity-view">
-            @for (int i = 0; i < 365; i++)
-            {
-
-                if ((i % 3) == 0)
-                {
-                    <span class="day selected"></span>
-                }
-                else
-                {
-                    <span class="day"></span>
-                }
-            }
-        </div>
-    </div>
 </div>

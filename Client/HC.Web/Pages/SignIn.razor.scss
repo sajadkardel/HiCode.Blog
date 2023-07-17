@@ -1,3 +1,6 @@
-﻿.signin-h1 {
-    color: blue;
+﻿
+.signin-container {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
 }

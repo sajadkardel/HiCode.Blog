@@ -12,7 +12,7 @@
     margin: 10px;
     padding: 10px;
     cursor: pointer;
-    background-color: $Palette2Color;
+    background-color: $ElColor;
     transition: width 0.4s, height 0.4s;
 
     &:hover {
@@ -50,11 +50,11 @@
             font-size: 20px;
             font-weight: 800;
             margin-bottom: 10px;
-            color: $TitleTextColor;
+            color: $TitleColor;
         }
 
         .text {
-            color: $ContentTextColor;
+            color: $TextColor;
         }
     }
 }

@@ -30,71 +30,26 @@ html, body, #app {
     direction: rtl;
 }
 
+// Bit components
 .bit-srb {
-    background-color: $Palette2Color !important;
-    border-radius: 10px !important;
-
-    .bit-srb-cbc:hover .bit-srb-cbt {
-        background-color: transparent;
-    }
-
-    .bit-srb-cbc:hover .bit-srb-cbt i {
-        color: $White;
-    }
-
-    .bit-srb-inp {
-        color: $White;
-    }
 }
 
 .bit-nav {
-    li > ul {
-        position: absolute;
-        background-color: $Palette2Color;
-        padding: 5px;
-        border: 1px solid $BorderColor;
-        border-radius: 10px;
-
-        .bit-nav-ict:hover {
-            background-color: $HoverColor;
-            border-radius: 6px;
-        }
-    }
-
-    .bit-nav-sel .bit-nav-itm {
-        color: $ContentTextColor;
-    }
-
-    .bit-nav-ict.bit-nav-sel {
-        background-color: transparent;
-    }
-
-    .bit-nav-ict:hover {
-        background-color: transparent;
-
-        .bit-nav-itm {
-            color: $ContentTextColor;
-        }
-    }
-
-    button, i, a {
-        color: $ContentTextColor;
-    }
 }
 
-::deep .hc-dropdown {
+.hc-dropdown {
 }
 
-::deep .hc-success-btn {
+.hc-success-btn {
 }
 
-::deep .hc-warning-btn {
+.hc-warning-btn {
 }
 
-::deep .hc-danger-btn {
+.hc-danger-btn {
 }
 
-::deep .hc-info-btn {
+.hc-info-btn {
 }
 
 // Shared

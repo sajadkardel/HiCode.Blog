@@ -13,7 +13,7 @@
     min-height: rem(80px);
     padding: rem(7px) rem(16px);
     box-sizing: border-box;
-    background-color: $Palette1Color;
+    background-color: $HeaderColor;
     border-bottom: 1px solid $BorderColor;
 
     .nav-items {
@@ -41,7 +41,7 @@
 
             .icon, .text {
                 margin: 0 3px;
-                color: $ContentTextColor;
+                color: $TextColor;
                 font-size: 14px;
                 font-weight: 400;
             }
@@ -55,13 +55,13 @@
             background-color: $HoverColor;
             border: 0.1px solid $HoverBorderColor;
         }
+
+        .nav-search {
+            margin: 0 10px;
+            width: 500px;
+        }
     }
 
-    .nav-search {
-        margin: 0 10px;
-        width: 500px;
-    } 
-    
     .nav-logo {
         background-image: url('../wwwroot/images/icons/icon-512.svg');
         background-size: rem(100px);
