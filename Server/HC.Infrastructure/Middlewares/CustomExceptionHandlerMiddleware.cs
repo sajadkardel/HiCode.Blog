@@ -34,8 +34,8 @@ public class CustomExceptionHandlerMiddleware
 
     public async Task Invoke(HttpContext context)
     {
-        ApiResultStatusCode apiStatusCode = ApiResultStatusCode.InternalServerError;
-        string message = ApiResultStatusCode.InternalServerError.ToDisplay();
+        ResultStatusCode apiStatusCode = ResultStatusCode.InternalServerError;
+        string message = ResultStatusCode.InternalServerError.ToDisplay();
 
         try
         {
@@ -79,7 +79,7 @@ public class CustomExceptionHandlerMiddleware
 
         void SetUnAuthorizeResponse(Exception exception)
         {
-            apiStatusCode = ApiResultStatusCode.Unauthorized;
+            apiStatusCode = ResultStatusCode.Unauthorized;
 
             if (_env.IsDevelopment())
             {

@@ -2,7 +2,7 @@
 
 namespace HC.Shared.Enums;
 
-public enum ApiResultStatusCode
+public enum ResultStatusCode
 {
     Continue = 100,
 

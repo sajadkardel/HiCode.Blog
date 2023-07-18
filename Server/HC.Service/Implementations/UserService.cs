@@ -3,6 +3,7 @@ using HC.Data.Repositories.Contracts;
 using HC.Service.Contracts;
 using HC.Shared.Dtos.User;
 using HC.Shared.Markers;
+using HC.Shared.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace HC.Service.Implementations;
@@ -16,7 +17,7 @@ public class UserService : IUserService, IScopedDependency
         _userRepository = userRepository;
     }
 
-    public async Task<List<UserResponseDto>> GetAll(CancellationToken cancellationToken = default)
+    public async Task<Result<List<UserResponseDto>>> GetAll(CancellationToken cancellationToken = default)
     {
         var result = await _userRepository.TableNoTracking.ToListAsync(cancellationToken);
 
@@ -33,10 +34,10 @@ public class UserService : IUserService, IScopedDependency
 
         }).ToList();
 
-        return response;
+        return Result.Success(response);
     }
 
-    public async Task<UserResponseDto> GetById(int id, CancellationToken cancellationToken = default)
+    public async Task<Result<UserResponseDto>> GetById(int id, CancellationToken cancellationToken = default)
     {
         var result = await _userRepository.GetByIdAsync(cancellationToken, id);
 
@@ -52,6 +53,6 @@ public class UserService : IUserService, IScopedDependency
             LastLoginDate = result.LastLoginDate
         };
 
-        return response;
+        return Result.Success(response);
     }
 }

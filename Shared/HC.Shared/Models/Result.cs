@@ -7,10 +7,10 @@ namespace HC.Shared.Models;
 public class Result
 {
     public bool IsSucceed { get; set; }
-    public ApiResultStatusCode StatusCode { get; set; }
+    public ResultStatusCode StatusCode { get; set; }
     public string Message { get; set; }
 
-    public Result(bool isSucceed, ApiResultStatusCode statusCode = ApiResultStatusCode.Continue, string message = "")
+    public Result(bool isSucceed, ResultStatusCode statusCode = ResultStatusCode.Continue, string message = "")
     {
         IsSucceed = isSucceed;
         StatusCode = statusCode;
@@ -21,23 +21,23 @@ public class Result
     [DebuggerStepThrough]
     public static Result Success()
     {
-        return new Result(true, ApiResultStatusCode.OK, ApiResultStatusCode.OK.ToDisplay());
+        return new Result(true, ResultStatusCode.OK, ResultStatusCode.OK.ToDisplay());
     }
 
     [DebuggerStepThrough]
     public static Result<T> Success<T>(T data)
     {
-        return new Result<T>(data ,true, ApiResultStatusCode.OK, ApiResultStatusCode.OK.ToDisplay());
+        return new Result<T>(data ,true, ResultStatusCode.OK, ResultStatusCode.OK.ToDisplay());
     }
 
     [DebuggerStepThrough]
-    public static Result Success(ApiResultStatusCode statusCode)
+    public static Result Success(ResultStatusCode statusCode)
     {
         return new Result(true, statusCode, statusCode.ToDisplay());
     }
 
     [DebuggerStepThrough]
-    public static Result<T> Success<T>(T data, ApiResultStatusCode statusCode)
+    public static Result<T> Success<T>(T data, ResultStatusCode statusCode)
     {
         return new Result<T>(data, true, statusCode, statusCode.ToDisplay());
     }
@@ -45,23 +45,23 @@ public class Result
     [DebuggerStepThrough]
     public static Result Success(string message)
     {
-        return new Result(true, ApiResultStatusCode.OK, message);
+        return new Result(true, ResultStatusCode.OK, message);
     }
 
     [DebuggerStepThrough]
     public static Result<T> Success<T>(T data, string message)
     {
-        return new Result<T>(data, true, ApiResultStatusCode.OK, message);
+        return new Result<T>(data, true, ResultStatusCode.OK, message);
     }
 
     [DebuggerStepThrough]
-    public static Result Success(ApiResultStatusCode statusCode, string message)
+    public static Result Success(ResultStatusCode statusCode, string message)
     {
         return new Result(true, statusCode, message);
     }
 
     [DebuggerStepThrough]
-    public static Result<T> Success<T>(T data, ApiResultStatusCode statusCode, string message)
+    public static Result<T> Success<T>(T data, ResultStatusCode statusCode, string message)
     {
         return new Result<T>(data, true, statusCode, message);
     }
@@ -71,23 +71,23 @@ public class Result
     [DebuggerStepThrough]
     public static Result Failed()
     {
-        return new Result(false, ApiResultStatusCode.OK, ApiResultStatusCode.OK.ToDisplay());
+        return new Result(false, ResultStatusCode.OK, ResultStatusCode.OK.ToDisplay());
     }
 
     [DebuggerStepThrough]
     public static Result<T> Failed<T>()
     {
-        return new Result<T>(false, ApiResultStatusCode.OK, ApiResultStatusCode.OK.ToDisplay());
+        return new Result<T>(false, ResultStatusCode.OK, ResultStatusCode.OK.ToDisplay());
     }
 
     [DebuggerStepThrough]
-    public static Result Failed(ApiResultStatusCode statusCode)
+    public static Result Failed(ResultStatusCode statusCode)
     {
         return new Result(false, statusCode, statusCode.ToDisplay());
     }
 
     [DebuggerStepThrough]
-    public static Result<T> Failed<T>(ApiResultStatusCode statusCode)
+    public static Result<T> Failed<T>(ResultStatusCode statusCode)
     {
         return new Result<T>(false, statusCode, statusCode.ToDisplay());
     }
@@ -95,23 +95,23 @@ public class Result
     [DebuggerStepThrough]
     public static Result Failed(string message)
     {
-        return new Result(false, ApiResultStatusCode.OK, message);
+        return new Result(false, ResultStatusCode.OK, message);
     }
 
     [DebuggerStepThrough]
     public static Result<T> Failed<T>(string message)
     {
-        return new Result<T>(false, ApiResultStatusCode.OK, message);
+        return new Result<T>(false, ResultStatusCode.OK, message);
     }
 
     [DebuggerStepThrough]
-    public static Result Failed(ApiResultStatusCode statusCode, string message)
+    public static Result Failed(ResultStatusCode statusCode, string message)
     {
         return new Result(false, statusCode, message);
     }
 
     [DebuggerStepThrough]
-    public static Result<T> Failed<T>(ApiResultStatusCode statusCode, string message)
+    public static Result<T> Failed<T>(ResultStatusCode statusCode, string message)
     {
         return new Result<T>(false, statusCode, message);
     }
@@ -121,16 +121,16 @@ public class Result
 
 public class Result<TData> : Result
 {
-    public Result(bool isSucceed, ApiResultStatusCode statusCode = ApiResultStatusCode.Continue, string message = "")
+    public Result(bool isSucceed, ResultStatusCode statusCode = ResultStatusCode.Continue, string message = "")
         : base(isSucceed, statusCode, message)
     {
     }
 
-    public Result(TData? data, bool isSucceed, ApiResultStatusCode statusCode, string message = "") 
+    public Result(TData data, bool isSucceed, ResultStatusCode statusCode, string message = "") 
         : base(isSucceed, statusCode, message)
     {
         Data = data;
     }
 
-    public TData? Data { get; set; } = default;
+    public TData Data { get; set; } = default!;
 }

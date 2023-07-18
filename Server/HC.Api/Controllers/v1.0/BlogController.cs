@@ -1,5 +1,6 @@
 ﻿using HC.Service.Contracts;
 using HC.Shared.Constants;
+using HC.Shared.Dtos.Blog;
 using HC.Shared.Dtos.User;
 using HC.Shared.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -17,37 +18,39 @@ public class BlogController : BaseController
 		_blogService = blogService;
 	}
 
+    #region Post
     [AllowAnonymous]
-    [HttpGet(RoutingConstants.ServerSide.Blog.GetAll)]
-    public virtual async Task<Result<List<UserResponseDto>>> GetAll(CancellationToken cancellationToken = default)
+    [HttpGet(RoutingConstants.ServerSide.Blog.GetAllPost)]
+    public virtual async Task<Result<List<PostResponseDto>>> GetAllPost(CancellationToken cancellationToken = default)
     {
-        var result = await _blogService.GetAll(cancellationToken);
-        return Result.Success(result);
+        var result = await _blogService.GetAllPost(cancellationToken);
+        return Result.Success(result.Data);
     }
 
     [AllowAnonymous]
-    [HttpGet(RoutingConstants.ServerSide.Blog.GetById)]
-    public virtual async Task<Result<UserResponseDto>> GetById([FromQuery] int id, CancellationToken cancellationToken = default)
+    [HttpGet(RoutingConstants.ServerSide.Blog.GetPostById)]
+    public virtual async Task<Result<PostResponseDto>> GetPostById([FromQuery] int id, CancellationToken cancellationToken = default)
     {
-        var result = await _blogService.GetById(id, cancellationToken);
-        return Result.Success(result);
+        var result = await _blogService.GetPostById(id, cancellationToken);
+        return Result.Success(result.Data);
     }
 
-    [HttpPost(RoutingConstants.ServerSide.Blog.Create)]
-    public virtual async Task<Result> Create([FromBody] UserRequestDto dto, CancellationToken cancellationToken = default)
+    [HttpPost(RoutingConstants.ServerSide.Blog.CreatePost)]
+    public virtual async Task<Result> CreatePost([FromBody] PostRequestDto dto, CancellationToken cancellationToken = default)
     {
         return Result.Success();
     }
 
-    [HttpPut(RoutingConstants.ServerSide.Blog.Update)]
-    public virtual async Task<Result> Update([FromQuery] int id, [FromBody] UserRequestDto dto, CancellationToken cancellationToken = default)
+    [HttpPut(RoutingConstants.ServerSide.Blog.UpdatePost)]
+    public virtual async Task<Result> UpdatePost([FromQuery] int id, [FromBody] PostRequestDto dto, CancellationToken cancellationToken = default)
     {
         return Result.Success();
     }
 
-    [HttpDelete(RoutingConstants.ServerSide.Blog.Delete)]
-    public virtual async Task<Result> Delete([FromQuery] int id, CancellationToken cancellationToken = default)
+    [HttpDelete(RoutingConstants.ServerSide.Blog.DeletePost)]
+    public virtual async Task<Result> DeletePost([FromQuery] int id, CancellationToken cancellationToken = default)
     {
         return Result.Success();
     }
+    #endregion
 }

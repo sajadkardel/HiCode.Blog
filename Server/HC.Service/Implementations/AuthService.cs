@@ -3,6 +3,7 @@ using HC.Data.Entities.Identity;
 using HC.Service.Contracts;
 using HC.Shared.Dtos.Auth;
 using HC.Shared.Markers;
+using HC.Shared.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -22,33 +23,35 @@ public class AuthService :  IAuthService, IScopedDependency
         _signInManager = signInManager;
     }
 
-    public async Task SignUp(SignUpRequestDto request, CancellationToken cancellationToken = default)
+    public async Task<Result> SignUp(SignUpRequestDto request, CancellationToken cancellationToken = default)
     {
         var existingUser = await _userManager.FindByNameAsync(request.UserName);
-        if (existingUser is not null) throw new Exception("کاربری با این نام کاربری قبلا ثبت شده.");
+        if (existingUser is not null) return Result.Failed("کاربری با این نام کاربری قبلا ثبت شده.");
 
         var result = await _userManager.CreateAsync(new User() { UserName = request.UserName, }, request.Password);
+        if (result.Succeeded is false) return Result.Failed(result.Errors.First().Description);
 
-        if (result.Succeeded is false) throw new Exception(result.Errors.First().Description);
+        return Result.Success();
     }
 
-    public async Task<SignInResponseDto> SignIn(SignInRequestDto request, CancellationToken cancellationToken = default)
+    public async Task<Result<SignInResponseDto>> SignIn(SignInRequestDto request, CancellationToken cancellationToken = default)
     {
         var user = await _userManager.FindByNameAsync(request.UserName);
-        if (user is null) throw new Exception("نام کاربری یا رمز عبور اشتباه است");
+        if (user is null) return Result.Failed<SignInResponseDto>("نام کاربری یا رمز عبور اشتباه است");
 
         var isPasswordValid = await _userManager.CheckPasswordAsync(user, request.Password);
-        if (isPasswordValid is false) throw new Exception("نام کاربری یا رمز عبور اشتباه است");
+        if (isPasswordValid is false) return Result.Failed<SignInResponseDto>("نام کاربری یا رمز عبور اشتباه است");
 
         var accessToken = await GenerateTokenAsync(user);
+        if (accessToken.IsSucceed is false) return Result.Failed<SignInResponseDto>(accessToken.Message);
 
-        return new SignInResponseDto
+        return Result.Success(new SignInResponseDto
         {
-            access_token = accessToken,
-        };
+            access_token = accessToken.Data,
+        });
     }
 
-    private async Task<string> GenerateTokenAsync(User user)
+    private async Task<Result<string>> GenerateTokenAsync(User user)
     {
         byte[] secretKey = Encoding.UTF8.GetBytes(JwtSettings.Get().SecretKey); // longer that 16 character
         SigningCredentials signingCredentials = new(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256);
@@ -74,6 +77,6 @@ public class AuthService :  IAuthService, IScopedDependency
 
         string accessToken = tokenHandler.WriteToken(securityToken);
 
-        return accessToken;
+        return Result.Success<string>(accessToken);
     }
 }

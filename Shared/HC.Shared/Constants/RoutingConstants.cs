@@ -26,11 +26,18 @@ public static class RoutingConstants
         public static class Blog
         {
             private const string BaseAddress = "blog/";
-            public const string GetAll = BaseAddress + "getAll";
-            public const string GetById = BaseAddress + "getById";
-            public const string Create = BaseAddress + "create";
-            public const string Update = BaseAddress + "update";
-            public const string Delete = BaseAddress + "delete";
+
+            public const string GetAllPost = BaseAddress + "getAllPost";
+            public const string GetPostById = BaseAddress + "getPostById";
+            public const string CreatePost = BaseAddress + "createPost";
+            public const string UpdatePost = BaseAddress + "updatePost";
+            public const string DeletePost = BaseAddress + "deletePost";
+
+            public const string GetAllTag = BaseAddress + "getAllTag";
+            public const string GetTagById = BaseAddress + "getTagById";
+            public const string CreateTag = BaseAddress + "createTag";
+            public const string UpdateTag = BaseAddress + "updateTag";
+            public const string DeleteTag = BaseAddress + "deleteTag";
         }
     }
 

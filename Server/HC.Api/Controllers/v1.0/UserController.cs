@@ -20,14 +20,14 @@ public class UserController : BaseController
     public virtual async Task<Result<List<UserResponseDto>>> GetAll(CancellationToken cancellationToken = default)
     {
         var result = await _userService.GetAll(cancellationToken);
-        return Result.Success(result);
+        return Result.Success(result.Data);
     }
 
     [HttpGet(RoutingConstants.ServerSide.User.GetById)]
     public virtual async Task<Result<UserResponseDto>> GetById([FromQuery] int id, CancellationToken cancellationToken = default)
     {
         var result = await _userService.GetById(id, cancellationToken);
-        return Result.Success(result);
+        return Result.Success(result.Data);
     }
 
     [HttpPost(RoutingConstants.ServerSide.User.Create)]

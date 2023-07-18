@@ -30,6 +30,6 @@ public class AuthController : BaseController
     public virtual async Task<Result<SignInResponseDto>> SignIn([FromBody] SignInRequestDto request, CancellationToken cancellationToken = default)
     {
         var result = await _authService.SignIn(request, cancellationToken);
-        return Result.Success(result);
+        return Result.Success(result.Data);
     }
 }
