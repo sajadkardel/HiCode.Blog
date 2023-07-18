@@ -30,10 +30,10 @@ public class ApiCaller : IApiCaller, IScopedDependency
 
         var result = _httpClient.GetAsync(url).Result;
         var resultContent = result.Content.ReadAsStringAsync().Result;
-        var response = JsonSerializer.Deserialize<T>(resultContent, _serializerOption);
+        var response = JsonSerializer.Deserialize<Result<T>>(resultContent, _serializerOption);
         if (response is null) return Result.Failed<T>("");
 
-        return Result.Success(response);
+        return response;
     }
 
     public async Task<Result<T>> GetAsync<T>(string url, Dictionary<string, string>? headers = null, CancellationToken cancelationToken = default)
@@ -43,10 +43,10 @@ public class ApiCaller : IApiCaller, IScopedDependency
 
         var result = await _httpClient.GetAsync(url);
         var resultContent = await result.Content.ReadAsStringAsync();
-        var response = JsonSerializer.Deserialize<T>(resultContent, _serializerOption);
+        var response = JsonSerializer.Deserialize<Result<T>>(resultContent, _serializerOption);
         if (response is null) return Result.Failed<T>("");
 
-        return Result.Success(response);
+        return response;
     }
 
     public Result<T> Post<T, TU>(string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string contentType = HttpRequestContentTypeConstants.Json)
@@ -70,10 +70,10 @@ public class ApiCaller : IApiCaller, IScopedDependency
 
         var result = _httpClient.PostAsync(url, httpContent).Result;
         var resultContent = result.Content.ReadAsStringAsync().Result;
-        var response = JsonSerializer.Deserialize<T>(resultContent, _serializerOption);
+        var response = JsonSerializer.Deserialize<Result<T>>(resultContent, _serializerOption);
         if (response is null) return Result.Failed<T>("");
 
-        return Result.Success(response);
+        return response;
     }
 
     public async Task<Result<T>> PostAsync<T, TU>(string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string contentType = HttpRequestContentTypeConstants.Json, CancellationToken cancelationToken = default)
@@ -97,10 +97,10 @@ public class ApiCaller : IApiCaller, IScopedDependency
 
         var result = await _httpClient.PostAsync(url, httpContent);
         var resultContent = await result.Content.ReadAsStringAsync();
-        var response = JsonSerializer.Deserialize<T>(resultContent, _serializerOption);
+        var response = JsonSerializer.Deserialize<Result<T>>(resultContent, _serializerOption);
         if (response is null) return Result.Failed<T>("");
 
-        return Result.Success(response);
+        return response;
     }
 
     public Result<T> Put<T, TU>(string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string contentType = HttpRequestContentTypeConstants.Json)
@@ -124,10 +124,10 @@ public class ApiCaller : IApiCaller, IScopedDependency
 
         var result = _httpClient.PutAsync(url, httpContent).Result;
         var resultContent = result.Content.ReadAsStringAsync().Result;
-        var response = JsonSerializer.Deserialize<T>(resultContent, _serializerOption);
+        var response = JsonSerializer.Deserialize<Result<T>>(resultContent, _serializerOption);
         if (response is null) return Result.Failed<T>("");
 
-        return Result.Success(response);
+        return response;
     }
 
     public async Task<Result<T>> PutAsync<T, TU>(string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string contentType = HttpRequestContentTypeConstants.Json, CancellationToken cancelationToken = default)
@@ -151,10 +151,10 @@ public class ApiCaller : IApiCaller, IScopedDependency
 
         var result = await _httpClient.PutAsync(url, httpContent);
         var resultContent = await result.Content.ReadAsStringAsync();
-        var response = JsonSerializer.Deserialize<T>(resultContent, _serializerOption);
+        var response = JsonSerializer.Deserialize<Result<T>>(resultContent, _serializerOption);
         if (response is null) return Result.Failed<T>("");
 
-        return Result.Success(response);
+        return response;
     }
 
     public Result<T> Delete<T>(string url, Dictionary<string, string>? headers = null)
@@ -163,10 +163,10 @@ public class ApiCaller : IApiCaller, IScopedDependency
         if (headers is not null) foreach (var header in headers) _httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
         var result = _httpClient.DeleteAsync(url).Result;
         var resultContent = result.Content.ReadAsStringAsync().Result;
-        var response = JsonSerializer.Deserialize<T>(resultContent, _serializerOption);
+        var response = JsonSerializer.Deserialize<Result<T>>(resultContent, _serializerOption);
         if (response is null) return Result.Failed<T>("");
 
-        return Result.Success(response);
+        return response;
     }
 
     public async Task<Result<T>> DeleteAsync<T>(string url, Dictionary<string, string>? headers = null, CancellationToken cancelationToken = default)
@@ -175,10 +175,10 @@ public class ApiCaller : IApiCaller, IScopedDependency
         if (headers is not null) foreach (var header in headers) _httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
         var result = await _httpClient.DeleteAsync(url);
         var resultContent = await result.Content.ReadAsStringAsync();
-        var response = JsonSerializer.Deserialize<T>(resultContent, _serializerOption);
+        var response = JsonSerializer.Deserialize<Result<T>>(resultContent, _serializerOption);
         if (response is null) return Result.Failed<T>("");
 
-        return Result.Success(response);
+        return response;
     }
 
     // Methods

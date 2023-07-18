@@ -67,11 +67,10 @@ public class CustomExceptionHandlerMiddleware
 
         async Task WriteToResponseAsync()
         {
-            if (context.Response.HasStarted)
-                throw new InvalidOperationException("The response has already started, the http status code middleware will not be executed.");
+            if (context.Response.HasStarted) 
+                Result.Failed("The response has already started, the http status code middleware will not be executed.");
 
             var result = Result.Failed(apiStatusCode, message);
-
             var json = JsonSerializer.Serialize(result);
             context.Response.ContentType = HttpRequestContentTypeConstants.Json;
             await context.Response.WriteAsync(json);

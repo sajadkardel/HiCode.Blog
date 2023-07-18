@@ -18,6 +18,9 @@ public class BlogController : BaseController
 		_blogService = blogService;
 	}
 
+    #region Category
+    #endregion
+
     #region Post
     [AllowAnonymous]
     [HttpGet(RoutingConstants.ServerSide.Blog.GetAllPost)]
@@ -52,5 +55,11 @@ public class BlogController : BaseController
     {
         return Result.Success();
     }
+    #endregion
+
+    #region Tag
+    #endregion
+
+    #region Comment
     #endregion
 }

@@ -16,11 +16,13 @@ public class AppAuthenticationStateProvider : AuthenticationStateProvider
 
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {
-        string token = await _localStorageService.GetFromCookieAsync("access_token");
+        var token = await _localStorageService.GetFromCookieAsync("access_token");
 
-        if (string.IsNullOrWhiteSpace(token)) return NotSignedInUser();
+        if (token.IsSucceed is false) return NotSignedInUser();
 
-        return SignedInUser(token);
+        if (string.IsNullOrWhiteSpace(token.Data)) return NotSignedInUser();
+
+        return SignedInUser(token.Data);
     }
 
     public async Task RaiseAuthenticationStateHasChanged()

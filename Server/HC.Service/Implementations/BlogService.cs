@@ -16,6 +16,10 @@ public class BlogService : IBlogService, IScopedDependency
         _postRepository = postRepository;
     }
 
+    #region Category
+    #endregion
+
+    #region Post
     public async Task<Result> CreatePost(PostRequestDto dto, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
@@ -40,4 +44,11 @@ public class BlogService : IBlogService, IScopedDependency
     {
         throw new NotImplementedException();
     }
+    #endregion
+
+    #region Tag
+    #endregion
+
+    #region Comment
+    #endregion
 }

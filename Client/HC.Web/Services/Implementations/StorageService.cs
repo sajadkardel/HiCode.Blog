@@ -1,4 +1,5 @@
 ﻿using HC.Shared.Markers;
+using HC.Shared.Models;
 using HC.Web.Services.Contracts;
 using Microsoft.JSInterop;
 
@@ -14,34 +15,92 @@ public class StorageService : IStorageService, IScopedDependency
     }
 
     // Local Storage
-    public async Task<string> GetFromLocalStorageAsync(string key)
+    public async Task<Result<string>> GetFromLocalStorageAsync(string key)
     {
-        return await _jSRuntime.InvokeAsync<string>("localStorage.getItem", key);
+        string result = string.Empty;
+
+        try
+        {
+            result = await _jSRuntime.InvokeAsync<string>("localStorage.getItem", key);
+        }
+        catch (Exception ex)
+        {
+            return Result.Failed<string>(ex.Message);
+        }
+
+        return Result.Success<string>(result);
     }
 
-    public async Task SetToLocalStorageAsync(string key, string value)
+    public async Task<Result> SetToLocalStorageAsync(string key, string value)
     {
-        await _jSRuntime.InvokeVoidAsync("localStorage.setItem", key, value);
+        try
+        {
+            await _jSRuntime.InvokeVoidAsync("localStorage.setItem", key, value);
+        }
+        catch (Exception ex)
+        {
+            return Result.Failed(ex.Message);
+        }
+        
+        return Result.Success();
     }
 
-    public async Task RemoveFromLocalStorageAsync(string key)
+    public async Task<Result> RemoveFromLocalStorageAsync(string key)
     {
-        await _jSRuntime.InvokeVoidAsync("localStorage.removeItem", key);
+        try
+        {
+            await _jSRuntime.InvokeVoidAsync("localStorage.removeItem", key);
+        }
+        catch (Exception ex)
+        {
+            return Result.Failed(ex.Message);
+        }
+        
+        return Result.Success();
     }
 
     // Cookie
-    public async Task SetToCookieAsync(string key, string value, long expiresIn)
+    public async Task<Result> SetToCookieAsync(string key, string value, long expiresIn)
     {
-        await _jSRuntime.InvokeVoidAsync("App.setCookie", key, value, expiresIn);
+        try
+        {
+            await _jSRuntime.InvokeVoidAsync("App.setCookie", key, value, expiresIn);
+        }
+        catch (Exception ex)
+        {
+            return Result.Failed(ex.Message);
+        }
+
+        return Result.Success();
     }
 
-    public async Task<string> GetFromCookieAsync(string key)
+    public async Task<Result<string>> GetFromCookieAsync(string key)
     {
-        return await _jSRuntime.InvokeAsync<string>("App.getCookie", key);
+        string result = string.Empty;
+
+        try
+        {
+            result = await _jSRuntime.InvokeAsync<string>("App.getCookie", key);
+        }
+        catch (Exception ex)
+        {
+            return Result.Failed<string>(ex.Message);
+        }
+
+        return Result.Success<string>(result);
     }
 
-    public async Task RemoveFromCookieAsync(string key)
+    public async Task<Result> RemoveFromCookieAsync(string key)
     {
-        await _jSRuntime.InvokeVoidAsync("App.removeCookie", key);
+        try
+        {
+            await _jSRuntime.InvokeVoidAsync("App.removeCookie", key);
+        }
+        catch (Exception ex)
+        {
+            return Result.Failed(ex.Message);
+        }
+
+        return Result.Success();
     }
 }

@@ -19,7 +19,6 @@ public class UserService : IUserService, IScopedDependency
     {
         var response = await _apiCaller.GetAsync<List<UserResponseDto>>(RoutingConstants.ServerSide.User.GetAll);
         if (response.IsSucceed is false) return Result.Failed<List<UserResponseDto>>(response.Message);
-
         return response;
     }
 

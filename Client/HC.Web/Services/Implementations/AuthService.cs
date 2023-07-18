@@ -24,7 +24,6 @@ public class AuthService : IAuthService, IScopedDependency
     {
         var response = await _apiCaller.PostAsync<SignUpResponseDto, SignUpRequestDto>(RoutingConstants.ServerSide.Auth.SignUp, request);
         if (response.IsSucceed is false) return Result.Failed<SignUpResponseDto>(response.Message);
-
         return response;
     }
 
@@ -35,7 +34,7 @@ public class AuthService : IAuthService, IScopedDependency
 
         JwtSecurityTokenHandler tokenHandler = new();
 
-        if (response.Data is not null && tokenHandler.CanReadToken(response.Data.access_token))
+        if (tokenHandler.CanReadToken(response.Data.access_token))
         {
             var securityToken = tokenHandler.ReadJwtToken(response.Data.access_token);
             await _localStorageService.SetToCookieAsync("access_token", response.Data.access_token, (DateTime.Now.Second - securityToken.ValidTo.Second));
