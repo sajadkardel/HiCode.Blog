@@ -7,7 +7,7 @@ public static class ServiceCollectionExtensions
 {
     public static void AddMarkedServices(this IServiceCollection services)
     {
-        var sharedAssembly = typeof(ApiResult).Assembly;
+        var sharedAssembly = typeof(Result).Assembly;
         var webAssembly = typeof(Program).Assembly;
 
         services.Scan(scan => scan.FromAssemblies(sharedAssembly, webAssembly)

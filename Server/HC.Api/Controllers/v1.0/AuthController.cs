@@ -19,17 +19,17 @@ public class AuthController : BaseController
 
     [AllowAnonymous]
     [HttpPost(RoutingConstants.ServerSide.Auth.SignUp)]
-    public virtual async Task<ApiResult> SignUp([FromBody] SignUpRequestDto request, CancellationToken cancellationToken = default)
+    public virtual async Task<Result> SignUp([FromBody] SignUpRequestDto request, CancellationToken cancellationToken = default)
     {
         await _authService.SignUp(request, cancellationToken);
-        return ApiResult.Success();
+        return Result.Success();
     }
 
     [AllowAnonymous]
     [HttpPost(RoutingConstants.ServerSide.Auth.SignIn)]
-    public virtual async Task<ApiResult<SignInResponseDto>> SignIn([FromBody] SignInRequestDto request, CancellationToken cancellationToken = default)
+    public virtual async Task<Result<SignInResponseDto>> SignIn([FromBody] SignInRequestDto request, CancellationToken cancellationToken = default)
     {
         var result = await _authService.SignIn(request, cancellationToken);
-        return ApiResult.Success(result);
+        return Result.Success(result);
     }
 }

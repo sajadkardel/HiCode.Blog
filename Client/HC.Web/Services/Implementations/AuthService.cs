@@ -20,18 +20,18 @@ public class AuthService : IAuthService, IScopedDependency
         _apiCaller = apiCaller;
     }
 
-    public async Task<ApiResult<SignUpResponseDto>> SignUp(SignUpRequestDto request)
+    public async Task<Result<SignUpResponseDto>> SignUp(SignUpRequestDto request)
     {
         var response = await _apiCaller.PostAsync<SignUpResponseDto, SignUpRequestDto>(RoutingConstants.ServerSide.Auth.SignUp, request);
-        if (response.IsSucceed is false) return ApiResult.Failed<SignUpResponseDto>(response.Message);
+        if (response.IsSucceed is false) return Result.Failed<SignUpResponseDto>(response.Message);
 
         return response;
     }
 
-    public async Task<ApiResult<SignInResponseDto>> SignIn(SignInRequestDto request)
+    public async Task<Result<SignInResponseDto>> SignIn(SignInRequestDto request)
     {
         var response = await _apiCaller.PostAsync<SignInResponseDto, SignInRequestDto>(RoutingConstants.ServerSide.Auth.SignIn, request);
-        if (response.IsSucceed is false) return ApiResult.Failed<SignInResponseDto>(response.Message);
+        if (response.IsSucceed is false) return Result.Failed<SignInResponseDto>(response.Message);
 
         JwtSecurityTokenHandler tokenHandler = new();
 

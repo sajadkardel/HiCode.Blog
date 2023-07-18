@@ -17,34 +17,34 @@ public class UserController : BaseController
     }
 
     [HttpGet(RoutingConstants.ServerSide.User.GetAll)]
-    public virtual async Task<ApiResult<List<UserResponseDto>>> GetAll(CancellationToken cancellationToken = default)
+    public virtual async Task<Result<List<UserResponseDto>>> GetAll(CancellationToken cancellationToken = default)
     {
         var result = await _userService.GetAll(cancellationToken);
-        return ApiResult.Success(result);
+        return Result.Success(result);
     }
 
     [HttpGet(RoutingConstants.ServerSide.User.GetById)]
-    public virtual async Task<ApiResult<UserResponseDto>> GetById([FromQuery] int id, CancellationToken cancellationToken = default)
+    public virtual async Task<Result<UserResponseDto>> GetById([FromQuery] int id, CancellationToken cancellationToken = default)
     {
         var result = await _userService.GetById(id, cancellationToken);
-        return ApiResult.Success(result);
+        return Result.Success(result);
     }
 
     [HttpPost(RoutingConstants.ServerSide.User.Create)]
-    public virtual async Task<ApiResult> Create([FromBody] UserRequestDto dto, CancellationToken cancellationToken = default)
+    public virtual async Task<Result> Create([FromBody] UserRequestDto dto, CancellationToken cancellationToken = default)
     {
-        return ApiResult.Success();
+        return Result.Success();
     }
 
     [HttpPut(RoutingConstants.ServerSide.User.Update)]
-    public virtual async Task<ApiResult> Update([FromQuery] int id, [FromBody] UserRequestDto dto, CancellationToken cancellationToken = default)
+    public virtual async Task<Result> Update([FromQuery] int id, [FromBody] UserRequestDto dto, CancellationToken cancellationToken = default)
     {
-        return ApiResult.Success();
+        return Result.Success();
     }
 
     [HttpDelete(RoutingConstants.ServerSide.User.Delete)]
-    public virtual async Task<ApiResult> Delete([FromQuery] int id, CancellationToken cancellationToken = default)
+    public virtual async Task<Result> Delete([FromQuery] int id, CancellationToken cancellationToken = default)
     {
-        return ApiResult.Success();
+        return Result.Success();
     }
 }

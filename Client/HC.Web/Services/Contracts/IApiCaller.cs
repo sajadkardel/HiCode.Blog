@@ -5,35 +5,35 @@ namespace HC.Web.Services.Contracts;
 
 public interface IApiCaller
 {
-    public ApiResult<T> Get<T>
+    public Result<T> Get<T>
         (string url, Dictionary<string, string>? headers = null)
         where T : class;
 
-    public Task<ApiResult<T>> GetAsync<T>
+    public Task<Result<T>> GetAsync<T>
         (string url, Dictionary<string, string>? headers = null, CancellationToken cancelationToken = default)
         where T : class;
 
-    public ApiResult<T> Post<T, TU>
+    public Result<T> Post<T, TU>
         (string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string contentType = HttpRequestContentTypeConstants.Json) 
         where T: class where TU: class;
 
-    public Task<ApiResult<T>> PostAsync<T, TU>
+    public Task<Result<T>> PostAsync<T, TU>
         (string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string contentType = HttpRequestContentTypeConstants.Json, CancellationToken cancelationToken = default)
         where T : class where TU : class;
 
-    public ApiResult<T> Put<T, TU>
+    public Result<T> Put<T, TU>
         (string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string contentType = HttpRequestContentTypeConstants.Json) 
         where T : class where TU : class;
 
-    public Task<ApiResult<T>> PutAsync<T, TU>
+    public Task<Result<T>> PutAsync<T, TU>
         (string url, TU requestModel, int encoding = 65001, Dictionary<string, string>? headers = null, string contentType = HttpRequestContentTypeConstants.Json, CancellationToken cancelationToken = default) 
         where T : class where TU : class;
 
-    public ApiResult<T> Delete<T>
+    public Result<T> Delete<T>
         (string url, Dictionary<string, string>? headers = null) 
         where T : class;
 
-    public Task<ApiResult<T>> DeleteAsync<T>
+    public Task<Result<T>> DeleteAsync<T>
         (string url, Dictionary<string, string>? headers = null, CancellationToken cancelationToken = default)
         where T : class;
 }

@@ -61,7 +61,7 @@ public static class ServiceCollectionExtensions
 
     public static void AddMarkedServices(this IServiceCollection services)
     {
-        var sharedAssembly = typeof(ApiResult).Assembly;
+        var sharedAssembly = typeof(Result).Assembly;
         var commonAssembly = typeof(ConnectionStrings).Assembly;
         var dataAccessAssembly = typeof(ApplicationDbContext).Assembly;
         var servicesAssembly = typeof(AuthService).Assembly;
