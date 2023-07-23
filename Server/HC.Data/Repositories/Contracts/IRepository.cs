@@ -19,8 +19,8 @@ public interface IRepository<TEntity> where TEntity : class
     void DeleteRange(IEnumerable<TEntity> entities, bool saveNow = true);
     Task DeleteRangeAsync(IEnumerable<TEntity> entities, bool saveNow = true, CancellationToken cancellationToken = default);
     void Detach(TEntity entity);
-    TEntity GetById(params object[] ids);
-    ValueTask<TEntity> GetByIdAsync(CancellationToken cancellationToken = default, params object[] ids);
+    TEntity? GetById(params object[] ids);
+    Task<TEntity?> GetByIdAsync(CancellationToken cancellationToken = default, params object[] ids);
     void LoadCollection<TProperty>(TEntity entity, Expression<Func<TEntity, IEnumerable<TProperty>>> collectionProperty) where TProperty : class;
     Task LoadCollectionAsync<TProperty>(TEntity entity, Expression<Func<TEntity, IEnumerable<TProperty>>> collectionProperty, CancellationToken cancellationToken = default) where TProperty : class;
     void LoadReference<TProperty>(TEntity entity, Expression<Func<TEntity, TProperty>> referenceProperty) where TProperty : class;

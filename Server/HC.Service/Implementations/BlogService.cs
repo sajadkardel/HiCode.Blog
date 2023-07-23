@@ -17,6 +17,10 @@ public class BlogService : IBlogService, IScopedDependency
     }
 
     #region Category
+    public Task<Result<List<PostResponseDto>>> GetAllCategory(CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
     #endregion
 
     #region Post

@@ -7,6 +7,7 @@ namespace HC.Service.Contracts;
 public interface IBlogService
 {
     #region Category
+    public Task<Result<List<PostResponseDto>>> GetAllCategory(CancellationToken cancellationToken = default);
     #endregion
 
     #region Post

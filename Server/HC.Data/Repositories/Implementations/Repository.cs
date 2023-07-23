@@ -11,6 +11,7 @@ public class Repository<TEntity> : IRepository<TEntity>, IScopedDependency
     where TEntity : class
 {
     protected readonly ApplicationDbContext DbContext;
+
     public DbSet<TEntity> Entities { get; }
     public virtual IQueryable<TEntity> Table => Entities;
     public virtual IQueryable<TEntity> TableNoTracking => Entities.AsNoTracking();
@@ -22,9 +23,9 @@ public class Repository<TEntity> : IRepository<TEntity>, IScopedDependency
     }
 
     #region Async Method
-    public virtual ValueTask<TEntity> GetByIdAsync(CancellationToken cancellationToken = default, params object[] ids)
+    public virtual async Task<TEntity?> GetByIdAsync(CancellationToken cancellationToken = default, params object[] ids)
     {
-        return Entities.FindAsync(ids, cancellationToken);
+        return await Entities.FindAsync(ids, cancellationToken);
     }
 
     public virtual async Task AddAsync(TEntity entity, bool saveNow = true, CancellationToken cancellationToken = default)
@@ -77,7 +78,7 @@ public class Repository<TEntity> : IRepository<TEntity>, IScopedDependency
     #endregion
 
     #region Sync Methods
-    public virtual TEntity GetById(params object[] ids)
+    public virtual TEntity? GetById(params object[] ids)
     {
         return Entities.Find(ids);
     }

@@ -8,7 +8,7 @@ public class Post : BaseEntity
 {
     public string Title { get; set; } = default!;
     public string? ShortDescription { get; set; }
-    public string? PreviewImageUrl { get; set; }
+    public string? PreviewImageName { get; set; }
     public string? SubTitle { get; set; }
     public string? Content { get; set; }
     public DateTime? ScheduledPublishDate { get; set; }
