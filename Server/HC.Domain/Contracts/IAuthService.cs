@@ -1,7 +1,7 @@
 ﻿using HC.Shared.Dtos.Auth;
 using HC.Shared.Models;
 
-namespace HC.Service.Contracts;
+namespace HC.Domain.Contracts;
 
 public interface IAuthService
 {

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HC.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230628205857_Init_Database")]
-    partial class Init_Database
+    [Migration("20230726191328_InitDb")]
+    partial class InitDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,6 +36,9 @@ namespace HC.Data.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("IconName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -47,7 +50,12 @@ namespace HC.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int?>("ParentCategoryId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ParentCategoryId");
 
                     b.ToTable("Categories", "Blog");
                 });
@@ -129,7 +137,7 @@ namespace HC.Data.Migrations
                     b.Property<int>("LikeCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("PreviewImageUrl")
+                    b.Property<string>("PreviewImageName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ScheduledPublishDate")
@@ -441,6 +449,15 @@ namespace HC.Data.Migrations
                     b.ToTable("UserTokens", "Identity");
                 });
 
+            modelBuilder.Entity("HC.Data.Entities.Blog.Category", b =>
+                {
+                    b.HasOne("HC.Data.Entities.Blog.Category", "ParentCategory")
+                        .WithMany("ChildCategories")
+                        .HasForeignKey("ParentCategoryId");
+
+                    b.Navigation("ParentCategory");
+                });
+
             modelBuilder.Entity("HC.Data.Entities.Blog.Comment", b =>
                 {
                     b.HasOne("HC.Data.Entities.Identity.User", "User")
@@ -557,6 +574,8 @@ namespace HC.Data.Migrations
 
             modelBuilder.Entity("HC.Data.Entities.Blog.Category", b =>
                 {
+                    b.Navigation("ChildCategories");
+
                     b.Navigation("Posts");
                 });
 

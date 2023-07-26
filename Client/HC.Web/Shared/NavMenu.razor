@@ -1,6 +1,15 @@
 ﻿<div class="nav-container">
     <div class="nav-items">
-        <div class="nav-item">
+        @if (_categories is not null)
+        {
+            foreach (var item in _categories)
+            {
+                <div class="nav-item">
+                    <BitLink Class="text" Href="@RoutingConstants.ClientSide.Page.Archive">@item.Name</BitLink>
+                </div>
+            }
+        }
+       @* <div class="nav-item">
             <BitLink Class="text" Href="@RoutingConstants.ClientSide.Page.Archive">مطالب</BitLink>
         </div>
         <div class="nav-item">
@@ -8,7 +17,7 @@
         </div>
         <div class="nav-item">
             <BitLink Class="text" Href="@RoutingConstants.ClientSide.Page.Books">کتاب ها</BitLink>
-        </div>
+        </div>*@
         <BitSearchBox Class="nav-search" Placeholder="جستجو..."></BitSearchBox>
     </div>
 

@@ -20,16 +20,16 @@ public class AuthService : IAuthService, IScopedDependency
         _apiCaller = apiCaller;
     }
 
-    public async Task<Result<SignUpResponseDto>> SignUp(SignUpRequestDto request)
+    public async Task<Result<SignUpResponseDto>> SignUp(SignUpRequestDto request, CancellationToken cancellationToken = default)
     {
-        var response = await _apiCaller.PostAsync<SignUpResponseDto, SignUpRequestDto>(RoutingConstants.ServerSide.Auth.SignUp, request);
+        var response = await _apiCaller.PostAsync<SignUpResponseDto, SignUpRequestDto>(RoutingConstants.ServerSide.Auth.SignUp, request, cancelationToken: cancellationToken);
         if (response.IsSucceed is false) return Result.Failed<SignUpResponseDto>(response.Message);
         return response;
     }
 
-    public async Task<Result<SignInResponseDto>> SignIn(SignInRequestDto request)
+    public async Task<Result<SignInResponseDto>> SignIn(SignInRequestDto request, CancellationToken cancellationToken = default)
     {
-        var response = await _apiCaller.PostAsync<SignInResponseDto, SignInRequestDto>(RoutingConstants.ServerSide.Auth.SignIn, request);
+        var response = await _apiCaller.PostAsync<SignInResponseDto, SignInRequestDto>(RoutingConstants.ServerSide.Auth.SignIn, request, cancelationToken: cancellationToken);
         if (response.IsSucceed is false) return Result.Failed<SignInResponseDto>(response.Message);
 
         JwtSecurityTokenHandler tokenHandler = new();
@@ -37,16 +37,16 @@ public class AuthService : IAuthService, IScopedDependency
         if (tokenHandler.CanReadToken(response.Data.access_token))
         {
             var securityToken = tokenHandler.ReadJwtToken(response.Data.access_token);
-            await _localStorageService.SetToCookieAsync("access_token", response.Data.access_token, (DateTime.Now.Second - securityToken.ValidTo.Second));
+            await _localStorageService.SetToCookieAsync("access_token", response.Data.access_token, (DateTime.Now.Second - securityToken.ValidTo.Second), cancellationToken);
             await _appAuthenticationStateProvider.RaiseAuthenticationStateHasChanged();
         }
 
         return response;
     }
 
-    public async Task SignOut()
+    public async Task SignOut(CancellationToken cancellationToken = default)
     {
-        await _localStorageService.RemoveFromCookieAsync("access_token");
+        await _localStorageService.RemoveFromCookieAsync("access_token", cancellationToken);
         await _appAuthenticationStateProvider.RaiseAuthenticationStateHasChanged();
     }
 }

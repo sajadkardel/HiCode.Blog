@@ -27,6 +27,12 @@ public static class RoutingConstants
         {
             private const string BaseAddress = "blog/";
 
+            public const string GetAllCategory = BaseAddress + "getAllCategory";
+            public const string GetCategoryById = BaseAddress + "getCategoryById";
+            public const string CreateCategory = BaseAddress + "createCategory";
+            public const string UpdateCategory = BaseAddress + "updateCategory";
+            public const string DeleteCategory = BaseAddress + "deleteCategory";
+
             public const string GetAllPost = BaseAddress + "getAllPost";
             public const string GetPostById = BaseAddress + "getPostById";
             public const string CreatePost = BaseAddress + "createPost";

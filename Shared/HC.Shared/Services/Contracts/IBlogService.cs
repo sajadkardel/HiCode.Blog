@@ -2,12 +2,13 @@
 using HC.Shared.Dtos.User;
 using HC.Shared.Models;
 
-namespace HC.Service.Contracts;
+namespace HC.Shared.Services.Contracts;
 
 public interface IBlogService
 {
     #region Category
-    public Task<Result<List<PostResponseDto>>> GetAllCategory(CancellationToken cancellationToken = default);
+    public Task<Result<IEnumerable<CategoryResponseDto>>> GetAllCategory(CancellationToken cancellationToken = default);
+    public Task<Result> CreateCategory(CategoryRequestDto request, CancellationToken cancellationToken = default);
     #endregion
 
     #region Post

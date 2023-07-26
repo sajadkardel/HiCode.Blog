@@ -1,5 +1,4 @@
-﻿using HC.Service.Contracts;
-using Microsoft.AspNetCore.Http;
+﻿using HC.Shared.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HC.Api.Controllers.v2;

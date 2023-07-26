@@ -15,7 +15,7 @@ public class StorageService : IStorageService, IScopedDependency
     }
 
     // Local Storage
-    public async Task<Result<string>> GetFromLocalStorageAsync(string key)
+    public async Task<Result<string>> GetFromLocalStorageAsync(string key, CancellationToken cancellationToken = default)
     {
         string result = string.Empty;
 
@@ -31,7 +31,7 @@ public class StorageService : IStorageService, IScopedDependency
         return Result.Success<string>(result);
     }
 
-    public async Task<Result> SetToLocalStorageAsync(string key, string value)
+    public async Task<Result> SetToLocalStorageAsync(string key, string value, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -45,7 +45,7 @@ public class StorageService : IStorageService, IScopedDependency
         return Result.Success();
     }
 
-    public async Task<Result> RemoveFromLocalStorageAsync(string key)
+    public async Task<Result> RemoveFromLocalStorageAsync(string key, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -60,7 +60,7 @@ public class StorageService : IStorageService, IScopedDependency
     }
 
     // Cookie
-    public async Task<Result> SetToCookieAsync(string key, string value, long expiresIn)
+    public async Task<Result> SetToCookieAsync(string key, string value, long expiresIn, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -74,7 +74,7 @@ public class StorageService : IStorageService, IScopedDependency
         return Result.Success();
     }
 
-    public async Task<Result<string>> GetFromCookieAsync(string key)
+    public async Task<Result<string>> GetFromCookieAsync(string key, CancellationToken cancellationToken = default)
     {
         string result = string.Empty;
 
@@ -90,7 +90,7 @@ public class StorageService : IStorageService, IScopedDependency
         return Result.Success<string>(result);
     }
 
-    public async Task<Result> RemoveFromCookieAsync(string key)
+    public async Task<Result> RemoveFromCookieAsync(string key, CancellationToken cancellationToken = default)
     {
         try
         {

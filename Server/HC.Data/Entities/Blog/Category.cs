@@ -12,9 +12,9 @@ public class Category : BaseEntity
     public int? ParentCategoryId { get; set; }
 
     // Relations
-    public ICollection<Post>? Posts { get; set; }
+    public ICollection<Post> Posts { get; set; }
     public Category? ParentCategory { get; set; }
-    public ICollection<Category>? ChildCategories { get; set; }
+    public ICollection<Category> ChildCategories { get; set; }
 }
 
 public class CategoryConfiguration : IEntityTypeConfiguration<Category>

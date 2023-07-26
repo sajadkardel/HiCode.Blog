@@ -1,8 +1,9 @@
-﻿using HC.Service.Contracts;
-using HC.Shared.Constants;
+﻿using HC.Shared.Constants;
+using HC.Shared.Dtos.Auth;
 using HC.Shared.Dtos.Blog;
 using HC.Shared.Dtos.User;
 using HC.Shared.Models;
+using HC.Shared.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,24 @@ public class BlogController : BaseController
 	}
 
     #region Category
+    [AllowAnonymous]
+    [HttpGet(RoutingConstants.ServerSide.Blog.GetAllCategory)]
+    public virtual async Task<Result<IEnumerable<CategoryResponseDto>>> GetAllCategory(CancellationToken cancellationToken = default)
+    {
+        var result = await _blogService.GetAllCategory(cancellationToken);
+        if (result.IsSucceed is false) return Result.Failed<IEnumerable<CategoryResponseDto>>(result.Message);
+
+        return Result.Success(result.Data);
+    }
+
+    [HttpPost(RoutingConstants.ServerSide.Blog.CreateCategory)]
+    public virtual async Task<Result> CreateCategory(CategoryRequestDto request, CancellationToken cancellationToken = default)
+    {
+        var result = await _blogService.CreateCategory(request, cancellationToken);
+        if (result.IsSucceed is false) return Result.Failed(result.Message);
+
+        return Result.Success();
+    }
     #endregion
 
     #region Post

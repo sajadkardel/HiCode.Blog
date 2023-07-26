@@ -1,7 +1,7 @@
 ﻿using HC.Common.Settings;
 using HC.Data.Context;
 using HC.Data.Repositories.Implementations;
-using HC.Service.Implementations;
+using HC.Domain.Implementations;
 using HC.Shared.Extensions;
 using HC.Shared.Markers;
 using HC.Shared.Models;

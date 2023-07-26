@@ -1,4 +1,4 @@
-﻿using HC.Service.Contracts;
+﻿using HC.Domain.Contracts;
 using HC.Shared.Constants;
 using HC.Shared.Dtos.Auth;
 using HC.Shared.Models;

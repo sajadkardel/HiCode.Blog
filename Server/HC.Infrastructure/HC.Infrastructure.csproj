@@ -15,7 +15,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\HC.Service\HC.Service.csproj" />
+	  <ProjectReference Include="..\HC.Domain\HC.Domain.csproj" />
 	</ItemGroup>
 	
 </Project>

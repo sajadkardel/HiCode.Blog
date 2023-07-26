@@ -1,6 +1,6 @@
 ﻿using HC.Common.Settings;
 using HC.Data.Entities.Identity;
-using HC.Service.Contracts;
+using HC.Domain.Contracts;
 using HC.Shared.Dtos.Auth;
 using HC.Shared.Markers;
 using HC.Shared.Models;
@@ -10,9 +10,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace HC.Service.Implementations;
+namespace HC.Domain.Implementations;
 
-public class AuthService :  IAuthService, IScopedDependency
+public class AuthService : IAuthService, IScopedDependency
 {
     private readonly UserManager<User> _userManager;
     private readonly SignInManager<User> _signInManager;

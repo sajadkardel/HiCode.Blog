@@ -1,5 +1,5 @@
 ﻿using HC.Shared.Dtos.User;
-using HC.Web.Services.Contracts;
+using HC.Shared.Services.Contracts;
 using Microsoft.AspNetCore.Components;
 
 namespace HC.Web.Pages;

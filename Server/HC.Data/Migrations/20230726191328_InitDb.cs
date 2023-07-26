@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HC.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Init_Database : Migration
+    public partial class InitDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,6 +25,8 @@ namespace HC.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    IconName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ParentCategoryId = table.Column<int>(type: "int", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastUpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
@@ -32,6 +34,12 @@ namespace HC.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Categories_Categories_ParentCategoryId",
+                        column: x => x.ParentCategoryId,
+                        principalSchema: "Blog",
+                        principalTable: "Categories",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -132,7 +140,7 @@ namespace HC.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     ShortDescription = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: true),
-                    PreviewImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PreviewImageName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SubTitle = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ScheduledPublishDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -329,6 +337,12 @@ namespace HC.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Categories_ParentCategoryId",
+                schema: "Blog",
+                table: "Categories",
+                column: "ParentCategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_AuthorUserId",

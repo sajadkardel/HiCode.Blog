@@ -1,7 +1,7 @@
-﻿using HC.Service.Contracts;
-using HC.Shared.Constants;
+﻿using HC.Shared.Constants;
 using HC.Shared.Dtos.User;
 using HC.Shared.Models;
+using HC.Shared.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HC.Api.Controllers.v1;

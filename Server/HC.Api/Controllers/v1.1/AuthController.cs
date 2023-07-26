@@ -1,4 +1,4 @@
-﻿using HC.Service.Contracts;
+﻿using HC.Domain.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HC.Api.Controllers.v2;

@@ -1,4 +1,4 @@
-﻿using HC.Service.Contracts;
+﻿using HC.Shared.Services.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

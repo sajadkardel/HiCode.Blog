@@ -1,12 +1,12 @@
 ﻿using HC.Data.Entities.Identity;
 using HC.Data.Repositories.Contracts;
-using HC.Service.Contracts;
 using HC.Shared.Dtos.User;
 using HC.Shared.Markers;
 using HC.Shared.Models;
+using HC.Shared.Services.Contracts;
 using Microsoft.EntityFrameworkCore;
 
-namespace HC.Service.Implementations;
+namespace HC.Domain.Implementations;
 
 public class UserService : IUserService, IScopedDependency
 {
