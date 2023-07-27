@@ -4,20 +4,19 @@
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     padding: 20px;
+
+    .title {
+        font-size: 20px;
+        font-weight: 800;
+        color: $White;
+    }
 
     .recent-post {
         display: flex;
-        flex-flow: column nowrap;
+        flex-flow: row wrap;
         justify-content: center;
         align-items: center;
-        width: 100%;
-
-        .title {
-            font-size: 20px;
-            font-weight: 800;
-            color: $White;
-        }
     }
 }

@@ -5,7 +5,16 @@
 <NavMenu />
 
 <main class="main-body">
-    @Body
+    <ErrorBoundary>
+        <ChildContent>
+            <FluentDesignSystemProvider FillColor="#07302e">
+                @Body
+            </FluentDesignSystemProvider>
+        </ChildContent>
+        <ErrorContent Context="ex">
+            <p class="error">@ex.Message</p>
+        </ErrorContent>
+    </ErrorBoundary>
 </main>
 
 <Footer />

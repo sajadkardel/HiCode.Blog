@@ -1,5 +1,5 @@
 ﻿namespace HC.Web.Shared;
 
-public partial class PageNotFound
+public partial class PageNotFound : AppBaseComponent
 {
 }

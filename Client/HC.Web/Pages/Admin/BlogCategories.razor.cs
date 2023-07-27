@@ -1,5 +1,7 @@
-﻿namespace HC.Web.Pages.Admin;
+﻿using HC.Web.Shared;
 
-public partial class BlogCategories
+namespace HC.Web.Pages.Admin;
+
+public partial class BlogCategories : AppBaseComponent
 {
 }

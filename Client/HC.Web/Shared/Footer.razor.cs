@@ -1,7 +1,7 @@
 ﻿
 namespace HC.Web.Shared;
 
-public partial class Footer
+public partial class Footer : AppBaseComponent
 {
 
 }

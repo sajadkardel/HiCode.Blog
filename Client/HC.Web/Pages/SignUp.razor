@@ -1,4 +1,5 @@
 ﻿@page "/sign-up"
+@inherits AppBaseComponent
 
 <PageTitle>@PageTitleResource.SignUp</PageTitle>
 
@@ -6,18 +7,18 @@
     <EditForm Model="_signUpRequestDto" OnValidSubmit="DoSignUp">
 
         <div>
-            <BitLabel For="UserName">UserName</BitLabel>
-            <BitTextField @bind-Value="_signUpRequestDto.UserName" id="UserName" />
+            <FluentLabel For="UserName">UserName</FluentLabel>
+            <FluentTextField @bind-Value="_signUpRequestDto.UserName" id="UserName" />
             <ValidationMessage For="@(() => _signUpRequestDto.UserName)" />
         </div>
 
         <div>
-            <BitLabel For="Password">Password</BitLabel>
-            <BitTextField @bind-Value="_signUpRequestDto.Password" id="Password" />
+            <FluentLabel For="Password">Password</FluentLabel>
+            <FluentTextField @bind-Value="_signUpRequestDto.Password" id="Password" />
             <ValidationMessage For="@(() => _signUpRequestDto.Password)" />
         </div>
 
-        <BitButton ButtonType="BitButtonType.Submit">SignUp</BitButton>
+        <FluentButton Type="ButtonType.Submit">SignUp</FluentButton>
     </EditForm>
 
     @if (string.IsNullOrEmpty(_message) is false)

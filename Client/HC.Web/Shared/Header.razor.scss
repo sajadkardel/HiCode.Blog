@@ -19,13 +19,13 @@
     -webkit-backdrop-filter: blur(8.1px);
     border-bottom: 1px solid $BorderColor;
 
-    .nav-logo {
+    .logo {
+        border-radius: 10px;
         background-image: url('../wwwroot/images/icons/icon-512.svg');
         background-size: rem(100px);
         background-position: center;
         background-repeat: no-repeat;
         width: rem(100px);
         height: rem(52px);
-        border-radius: 10px;
     }
 }

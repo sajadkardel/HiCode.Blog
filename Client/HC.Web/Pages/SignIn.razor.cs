@@ -1,11 +1,12 @@
 ﻿using HC.Shared.Dtos.Auth;
 using HC.Shared.Dtos.User;
 using HC.Web.Services.Contracts;
+using HC.Web.Shared;
 using Microsoft.AspNetCore.Components;
 
 namespace HC.Web.Pages;
 
-public partial class SignIn
+public partial class SignIn : AppBaseComponent
 {
     [Inject] protected IAuthService _authService { get; set; } = default!;
 

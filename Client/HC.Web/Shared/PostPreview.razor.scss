@@ -4,79 +4,35 @@
 
 .preview-container {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: center;
-    position: relative;
-    width: calc(100% - 150px);
-    height: 200px;
+    width: 300px;
+    height: 600px;
     border-radius: 5px;
     margin: 15px;
-    padding: 20px;
+    padding: 10px;
     background-color: $HeaderColor;
     transition: height 0.8s, width 0.8s;
     box-shadow: 0 3px 7px -1px rgba(0, 0, 0, 0.1);
 
     &:hover {
         background-color: $HoverColor;
-        width: calc(100% - 100px);
-        height: 220px;
-        padding-left: 20px;
-
-        .photo-overlay {
+        width: 310px;
+        height: 610px;
+        /*.photo-overlay {
             width: 300px;
         }
 
         .content-overlay {
             height: 70px;
-        }
+        }*/
     }
 
-    .photo-overlay {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 1;
-        background-color: rgba(191, 191, 191, 0.52);
-        width: 0;
-        height: 100%;
-        transition: width 0.8s;
-        /*clip-path: polygon(100% 0%, 100% 100%, 0% 100%, 8% 0%);*/
-    }
-
-    .photo {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        height: 100%;
-        width: 300px;
-
-        img {
-            border-radius: 5px;
-            width: 100%;
-            height: 100%;
-        }
-    }
-
-    .content-overlay {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        z-index: 1;
-        background-color: rgba(191, 191, 191, 0.52);
+    img {
+        border-radius: 5px;
         width: 100%;
-        height: 0;
-        transition: height 0.4s;
-        clip-path: polygon(100% 100%,100% 100%,0% 100%,0% 0%);
-
-        .read-more {
-            margin: 10px;
-        }
+        height: 100%;
     }
 
     .content {
@@ -84,7 +40,7 @@
         flex-flow: column nowrap;
         height: 100%;
         width: 100%;
-        margin-right: 300px;
+        margin-top: 20px;
 
         .title {
             font-size: 15px;

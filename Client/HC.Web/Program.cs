@@ -4,6 +4,8 @@ using HC.Web.Startup;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Fast.Components.FluentUI;
+using System.Runtime.Intrinsics.X86;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -14,9 +16,12 @@ builder.Services.AddScoped<AuthenticationStateProvider>(sp => sp.GetRequiredServ
 builder.Services.AddAuthorizationCore();
 
 builder.Services.AddScoped<AppHttpClientHandler>();
-
 builder.Services.AddScoped(sp => new HttpClient(sp.GetRequiredService<AppHttpClientHandler>()) { BaseAddress = new Uri($"{builder.HostEnvironment.BaseAddress}{builder.Configuration["ServerBaseUrl"]}") });
 
+builder.Services.AddFluentUIComponents(options =>
+{
+    options.HostingModel = BlazorHostingModel.WebAssembly;
+});
 builder.Services.AddMarkedServices();
 
 await builder.Build().RunAsync();

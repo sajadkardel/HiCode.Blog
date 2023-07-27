@@ -1,12 +1,13 @@
 ﻿@page "/"
+@inherits AppBaseComponent
 
 <PageTitle>@PageTitleResource.Index</PageTitle>
 
 <div class="index-container">
-    
-    <div class="recent-post">
-        <span class="title">آخرین مطالب</span>
 
+    <span class="title">آخرین مطالب</span>
+
+    <div class="recent-post">
         @for (int i = 0; i < 10; i++)
         {
             <PostPreview />

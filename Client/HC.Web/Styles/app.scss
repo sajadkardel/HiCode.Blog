@@ -30,28 +30,6 @@ html, body, #app {
     direction: rtl;
 }
 
-// Bit components
-.bit-srb {
-}
-
-.bit-nav {
-}
-
-.hc-dropdown {
-}
-
-.hc-success-btn {
-}
-
-.hc-warning-btn {
-}
-
-.hc-danger-btn {
-}
-
-.hc-info-btn {
-}
-
 // Shared
 @import '../Shared/MainLayout.razor.scss';
 @import '../Shared/Header.razor.scss';

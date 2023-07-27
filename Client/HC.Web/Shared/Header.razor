@@ -1,4 +1,6 @@
-﻿<header class="main-header">
-    <BitSearchBox Class="nav-search" Placeholder="جستجو..."></BitSearchBox>
-    <BitLink Class="nav-logo" Href="@RoutingConstants.ClientSide.Page.Index" />
+﻿@inherits AppBaseComponent
+
+<header class="main-header">
+    <FluentSearch Class="nav-search" Placeholder="جستجو..."></FluentSearch>
+    <FluentAnchor Class="logo" Href="@RoutingConstants.ClientSide.Page.Index" Appearance="Appearance.Filled" />
 </header>

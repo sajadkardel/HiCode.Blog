@@ -1,5 +1,5 @@
 ﻿namespace HC.Web.Shared;
 
-public partial class NotAuthorizedComponent
+public partial class NotAuthorizedComponent : AppBaseComponent
 {
 }

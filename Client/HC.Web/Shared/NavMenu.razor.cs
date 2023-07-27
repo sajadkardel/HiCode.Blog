@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace HC.Web.Shared;
 
-public partial class NavMenu
+public partial class NavMenu : AppBaseComponent
 {
     [Inject] protected IBlogService _blogService { get; set; } = default!;
 

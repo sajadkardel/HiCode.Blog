@@ -1,4 +1,5 @@
 ﻿@page "/sign-in"
+@inherits AppBaseComponent
 
 <PageTitle>@PageTitleResource.SignIn</PageTitle>
 
@@ -6,18 +7,18 @@
     <EditForm Model="_signInModel" OnValidSubmit="DoSignIn">
 
         <div>
-            <BitLabel For="UserName">UserName</BitLabel>
-            <BitTextField @bind-Value="_signInModel.UserName" id="UserName" />
+            <FluentLabel For="UserName">UserName</FluentLabel>
+            <FluentTextField @bind-Value="_signInModel.UserName" id="UserName" />
             <ValidationMessage For="@(() => _signInModel.UserName)" />
         </div>
 
         <div>
-            <BitLabel For="Password">Password</BitLabel>
-            <BitTextField @bind-Value="_signInModel.Password" id="Password" />
+            <FluentLabel For="Password">Password</FluentLabel>
+            <FluentTextField @bind-Value="_signInModel.Password" id="Password" />
             <ValidationMessage For="@(() => _signInModel.Password)" />
         </div>
 
-        <BitButton ButtonType="BitButtonType.Submit">SignIn</BitButton>
+        <FluentButton Type="ButtonType.Submit">SignIn</FluentButton>
     </EditForm>
 
     @if (string.IsNullOrEmpty(_message) is false)

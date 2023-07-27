@@ -8,11 +8,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Bit.BlazorUI" Version="5.1.0" />
 		<PackageReference Include="BuildWebCompiler2022" Version="1.14.10" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="7.0.5" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.5" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.5" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.Fast.Components.FluentUI" Version="3.0.0-RC.1" />
 		<PackageReference Include="Microsoft.TypeScript.MSBuild" Version="5.1.3">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -27,6 +27,7 @@
 		<ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
 	</ItemGroup>
 
+	<!-- This is for All 'resx' File -->
 	<ItemGroup>
 		<Compile Update="**\*.Designer.cs">
 			<DesignTime>True</DesignTime>
@@ -39,4 +40,14 @@
 		</EmbeddedResource>
 	</ItemGroup>
 
+	<!-- This is for FluentUi -->
+	<PropertyGroup>
+		<PublishFluentIconAssets>true</PublishFluentIconAssets>
+		<FluentIconSizes>10,12,16,20,24,28,32,48</FluentIconSizes>
+		<FluentIconVariants>Filled,Regular</FluentIconVariants>
+		<PublishFluentEmojiAssets>true</PublishFluentEmojiAssets>
+		<FluentEmojiGroups>Activities,Animals_Nature,Flags,Food_Drink,Objects,People_Body,Smileys_Emotion,Symbols,Travel_Places</FluentEmojiGroups>
+		<FluentEmojiStyles>Color,Flat,HighContrast</FluentEmojiStyles>
+	</PropertyGroup>
+	
 </Project>

@@ -1,6 +1,8 @@
-﻿namespace HC.Web.Pages;
+﻿using HC.Web.Shared;
 
-public partial class Index
+namespace HC.Web.Pages;
+
+public partial class Index : AppBaseComponent
 {
 
 }

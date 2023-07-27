@@ -1,10 +1,11 @@
 ﻿using HC.Shared.Dtos.User;
 using HC.Shared.Services.Contracts;
+using HC.Web.Shared;
 using Microsoft.AspNetCore.Components;
 
 namespace HC.Web.Pages.Admin;
 
-public partial class Users
+public partial class Users : AppBaseComponent
 {
     [Inject] protected IUserService _userService { get; set; } = default!;
 

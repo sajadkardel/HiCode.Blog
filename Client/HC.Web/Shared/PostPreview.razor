@@ -1,14 +1,8 @@
-﻿
-<div class="preview-container">
-    <div class="photo-overlay"></div>
-    <div class="content-overlay">
-        <BitLink Class="read-more">خواندن مطلب</BitLink>
-    </div>
+﻿@inherits AppBaseComponent
 
-    <div class="photo">
-        <span class="photo-animation"></span>
-        <img alt="@ImageAlt" src="@ImageSrc" />
-    </div>
+<div class="preview-container">
+
+    <img alt="@ImageAlt" src="@ImageSrc" />
 
     <div class="content">
         <span class="title">@Title</span>
@@ -16,4 +10,7 @@
             @ShortDescription
         </span>
     </div>
+
+    <FluentAnchor Href="" Class="read-more">خواندن مطلب</FluentAnchor>
+
 </div>
