@@ -18,10 +18,10 @@ public class Post : BaseEntity
     // Relations
     public int CategoryId { get; set; }
     public int AuthorUserId { get; set; }
-    public Category Category { get; set; } = default!;
-    public Identity.User User { get; set; } = default!;
-    public ICollection<Comment>? Comments { get; set; }
-    public ICollection<PostTag>? PostTags { get; set; }
+    public Category Category { get; set; }
+    public Identity.User User { get; set; }
+    public ICollection<Comment> Comments { get; set; }
+    public ICollection<PostTag> PostTags { get; set; }
 }
 
 public class PostConfiguration : IEntityTypeConfiguration<Post>

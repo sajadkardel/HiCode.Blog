@@ -13,10 +13,10 @@ public class Comment : BaseEntity
     public int? ParentCommentId { get; set; }
     public int PostId { get; set; }
     public int AuthorUserId { get; set; }
-    public Post Post { get; set; } = default!;
-    public Identity.User User { get; set; } = default!;
-    public Comment? ParentComment { get; set; }
-    public ICollection<Comment>? ChildComments { get; set; }
+    public Post Post { get; set; }
+    public Identity.User User { get; set; }
+    public Comment ParentComment { get; set; }
+    public ICollection<Comment> ChildComments { get; set; }
 }
 
 public class CommentConfiguration : IEntityTypeConfiguration<Comment>

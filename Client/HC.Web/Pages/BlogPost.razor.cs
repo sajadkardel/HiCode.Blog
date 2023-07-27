@@ -2,7 +2,7 @@
 
 namespace HC.Web.Pages;
 
-public partial class Post
+public partial class BlogPost
 {
     [Parameter] public int Id { get; set; }
 }

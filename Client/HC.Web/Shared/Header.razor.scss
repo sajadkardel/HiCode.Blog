@@ -1,1 +1,31 @@
-﻿
+﻿@import '../Styles/abstracts/_colors.scss';
+@import '../Styles/abstracts/_media-queries.scss';
+
+.main-header {
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 100%;
+    min-height: rem(80px);
+    padding: rem(7px) rem(16px);
+    box-sizing: border-box;
+    background-color: $HeaderColor;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8.1px);
+    -webkit-backdrop-filter: blur(8.1px);
+    border-bottom: 1px solid $BorderColor;
+
+    .nav-logo {
+        background-image: url('../wwwroot/images/icons/icon-512.svg');
+        background-size: rem(100px);
+        background-position: center;
+        background-repeat: no-repeat;
+        width: rem(100px);
+        height: rem(52px);
+        border-radius: 10px;
+    }
+}

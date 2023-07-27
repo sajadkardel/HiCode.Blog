@@ -53,7 +53,26 @@ public class BlogService : IBlogService, IScopedDependency
             ParentCategoryId = request.ParentId,
             Name = request.Name,
             IconName = request.IconName
-        });
+        }, cancellationToken: cancellationToken);
+
+        return Result.Success();
+    }
+
+    public async Task<Result> UpdateCategory(int id, CategoryRequestDto request, CancellationToken cancellationToken = default)
+    {
+        await _categoryRepository.UpdateAsync(new Category
+        {
+            Id = id,
+            Name = request.Name,
+            IconName = request.IconName
+        }, cancellationToken: cancellationToken);
+
+        return Result.Success();
+    }
+
+    public async Task<Result> DeleteCategory(int id, CancellationToken cancellationToken = default)
+    {
+        await _categoryRepository.DeleteAsync(new Category { Id = id }, cancellationToken: cancellationToken);
 
         return Result.Success();
     }

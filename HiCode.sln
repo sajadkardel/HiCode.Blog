@@ -29,7 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".SolutionItems", ".Solution
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HC.Infrastructure", "Server\HC.Infrastructure\HC.Infrastructure.csproj", "{8B95DDD5-F20E-4BBB-A1EF-359F3B935DC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HC.Domain", "Server\HC.Domain\HC.Domain.csproj", "{4A9BC762-FBE1-442D-AF53-6BF05B48844D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HC.Domain", "Server\HC.Domain\HC.Domain.csproj", "{4A9BC762-FBE1-442D-AF53-6BF05B48844D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

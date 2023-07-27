@@ -13,7 +13,7 @@ public class Category : BaseEntity
 
     // Relations
     public ICollection<Post> Posts { get; set; }
-    public Category? ParentCategory { get; set; }
+    public Category ParentCategory { get; set; }
     public ICollection<Category> ChildCategories { get; set; }
 }
 
@@ -24,7 +24,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
         builder.ToTable(nameof(Category), typeof(Category).GetParentFolderName());
 
         builder.Property(p => p.Name).IsRequired().HasMaxLength(50);
-        builder.Property(p => p.Name).IsRequired().HasMaxLength(50);
+        builder.Property(p => p.IconName).HasMaxLength(50);
 
         builder.HasOne(p => p.ParentCategory).WithMany(p => p.ChildCategories);
     }

@@ -67,6 +67,8 @@ html, body, #app {
 @import '../Pages/Index.razor.scss';
 @import '../Pages/SignUp.razor.scss';
 @import '../Pages/SignIn.razor.scss';
-@import '../Pages/Archive.razor.scss';
-@import '../Pages/Post.razor.scss';
-@import '../Pages/Users.razor.scss';
+@import '../Pages/BlogPost.razor.scss';
+
+// Pages => Admin
+@import '../Pages/Admin/Users.razor.scss';
+@import '../Pages/Admin/BlogCategories.razor.scss';

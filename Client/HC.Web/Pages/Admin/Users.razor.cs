@@ -2,7 +2,7 @@
 using HC.Shared.Services.Contracts;
 using Microsoft.AspNetCore.Components;
 
-namespace HC.Web.Pages;
+namespace HC.Web.Pages.Admin;
 
 public partial class Users
 {

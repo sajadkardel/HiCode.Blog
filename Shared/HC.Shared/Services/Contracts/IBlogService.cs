@@ -9,6 +9,8 @@ public interface IBlogService
     #region Category
     public Task<Result<IEnumerable<CategoryResponseDto>>> GetAllCategory(CancellationToken cancellationToken = default);
     public Task<Result> CreateCategory(CategoryRequestDto request, CancellationToken cancellationToken = default);
+    public Task<Result> DeleteCategory(int id, CancellationToken cancellationToken = default);
+    public Task<Result> UpdateCategory(int id, CategoryRequestDto request, CancellationToken cancellationToken = default);
     #endregion
 
     #region Post

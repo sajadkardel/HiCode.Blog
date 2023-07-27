@@ -54,8 +54,7 @@ public static class RoutingConstants
             public static string Index = "/";
             public static string SignUp = "/sign-up";
             public static string SignIn = "/sign-in";
-            public static string Post(int PostId) => $"/post/{PostId}";
-            public static string Archive = "/archive";
+            public static string Post(int PostId) => $"/blog-post/{PostId}";
             public static string News = "/news";
             public static string Books = "/books";
             public static string Users = "/users";

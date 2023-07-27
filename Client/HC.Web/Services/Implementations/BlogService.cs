@@ -18,14 +18,32 @@ public class BlogService : IBlogService, IScopedDependency
     #region Category
     public async Task<Result<IEnumerable<CategoryResponseDto>>> GetAllCategory(CancellationToken cancellationToken = default)
     {
-        var response = await _apiCaller.GetAsync<IEnumerable<CategoryResponseDto>>(RoutingConstants.ServerSide.Blog.GetAllCategory, cancelationToken: cancellationToken);
+        var url = RoutingConstants.ServerSide.Blog.GetAllCategory;
+        var response = await _apiCaller.GetAsync<IEnumerable<CategoryResponseDto>>(url, cancelationToken: cancellationToken);
         if (response.IsSucceed is false) return Result.Failed<IEnumerable<CategoryResponseDto>>(response.Message);
         return response;
     }
 
     public async Task<Result> CreateCategory(CategoryRequestDto request, CancellationToken cancellationToken = default)
     {
-        var response = await _apiCaller.PostAsync<CategoryResponseDto, CategoryRequestDto>(RoutingConstants.ServerSide.Blog.CreateCategory, request, cancelationToken: cancellationToken);
+        var url = RoutingConstants.ServerSide.Blog.CreateCategory;
+        var response = await _apiCaller.PostAsync<CategoryResponseDto, CategoryRequestDto>(url, request, cancelationToken: cancellationToken);
+        if (response.IsSucceed is false) return Result.Failed(response.Message);
+        return response;
+    }
+
+    public async Task<Result> UpdateCategory(int id, CategoryRequestDto request, CancellationToken cancellationToken = default)
+    {
+        var url = $"{RoutingConstants.ServerSide.Blog.UpdateCategory}?id={id}";
+        var response = await _apiCaller.PutAsync<CategoryResponseDto, CategoryRequestDto>(url, request, cancelationToken: cancellationToken);
+        if (response.IsSucceed is false) return Result.Failed(response.Message);
+        return response;
+    }
+
+    public async Task<Result> DeleteCategory(int id, CancellationToken cancellationToken = default)
+    {
+        var url = $"{RoutingConstants.ServerSide.Blog.DeleteCategory}?id={id}";
+        var response = await _apiCaller.DeleteAsync<CategoryResponseDto>(url, cancelationToken: cancellationToken);
         if (response.IsSucceed is false) return Result.Failed(response.Message);
         return response;
     }

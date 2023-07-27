@@ -61,11 +61,20 @@ namespace HC.Web.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to مطالب.
+        ///   Looks up a localized string similar to دسته بندی.
         /// </summary>
-        public static string Archive {
+        public static string BlogCategories {
             get {
-                return ResourceManager.GetString("Archive", resourceCulture);
+                return ResourceManager.GetString("BlogCategories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to مقاله.
+        /// </summary>
+        public static string BlogPost {
+            get {
+                return ResourceManager.GetString("BlogPost", resourceCulture);
             }
         }
         
@@ -75,15 +84,6 @@ namespace HC.Web.Resources {
         public static string Index {
             get {
                 return ResourceManager.GetString("Index", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to مقاله.
-        /// </summary>
-        public static string Post {
-            get {
-                return ResourceManager.GetString("Post", resourceCulture);
             }
         }
         
