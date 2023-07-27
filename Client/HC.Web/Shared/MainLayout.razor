@@ -2,19 +2,22 @@
 
 <Header />
 
-<NavMenu />
-
-<main class="main-body">
-    <ErrorBoundary>
-        <ChildContent>
-            <FluentDesignSystemProvider FillColor="#07302e">
-                @Body
-            </FluentDesignSystemProvider>
-        </ChildContent>
-        <ErrorContent Context="ex">
-            <p class="error">@ex.Message</p>
-        </ErrorContent>
-    </ErrorBoundary>
-</main>
+<ErrorBoundary>
+    <ChildContent>
+        <FluentDesignSystemProvider FillColor="#07302e" Direction="LocalizationDirection.rtl">
+            <main class="main-body">
+                <div class="main-nav">
+                    <NavMenu />
+                </div>
+                <div class="main-content">
+                    @Body
+                </div>
+            </main>
+        </FluentDesignSystemProvider>
+    </ChildContent>
+    <ErrorContent Context="ex">
+        <p class="error">@ex.Message</p>
+    </ErrorContent>
+</ErrorBoundary>
 
 <Footer />

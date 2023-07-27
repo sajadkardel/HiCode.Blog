@@ -1,10 +1,19 @@
 ﻿@import '../Styles/abstracts/_colors.scss';
 
 .main-body {
+    display: flex;
+    flex-flow: row nowrap;
     width: 100%;
     min-height: 100vh;
     position: relative;
-    padding-top: rem(80px);
+    margin-top: rem(80px);
     box-sizing: border-box;
-    background-color: $MainBackgroundColor;
+
+    .main-nav {
+        width: 300px;
+    }
+
+    .main-content {
+        width: 100%;
+    }
 }

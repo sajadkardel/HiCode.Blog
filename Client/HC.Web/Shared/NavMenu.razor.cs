@@ -14,11 +14,5 @@ public partial class NavMenu : AppBaseComponent
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-
-        var categories = await _blogService.GetAllCategory();
-        if (categories.IsSucceed is false) _error = categories.Message;
-        else _categories = categories.Data;
-
-        StateHasChanged();
     }
 }
