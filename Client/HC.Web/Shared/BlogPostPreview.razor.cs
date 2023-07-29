@@ -2,7 +2,7 @@
 
 namespace HC.Web.Shared;
 
-public partial class PostPreview : AppBaseComponent
+public partial class BlogPostPreview : AppBaseComponent
 {
     [Parameter] public string Title { get; set; } = string.Empty;
     [Parameter] public string ShortDescription { get; set; } = string.Empty;
