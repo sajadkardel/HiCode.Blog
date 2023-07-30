@@ -28,6 +28,7 @@ public class BlogService : IBlogService, IScopedDependency
         var categories = await _categoryRepository.TableNoTracking
             .Include(x => x.ChildCategories)
             .ToListAsync(cancellationToken);
+        if (categories is null) return Result.Failed<IEnumerable<CategoryResponseDto>>("موردی یافت نشد.");
 
         var result = categories.Select(x => new CategoryResponseDto
         {
@@ -79,29 +80,82 @@ public class BlogService : IBlogService, IScopedDependency
     #endregion
 
     #region Post
-    public async Task<Result<List<PostResponseDto>>> GetAllPost(CancellationToken cancellationToken = default)
+    public async Task<Result<IEnumerable<PostResponseDto>>> GetAllPost(CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        var posts = await _postRepository.TableNoTracking.Include(x => x.Author).ToListAsync(cancellationToken);
+        if (posts is null) return Result.Failed<IEnumerable<PostResponseDto>>("موردی یافت نشد.");
+
+        var result = posts.Select(x => new PostResponseDto
+        {
+            Title = x.Title,
+            Description = x.Description,
+            Content = x.Content,
+            //PreviewImage = new byte[0],
+            CategoryId = x.CategoryId,
+            PublishDate = x.PublishDate,
+            LikeCount = x.LikeCount,
+            AuthorName = x.Author.FullName
+        });
+
+        return Result.Success(result);
     }
 
     public async Task<Result<PostResponseDto>> GetPostById(int id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        var post = await _postRepository.GetByIdAsync(cancellationToken, id);
+        if (post is null) return Result.Failed<PostResponseDto>("موردی یافت نشد.");
+
+        var result = new PostResponseDto
+        {
+            Title = post.Title,
+            Description = post.Description,
+            Content = post.Content,
+            //PreviewImage = new byte[0],
+            CategoryId = post.CategoryId,
+            PublishDate = post.PublishDate,
+            LikeCount = post.LikeCount,
+            AuthorName = post.Author.FullName
+        };
+
+        return Result.Success(result);
     }
 
-    public async Task<Result> CreatePost(PostRequestDto dto, CancellationToken cancellationToken = default)
+    public async Task<Result> CreatePost(PostRequestDto request, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        await _postRepository.AddAsync(new Post
+        {
+            Title = request.Title,
+            Description = request.Description,
+            Content = request.Content,
+            CategoryId = request.CategoryId,
+            PreviewImageName = request.PreviewImageName,
+            ScheduledPublishDate = request.ScheduledPublishDate 
+        }, cancellationToken: cancellationToken);
+
+        return Result.Success();
+    }
+
+    public async Task<Result> UpdatePost(PostRequestDto request, CancellationToken cancellationToken = default)
+    {
+        await _postRepository.UpdateAsync(new Post
+        {
+            Id = request.Id,
+            Title = request.Title,
+            Description = request.Description,
+            Content = request.Content,
+            CategoryId = request.CategoryId,
+            PreviewImageName = request.PreviewImageName,
+            ScheduledPublishDate = request.ScheduledPublishDate
+        }, cancellationToken: cancellationToken);
+
+        return Result.Success();
     }
 
     public async Task<Result> DeletePost(int id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
-    }
+        await _postRepository.DeleteAsync(new Post { Id = id }, cancellationToken: cancellationToken);
 
-    public async Task<Result> UpdatePost(PostRequestDto dto, CancellationToken cancellationToken = default)
-    {
-        throw new NotImplementedException();
+        return Result.Success();
     }
     #endregion
 

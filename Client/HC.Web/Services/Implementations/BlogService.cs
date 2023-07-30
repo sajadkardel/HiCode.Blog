@@ -50,29 +50,50 @@ public class BlogService : IBlogService, IScopedDependency
     #endregion
 
     #region Post
-    public Task<Result<List<PostResponseDto>>> GetAllPost(CancellationToken cancellationToken = default)
+    public async Task<Result<IEnumerable<PostResponseDto>>> GetAllPost(CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        var url = RoutingConstants.ServerSide.Blog.GetAllPost;
+        var response = await _apiCaller.GetAsync<IEnumerable<PostResponseDto>>(url, cancelationToken: cancellationToken);
+        if (response.IsSucceed is false) return Result.Failed<IEnumerable<PostResponseDto>>(response.Message);
+        return response;
     }
 
-    public Task<Result<PostResponseDto>> GetPostById(int id, CancellationToken cancellationToken = default)
+    public async Task<Result<PostResponseDto>> GetPostById(int id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        var url = RoutingConstants.ServerSide.Blog.GetPostById;
+        var response = await _apiCaller.GetAsync<PostResponseDto>(url, cancelationToken: cancellationToken);
+        if (response.IsSucceed is false) return Result.Failed<PostResponseDto>(response.Message);
+        return response;
     }
 
-    public Task<Result> CreatePost(PostRequestDto dto, CancellationToken cancellationToken = default)
+    public async Task<Result> CreatePost(PostRequestDto dto, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        var url = RoutingConstants.ServerSide.Blog.CreatePost;
+        var response = await _apiCaller.PostAsync<PostResponseDto, PostRequestDto>(url, dto, cancelationToken: cancellationToken);
+        if (response.IsSucceed is false) return Result.Failed(response.Message);
+        return response;
     }
 
-    public Task<Result> UpdatePost(PostRequestDto dto, CancellationToken cancellationToken = default)
+    public async Task<Result> UpdatePost(PostRequestDto dto, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        var url = RoutingConstants.ServerSide.Blog.UpdatePost;
+        var response = await _apiCaller.PutAsync<PostResponseDto, PostRequestDto>(url, dto, cancelationToken: cancellationToken);
+        if (response.IsSucceed is false) return Result.Failed(response.Message);
+        return response;
     }
 
-    public Task<Result> DeletePost(int id, CancellationToken cancellationToken = default)
+    public async Task<Result> DeletePost(int id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        var url = $"{RoutingConstants.ServerSide.Blog.DeletePost}?id={id}";
+        var response = await _apiCaller.DeleteAsync<PostResponseDto>(url, cancelationToken: cancellationToken);
+        if (response.IsSucceed is false) return Result.Failed(response.Message);
+        return response;
     }
+    #endregion
+
+    #region Tag
+    #endregion
+
+    #region Comment
     #endregion
 }

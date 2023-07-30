@@ -6,11 +6,12 @@ namespace HC.Data.Entities.Blog;
 
 public class Post : BaseEntity
 {
-    public string Title { get; set; } = default!;
+    public string? Title { get; set; } = default!;
     public string? Description { get; set; }
     public string? PreviewImageName { get; set; }
     public string? Content { get; set; }
     public DateTime? ScheduledPublishDate { get; set; }
+    public DateTime? PublishDate { get; set; }
     public bool IsPublished { get; set; }
     public int LikeCount { get; set; }
 
@@ -18,7 +19,7 @@ public class Post : BaseEntity
     public int CategoryId { get; set; }
     public int AuthorUserId { get; set; }
     public Category Category { get; set; }
-    public Identity.User User { get; set; }
+    public Identity.User Author { get; set; }
     public ICollection<Comment> Comments { get; set; }
     public ICollection<PostTag> PostTags { get; set; }
 }
@@ -33,6 +34,6 @@ public class PostConfiguration : IEntityTypeConfiguration<Post>
         builder.Property(x => x.Description).HasMaxLength(2000);
 
         builder.HasOne(x => x.Category).WithMany(x => x.Posts).HasForeignKey(x => x.CategoryId);
-        builder.HasOne(x => x.User).WithMany(x => x.Posts).HasForeignKey(x => x.AuthorUserId);
+        builder.HasOne(x => x.Author).WithMany(x => x.Posts).HasForeignKey(x => x.AuthorUserId);
     }
 }

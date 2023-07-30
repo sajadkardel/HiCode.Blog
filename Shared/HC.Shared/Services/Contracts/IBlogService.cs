@@ -14,10 +14,10 @@ public interface IBlogService
     #endregion
 
     #region Post
-    public Task<Result<List<PostResponseDto>>> GetAllPost(CancellationToken cancellationToken = default);
+    public Task<Result<IEnumerable<PostResponseDto>>> GetAllPost(CancellationToken cancellationToken = default);
     public Task<Result<PostResponseDto>> GetPostById(int id, CancellationToken cancellationToken = default);
-    public Task<Result> CreatePost(PostRequestDto dto, CancellationToken cancellationToken = default);
-    public Task<Result> UpdatePost(PostRequestDto dto, CancellationToken cancellationToken = default);
+    public Task<Result> CreatePost(PostRequestDto request, CancellationToken cancellationToken = default);
+    public Task<Result> UpdatePost(PostRequestDto request, CancellationToken cancellationToken = default);
     public Task<Result> DeletePost(int id, CancellationToken cancellationToken = default);
     #endregion
 

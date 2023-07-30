@@ -1,7 +1,5 @@
 ﻿using HC.Shared.Constants;
-using HC.Shared.Dtos.Auth;
 using HC.Shared.Dtos.Blog;
-using HC.Shared.Dtos.User;
 using HC.Shared.Models;
 using HC.Shared.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
@@ -43,7 +41,7 @@ public class BlogController : BaseController
     #region Post
     [AllowAnonymous]
     [HttpGet(RoutingConstants.ServerSide.Blog.GetAllPost)]
-    public virtual async Task<Result<List<PostResponseDto>>> GetAllPost(CancellationToken cancellationToken = default)
+    public virtual async Task<Result<IEnumerable<PostResponseDto>>> GetAllPost(CancellationToken cancellationToken = default)
     {
         var result = await _blogService.GetAllPost(cancellationToken);
         return Result.Success(result.Data);
@@ -60,18 +58,21 @@ public class BlogController : BaseController
     [HttpPost(RoutingConstants.ServerSide.Blog.CreatePost)]
     public virtual async Task<Result> CreatePost([FromBody] PostRequestDto dto, CancellationToken cancellationToken = default)
     {
+        await _blogService.CreatePost(dto, cancellationToken);
         return Result.Success();
     }
 
     [HttpPut(RoutingConstants.ServerSide.Blog.UpdatePost)]
     public virtual async Task<Result> UpdatePost([FromBody] PostRequestDto dto, CancellationToken cancellationToken = default)
     {
+        await _blogService.UpdatePost(dto, cancellationToken);
         return Result.Success();
     }
 
     [HttpDelete(RoutingConstants.ServerSide.Blog.DeletePost)]
     public virtual async Task<Result> DeletePost([FromQuery] int id, CancellationToken cancellationToken = default)
     {
+        await _blogService.DeletePost(id, cancellationToken);
         return Result.Success();
     }
     #endregion

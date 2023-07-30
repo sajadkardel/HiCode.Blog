@@ -44,6 +44,12 @@ public static class RoutingConstants
             public const string CreateTag = BaseAddress + "createTag";
             public const string UpdateTag = BaseAddress + "updateTag";
             public const string DeleteTag = BaseAddress + "deleteTag";
+
+            public const string GetAllComment = BaseAddress + "getAllComment";
+            public const string GetCommentById = BaseAddress + "getCommentById";
+            public const string CreateComment = BaseAddress + "createComment";
+            public const string UpdateComment = BaseAddress + "updateComment";
+            public const string DeleteComment = BaseAddress + "deleteComment";
         }
     }
 
