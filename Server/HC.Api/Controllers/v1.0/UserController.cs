@@ -37,7 +37,7 @@ public class UserController : BaseController
     }
 
     [HttpPut(RoutingConstants.ServerSide.User.Update)]
-    public virtual async Task<Result> Update([FromQuery] int id, [FromBody] UserRequestDto dto, CancellationToken cancellationToken = default)
+    public virtual async Task<Result> Update([FromBody] UserRequestDto dto, CancellationToken cancellationToken = default)
     {
         return Result.Success();
     }

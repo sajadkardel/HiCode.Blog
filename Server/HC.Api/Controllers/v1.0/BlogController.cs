@@ -64,7 +64,7 @@ public class BlogController : BaseController
     }
 
     [HttpPut(RoutingConstants.ServerSide.Blog.UpdatePost)]
-    public virtual async Task<Result> UpdatePost([FromQuery] int id, [FromBody] PostRequestDto dto, CancellationToken cancellationToken = default)
+    public virtual async Task<Result> UpdatePost([FromBody] PostRequestDto dto, CancellationToken cancellationToken = default)
     {
         return Result.Success();
     }

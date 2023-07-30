@@ -7,9 +7,8 @@ namespace HC.Data.Entities.Blog;
 public class Post : BaseEntity
 {
     public string Title { get; set; } = default!;
-    public string? ShortDescription { get; set; }
+    public string? Description { get; set; }
     public string? PreviewImageName { get; set; }
-    public string? SubTitle { get; set; }
     public string? Content { get; set; }
     public DateTime? ScheduledPublishDate { get; set; }
     public bool IsPublished { get; set; }
@@ -31,8 +30,7 @@ public class PostConfiguration : IEntityTypeConfiguration<Post>
         builder.ToTable(nameof(Post), typeof(Post).GetParentFolderName());
 
         builder.Property(x => x.Title).IsRequired().HasMaxLength(100);
-        builder.Property(x => x.SubTitle).HasMaxLength(100);
-        builder.Property(x => x.ShortDescription).HasMaxLength(2000);
+        builder.Property(x => x.Description).HasMaxLength(2000);
 
         builder.HasOne(x => x.Category).WithMany(x => x.Posts).HasForeignKey(x => x.CategoryId);
         builder.HasOne(x => x.User).WithMany(x => x.Posts).HasForeignKey(x => x.AuthorUserId);

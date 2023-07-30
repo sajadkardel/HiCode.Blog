@@ -32,9 +32,9 @@ public class BlogService : IBlogService, IScopedDependency
         return response;
     }
 
-    public async Task<Result> UpdateCategory(int id, CategoryRequestDto request, CancellationToken cancellationToken = default)
+    public async Task<Result> UpdateCategory(CategoryRequestDto request, CancellationToken cancellationToken = default)
     {
-        var url = $"{RoutingConstants.ServerSide.Blog.UpdateCategory}?id={id}";
+        var url = RoutingConstants.ServerSide.Blog.UpdateCategory;
         var response = await _apiCaller.PutAsync<CategoryResponseDto, CategoryRequestDto>(url, request, cancelationToken: cancellationToken);
         if (response.IsSucceed is false) return Result.Failed(response.Message);
         return response;
@@ -65,7 +65,7 @@ public class BlogService : IBlogService, IScopedDependency
         throw new NotImplementedException();
     }
 
-    public Task<Result> UpdatePost(int id, PostRequestDto dto, CancellationToken cancellationToken = default)
+    public Task<Result> UpdatePost(PostRequestDto dto, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }

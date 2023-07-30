@@ -58,11 +58,11 @@ public class BlogService : IBlogService, IScopedDependency
         return Result.Success();
     }
 
-    public async Task<Result> UpdateCategory(int id, CategoryRequestDto request, CancellationToken cancellationToken = default)
+    public async Task<Result> UpdateCategory(CategoryRequestDto request, CancellationToken cancellationToken = default)
     {
         await _categoryRepository.UpdateAsync(new Category
         {
-            Id = id,
+            Id = request.Id,
             Name = request.Name,
             IconName = request.IconName
         }, cancellationToken: cancellationToken);
@@ -79,16 +79,6 @@ public class BlogService : IBlogService, IScopedDependency
     #endregion
 
     #region Post
-    public async Task<Result> CreatePost(PostRequestDto dto, CancellationToken cancellationToken = default)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<Result> DeletePost(int id, CancellationToken cancellationToken = default)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<Result<List<PostResponseDto>>> GetAllPost(CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
@@ -99,7 +89,17 @@ public class BlogService : IBlogService, IScopedDependency
         throw new NotImplementedException();
     }
 
-    public async Task<Result> UpdatePost(int id, PostRequestDto dto, CancellationToken cancellationToken = default)
+    public async Task<Result> CreatePost(PostRequestDto dto, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<Result> DeletePost(int id, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<Result> UpdatePost(PostRequestDto dto, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }
