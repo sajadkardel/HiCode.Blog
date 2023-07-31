@@ -33,28 +33,33 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, int>
         builder.AddRestrictDeleteBehaviorConvention();
         builder.AddSequentialGuidForIdConvention();
         builder.AddPluralizingTableNameConvention();
+        //builder.ApplySoftQueryFilter("IsDeleted", false);
     }
 
     public override int SaveChanges()
     {
+        _setDefaults();
         _cleanString();
         return base.SaveChanges();
     }
 
     public override int SaveChanges(bool acceptAllChangesOnSuccess)
     {
+        _setDefaults();
         _cleanString();
         return base.SaveChanges(acceptAllChangesOnSuccess);
     }
 
     public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
     {
+        _setDefaults();
         _cleanString();
         return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
     }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
+        _setDefaults();
         _cleanString();
         return base.SaveChangesAsync(cancellationToken);
     }
@@ -65,25 +70,55 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, int>
 
         foreach (var item in changedEntities)
         {
-            if (item.Entity == null)
-                continue;
+            if (item.Entity == null) continue;
 
-            var properties = item.Entity.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
+            var properties = item.Entity.GetType()
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
                 .Where(p => p.CanRead && p.CanWrite && p.PropertyType == typeof(string));
 
             foreach (var property in properties)
             {
                 var propName = property.Name;
-                var val = (string)property.GetValue(item.Entity, null);
+                string? val = property.GetValue(item.Entity, null)?.ToString();
 
-                if (val.HasValue())
+                if (val is not null && val.HasValue())
                 {
                     var newVal = val.Fa2En().FixPersianChars();
-                    if (newVal == val)
-                        continue;
+                    if (newVal == val) continue;
                     property.SetValue(item.Entity, newVal, null);
                 }
             }
         }
+    }
+
+    private void _setDefaults()
+    {
+        //var changedEntities = ChangeTracker.Entries().Where(x => x.State == EntityState.Added || x.State == EntityState.Modified || x.State == EntityState.Deleted);
+
+        //foreach (var item in changedEntities)
+        //{
+        //    if (item.Entity is BaseEntity entity)
+        //    {
+        //        switch (item.State)
+        //        {
+        //            case EntityState.Added:
+        //                entity.CreateDate = DateTime.Now;
+        //                entity.IsDeleted = false;
+        //                break;
+
+        //            case EntityState.Modified:
+        //                entity.LastModifyDate = DateTime.Now;
+        //                break;
+
+        //            case EntityState.Deleted:
+        //                item.State = EntityState.Modified;
+        //                entity.DeleteDate = DateTime.Now;
+        //                entity.IsDeleted = true;
+        //                break;
+        //        }
+
+        //        entity.LastChangerUserId = 1;
+        //    }
+        //}
     }
 }

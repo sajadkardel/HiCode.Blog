@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Pluralize.NET;
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace HC.Common.Extensions;
@@ -71,7 +72,7 @@ public static class ModelBuilderExtensions
         IEnumerable<IMutableForeignKey> cascadeFKs = modelBuilder.Model.GetEntityTypes()
             .SelectMany(t => t.GetForeignKeys())
             .Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);
-        foreach (IMutableForeignKey fk in cascadeFKs)
+        foreach (IMutableForeignKey fk in cascadeFKs) 
             fk.DeleteBehavior = DeleteBehavior.Restrict;
     }
 
@@ -87,5 +88,21 @@ public static class ModelBuilderExtensions
             .Where(c => c.IsClass && c.IsAbstract is false && c.IsPublic && typeof(BaseType).IsAssignableFrom(c));
 
         foreach (Type type in types) modelBuilder.Entity(type);
+    }
+
+    public static void ApplySoftQueryFilter<T>(this ModelBuilder modelBuilder, string propertyName, T value)
+    {
+        foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+        {
+            var foundProperty = entityType.FindProperty(propertyName);
+
+            if (foundProperty != null && foundProperty.ClrType == typeof(T))
+            {
+                var newParam = Expression.Parameter(entityType.ClrType);
+
+                var filter = Expression.Lambda(Expression.Equal(Expression.Property(newParam, propertyName),Expression.Constant(value)), newParam);
+                modelBuilder.Entity(entityType.ClrType).HasQueryFilter(filter);
+            }
+        }
     }
 }

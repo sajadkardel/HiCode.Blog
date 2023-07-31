@@ -27,7 +27,7 @@ public class BlogService : IBlogService, IScopedDependency
     public async Task<Result> CreateCategory(CategoryRequestDto request, CancellationToken cancellationToken = default)
     {
         var url = RoutingConstants.ServerSide.Blog.CreateCategory;
-        var response = await _apiCaller.PostAsync<CategoryResponseDto, CategoryRequestDto>(url, request, cancelationToken: cancellationToken);
+        var response = await _apiCaller.PostAsync(url, request, cancelationToken: cancellationToken);
         if (response.IsSucceed is false) return Result.Failed(response.Message);
         return response;
     }
@@ -35,7 +35,7 @@ public class BlogService : IBlogService, IScopedDependency
     public async Task<Result> UpdateCategory(CategoryRequestDto request, CancellationToken cancellationToken = default)
     {
         var url = RoutingConstants.ServerSide.Blog.UpdateCategory;
-        var response = await _apiCaller.PutAsync<CategoryResponseDto, CategoryRequestDto>(url, request, cancelationToken: cancellationToken);
+        var response = await _apiCaller.PutAsync(url, request, cancelationToken: cancellationToken);
         if (response.IsSucceed is false) return Result.Failed(response.Message);
         return response;
     }
@@ -43,7 +43,7 @@ public class BlogService : IBlogService, IScopedDependency
     public async Task<Result> DeleteCategory(int id, CancellationToken cancellationToken = default)
     {
         var url = $"{RoutingConstants.ServerSide.Blog.DeleteCategory}?id={id}";
-        var response = await _apiCaller.DeleteAsync<CategoryResponseDto>(url, cancelationToken: cancellationToken);
+        var response = await _apiCaller.DeleteAsync(url, cancelationToken: cancellationToken);
         if (response.IsSucceed is false) return Result.Failed(response.Message);
         return response;
     }
@@ -69,7 +69,7 @@ public class BlogService : IBlogService, IScopedDependency
     public async Task<Result> CreatePost(PostRequestDto dto, CancellationToken cancellationToken = default)
     {
         var url = RoutingConstants.ServerSide.Blog.CreatePost;
-        var response = await _apiCaller.PostAsync<PostResponseDto, PostRequestDto>(url, dto, cancelationToken: cancellationToken);
+        var response = await _apiCaller.PostAsync(url, dto, cancelationToken: cancellationToken);
         if (response.IsSucceed is false) return Result.Failed(response.Message);
         return response;
     }
@@ -77,7 +77,7 @@ public class BlogService : IBlogService, IScopedDependency
     public async Task<Result> UpdatePost(PostRequestDto dto, CancellationToken cancellationToken = default)
     {
         var url = RoutingConstants.ServerSide.Blog.UpdatePost;
-        var response = await _apiCaller.PutAsync<PostResponseDto, PostRequestDto>(url, dto, cancelationToken: cancellationToken);
+        var response = await _apiCaller.PutAsync(url, dto, cancelationToken: cancellationToken);
         if (response.IsSucceed is false) return Result.Failed(response.Message);
         return response;
     }
@@ -85,7 +85,7 @@ public class BlogService : IBlogService, IScopedDependency
     public async Task<Result> DeletePost(int id, CancellationToken cancellationToken = default)
     {
         var url = $"{RoutingConstants.ServerSide.Blog.DeletePost}?id={id}";
-        var response = await _apiCaller.DeleteAsync<PostResponseDto>(url, cancelationToken: cancellationToken);
+        var response = await _apiCaller.DeleteAsync(url, cancelationToken: cancellationToken);
         if (response.IsSucceed is false) return Result.Failed(response.Message);
         return response;
     }
