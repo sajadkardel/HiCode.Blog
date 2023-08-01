@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace HC.Api.Controllers;
 
 [ApiController]
-[Authorize]
+//[Authorize]
+[AllowAnonymous]
 [Route("api/v{version:apiVersion}/")]
 public class BaseController : ControllerBase
 {

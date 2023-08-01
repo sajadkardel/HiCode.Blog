@@ -10,8 +10,8 @@ public class PostTag : BaseEntity
     public int TagId { get; set; }
 
     // Relations
-    public Post Post { get; set; }
-    public Tag Tag { get; set; }
+    public Post Post { get; set; } = default!;
+    public Tag Tag { get; set; } = default!;
 }
 
 public class PostTagConfiguration : IEntityTypeConfiguration<PostTag>

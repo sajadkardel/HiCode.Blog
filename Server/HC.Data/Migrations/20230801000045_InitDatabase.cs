@@ -26,11 +26,11 @@ namespace HC.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     IconName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    ParentCategoryId = table.Column<int>(type: "int", nullable: false),
+                    ParentCategoryId = table.Column<int>(type: "int", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastChangerUserId = table.Column<int>(type: "int", nullable: true),
+                    LastChangerUserId = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -41,8 +41,7 @@ namespace HC.Data.Migrations
                         column: x => x.ParentCategoryId,
                         principalSchema: "Blog",
                         principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -73,7 +72,7 @@ namespace HC.Data.Migrations
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastChangerUserId = table.Column<int>(type: "int", nullable: true),
+                    LastChangerUserId = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -91,9 +90,9 @@ namespace HC.Data.Migrations
                     FullName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Age = table.Column<int>(type: "int", nullable: true),
                     Gender = table.Column<int>(type: "int", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
                     LastLoginDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -150,13 +149,13 @@ namespace HC.Data.Migrations
                     ScheduledPublishDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     PublishDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsPublished = table.Column<bool>(type: "bit", nullable: false),
-                    LikeCount = table.Column<int>(type: "int", nullable: false),
+                    LikeCount = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     AuthorUserId = table.Column<int>(type: "int", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastChangerUserId = table.Column<int>(type: "int", nullable: true),
+                    LastChangerUserId = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -281,13 +280,13 @@ namespace HC.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Content = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: false),
                     LikeCount = table.Column<int>(type: "int", nullable: false),
-                    ParentCommentId = table.Column<int>(type: "int", nullable: false),
+                    ParentCommentId = table.Column<int>(type: "int", nullable: true),
                     PostId = table.Column<int>(type: "int", nullable: false),
                     AuthorUserId = table.Column<int>(type: "int", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastChangerUserId = table.Column<int>(type: "int", nullable: true),
+                    LastChangerUserId = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -298,8 +297,7 @@ namespace HC.Data.Migrations
                         column: x => x.ParentCommentId,
                         principalSchema: "Blog",
                         principalTable: "Comments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Comments_Posts_PostId",
                         column: x => x.PostId,
@@ -328,7 +326,7 @@ namespace HC.Data.Migrations
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastChangerUserId = table.Column<int>(type: "int", nullable: true),
+                    LastChangerUserId = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>

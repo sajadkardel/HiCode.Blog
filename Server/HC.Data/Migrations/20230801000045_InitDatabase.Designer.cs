@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HC.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230730235347_InitDatabase")]
+    [Migration("20230801000045_InitDatabase")]
     partial class InitDatabase
     {
         /// <inheritdoc />
@@ -46,7 +46,7 @@ namespace HC.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("LastChangerUserId")
+                    b.Property<int>("LastChangerUserId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("LastModifyDate")
@@ -58,7 +58,6 @@ namespace HC.Data.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<int?>("ParentCategoryId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -93,7 +92,7 @@ namespace HC.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("LastChangerUserId")
+                    b.Property<int>("LastChangerUserId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("LastModifyDate")
@@ -103,7 +102,6 @@ namespace HC.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("ParentCommentId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int>("PostId")
@@ -153,14 +151,16 @@ namespace HC.Data.Migrations
                     b.Property<bool>("IsPublished")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("LastChangerUserId")
+                    b.Property<int>("LastChangerUserId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("LastModifyDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("LikeCount")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<string>("PreviewImageName")
                         .HasColumnType("nvarchar(max)");
@@ -202,7 +202,7 @@ namespace HC.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("LastChangerUserId")
+                    b.Property<int>("LastChangerUserId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("LastModifyDate")
@@ -240,7 +240,7 @@ namespace HC.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("LastChangerUserId")
+                    b.Property<int>("LastChangerUserId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("LastModifyDate")
@@ -326,7 +326,9 @@ namespace HC.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
 
                     b.Property<DateTimeOffset?>("LastLoginDate")
                         .HasColumnType("datetimeoffset");
@@ -361,9 +363,8 @@ namespace HC.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
@@ -485,9 +486,7 @@ namespace HC.Data.Migrations
                 {
                     b.HasOne("HC.Data.Entities.Blog.Category", "ParentCategory")
                         .WithMany("ChildCategories")
-                        .HasForeignKey("ParentCategoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("ParentCategoryId");
 
                     b.Navigation("ParentCategory");
                 });
@@ -502,9 +501,7 @@ namespace HC.Data.Migrations
 
                     b.HasOne("HC.Data.Entities.Blog.Comment", "ParentComment")
                         .WithMany("ChildComments")
-                        .HasForeignKey("ParentCommentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("ParentCommentId");
 
                     b.HasOne("HC.Data.Entities.Blog.Post", "Post")
                         .WithMany("Comments")
@@ -521,7 +518,7 @@ namespace HC.Data.Migrations
 
             modelBuilder.Entity("HC.Data.Entities.Blog.Post", b =>
                 {
-                    b.HasOne("HC.Data.Entities.Identity.User", "Author")
+                    b.HasOne("HC.Data.Entities.Identity.User", "AuthorUser")
                         .WithMany("Posts")
                         .HasForeignKey("AuthorUserId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -533,7 +530,7 @@ namespace HC.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Author");
+                    b.Navigation("AuthorUser");
 
                     b.Navigation("Category");
                 });

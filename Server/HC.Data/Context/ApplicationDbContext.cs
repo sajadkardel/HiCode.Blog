@@ -33,7 +33,7 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, int>
         builder.AddRestrictDeleteBehaviorConvention();
         builder.AddSequentialGuidForIdConvention();
         builder.AddPluralizingTableNameConvention();
-        //builder.ApplySoftQueryFilter("IsDeleted", false);
+        builder.ApplySoftQueryFilter("IsDeleted", false);
     }
 
     public override int SaveChanges()
@@ -93,32 +93,32 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, int>
 
     private void _setDefaults()
     {
-        //var changedEntities = ChangeTracker.Entries().Where(x => x.State == EntityState.Added || x.State == EntityState.Modified || x.State == EntityState.Deleted);
+        var changedEntities = ChangeTracker.Entries().Where(x => x.State == EntityState.Added || x.State == EntityState.Modified || x.State == EntityState.Deleted);
 
-        //foreach (var item in changedEntities)
-        //{
-        //    if (item.Entity is BaseEntity entity)
-        //    {
-        //        switch (item.State)
-        //        {
-        //            case EntityState.Added:
-        //                entity.CreateDate = DateTime.Now;
-        //                entity.IsDeleted = false;
-        //                break;
+        foreach (var item in changedEntities)
+        {
+            if (item.Entity is BaseEntity entity)
+            {
+                switch (item.State)
+                {
+                    case EntityState.Added:
+                        entity.CreateDate = DateTime.Now;
+                        entity.IsDeleted = false;
+                        break;
 
-        //            case EntityState.Modified:
-        //                entity.LastModifyDate = DateTime.Now;
-        //                break;
+                    case EntityState.Modified:
+                        entity.LastModifyDate = DateTime.Now;
+                        break;
 
-        //            case EntityState.Deleted:
-        //                item.State = EntityState.Modified;
-        //                entity.DeleteDate = DateTime.Now;
-        //                entity.IsDeleted = true;
-        //                break;
-        //        }
+                    case EntityState.Deleted:
+                        item.State = EntityState.Modified;
+                        entity.DeleteDate = DateTime.Now;
+                        entity.IsDeleted = true;
+                        break;
+                }
 
-        //        entity.LastChangerUserId = 1;
-        //    }
-        //}
+                entity.LastChangerUserId = 1;
+            }
+        }
     }
 }

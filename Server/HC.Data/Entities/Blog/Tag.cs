@@ -9,7 +9,7 @@ public class Tag : BaseEntity
     public string Name { get; set; } = default!;
 
     // Relations
-    public ICollection<PostTag> PostTags { get; set; }
+    public ICollection<PostTag>? PostTags { get; set; }
 }
 
 public class TagConfiguration : IEntityTypeConfiguration<Tag>

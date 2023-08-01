@@ -82,7 +82,7 @@ public class BlogService : IBlogService, IScopedDependency
     #region Post
     public async Task<Result<IEnumerable<PostResponseDto>>> GetAllPost(CancellationToken cancellationToken = default)
     {
-        var posts = await _postRepository.TableNoTracking.Include(x => x.Author).ToListAsync(cancellationToken);
+        var posts = await _postRepository.TableNoTracking.Include(x => x.AuthorUser).ToListAsync(cancellationToken);
         if (posts is null) return Result.Failed<IEnumerable<PostResponseDto>>("موردی یافت نشد.");
 
         var result = posts.Select(x => new PostResponseDto
@@ -94,7 +94,7 @@ public class BlogService : IBlogService, IScopedDependency
             CategoryId = x.CategoryId,
             PublishDate = x.PublishDate,
             LikeCount = x.LikeCount,
-            AuthorName = x.Author.FullName
+            AuthorName = x.AuthorUser.FullName
         });
 
         return Result.Success(result);
@@ -114,7 +114,7 @@ public class BlogService : IBlogService, IScopedDependency
             CategoryId = post.CategoryId,
             PublishDate = post.PublishDate,
             LikeCount = post.LikeCount,
-            AuthorName = post.Author.FullName
+            AuthorName = post.AuthorUser.FullName
         };
 
         return Result.Success(result);
@@ -129,7 +129,7 @@ public class BlogService : IBlogService, IScopedDependency
             Content = request.Content,
             CategoryId = request.CategoryId,
             PreviewImageName = request.PreviewImageName,
-            ScheduledPublishDate = request.ScheduledPublishDate 
+            ScheduledPublishDate = request.ScheduledPublishDate
         }, cancellationToken: cancellationToken);
 
         return Result.Success();
