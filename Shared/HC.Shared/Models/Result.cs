@@ -6,13 +6,13 @@ namespace HC.Shared.Models;
 
 public class Result
 {
-    public bool IsSucceed { get; set; }
+    public bool Succeeded { get; set; }
     public ResultStatusCode StatusCode { get; set; }
     public string Message { get; set; }
 
-    public Result(bool isSucceed, ResultStatusCode statusCode = ResultStatusCode.Continue, string message = "")
+    public Result(bool succeeded, ResultStatusCode statusCode = ResultStatusCode.Continue, string message = "")
     {
-        IsSucceed = isSucceed;
+        Succeeded = succeeded;
         StatusCode = statusCode;
         Message = message;
     }
@@ -121,13 +121,13 @@ public class Result
 
 public class Result<TData> : Result
 {
-    public Result(bool isSucceed, ResultStatusCode statusCode = ResultStatusCode.Continue, string message = "")
-        : base(isSucceed, statusCode, message)
+    public Result(bool succeeded, ResultStatusCode statusCode = ResultStatusCode.Continue, string message = "")
+        : base(succeeded, statusCode, message)
     {
     }
 
-    public Result(TData data, bool isSucceed, ResultStatusCode statusCode, string message = "") 
-        : base(isSucceed, statusCode, message)
+    public Result(TData data, bool succeeded, ResultStatusCode statusCode, string message = "") 
+        : base(succeeded, statusCode, message)
     {
         Data = data;
     }

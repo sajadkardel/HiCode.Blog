@@ -43,7 +43,7 @@ public class AuthService : IAuthService, IScopedDependency
         if (isPasswordValid is false) return Result.Failed<SignInResponseDto>("نام کاربری یا رمز عبور اشتباه است");
 
         var accessToken = await GenerateTokenAsync(user);
-        if (accessToken.IsSucceed is false) return Result.Failed<SignInResponseDto>(accessToken.Message);
+        if (accessToken.Succeeded is false) return Result.Failed<SignInResponseDto>(accessToken.Message);
 
         return Result.Success(new SignInResponseDto
         {

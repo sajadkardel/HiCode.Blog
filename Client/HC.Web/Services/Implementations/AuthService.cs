@@ -23,14 +23,14 @@ public class AuthService : IAuthService, IScopedDependency
     public async Task<Result<SignUpResponseDto>> SignUp(SignUpRequestDto request, CancellationToken cancellationToken = default)
     {
         var response = await _apiCaller.PostAsync<SignUpResponseDto, SignUpRequestDto>(RoutingConstants.ServerSide.Auth.SignUp, request, cancelationToken: cancellationToken);
-        if (response.IsSucceed is false) return Result.Failed<SignUpResponseDto>(response.Message);
+        if (response.Succeeded is false) return Result.Failed<SignUpResponseDto>(response.Message);
         return response;
     }
 
     public async Task<Result<SignInResponseDto>> SignIn(SignInRequestDto request, CancellationToken cancellationToken = default)
     {
         var response = await _apiCaller.PostAsync<SignInResponseDto, SignInRequestDto>(RoutingConstants.ServerSide.Auth.SignIn, request, cancelationToken: cancellationToken);
-        if (response.IsSucceed is false) return Result.Failed<SignInResponseDto>(response.Message);
+        if (response.Succeeded is false) return Result.Failed<SignInResponseDto>(response.Message);
 
         JwtSecurityTokenHandler tokenHandler = new();
 

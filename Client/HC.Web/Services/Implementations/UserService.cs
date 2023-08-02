@@ -19,14 +19,14 @@ public class UserService : IUserService, IScopedDependency
     public async Task<Result<List<UserResponseDto>>> GetAll(CancellationToken cancellationToken = default)
     {
         var response = await _apiCaller.GetAsync<List<UserResponseDto>>(RoutingConstants.ServerSide.User.GetAll, cancelationToken: cancellationToken);
-        if (response.IsSucceed is false) return Result.Failed<List<UserResponseDto>>(response.Message);
+        if (response.Succeeded is false) return Result.Failed<List<UserResponseDto>>(response.Message);
         return response;
     }
 
     public async Task<Result<UserResponseDto>> GetById(int id, CancellationToken cancellationToken = default)
     {
         var response = await _apiCaller.GetAsync<UserResponseDto>(RoutingConstants.ServerSide.User.GetById);
-        if (response.IsSucceed is false) return Result.Failed<UserResponseDto>(response.Message);
+        if (response.Succeeded is false) return Result.Failed<UserResponseDto>(response.Message);
         return response;
     }
 }

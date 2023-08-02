@@ -17,7 +17,7 @@ public class AppHttpClientHandler : HttpClientHandler
         if (request.Headers.Authorization is null)
         {
             var access_token = await _storageService.GetFromCookieAsync("access_token", cancellationToken);
-            if (access_token.IsSucceed && access_token.Data is not null)
+            if (access_token.Succeeded && access_token.Data is not null)
             {
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", access_token.Data);
             }

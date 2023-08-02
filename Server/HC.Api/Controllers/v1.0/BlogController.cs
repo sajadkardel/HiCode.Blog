@@ -23,7 +23,7 @@ public class BlogController : BaseController
     public virtual async Task<Result<IEnumerable<CategoryResponseDto>>> GetAllCategory(CancellationToken cancellationToken = default)
     {
         var result = await _blogService.GetAllCategory(cancellationToken);
-        if (result.IsSucceed is false) return Result.Failed<IEnumerable<CategoryResponseDto>>(result.Message);
+        if (result.Succeeded is false) return Result.Failed<IEnumerable<CategoryResponseDto>>(result.Message);
 
         return Result.Success(result.Data);
     }
@@ -32,7 +32,7 @@ public class BlogController : BaseController
     public virtual async Task<Result> CreateCategory(CategoryRequestDto request, CancellationToken cancellationToken = default)
     {
         var result = await _blogService.CreateCategory(request, cancellationToken);
-        if (result.IsSucceed is false) return Result.Failed(result.Message);
+        if (result.Succeeded is false) return Result.Failed(result.Message);
 
         return Result.Success();
     }

@@ -20,7 +20,7 @@ public class BlogService : IBlogService, IScopedDependency
     {
         var url = RoutingConstants.ServerSide.Blog.GetAllCategory;
         var response = await _apiCaller.GetAsync<IEnumerable<CategoryResponseDto>>(url, cancelationToken: cancellationToken);
-        if (response.IsSucceed is false) return Result.Failed<IEnumerable<CategoryResponseDto>>(response.Message);
+        if (response.Succeeded is false) return Result.Failed<IEnumerable<CategoryResponseDto>>(response.Message);
         return response;
     }
 
@@ -28,7 +28,7 @@ public class BlogService : IBlogService, IScopedDependency
     {
         var url = RoutingConstants.ServerSide.Blog.CreateCategory;
         var response = await _apiCaller.PostAsync(url, request, cancelationToken: cancellationToken);
-        if (response.IsSucceed is false) return Result.Failed(response.Message);
+        if (response.Succeeded is false) return Result.Failed(response.Message);
         return response;
     }
 
@@ -36,7 +36,7 @@ public class BlogService : IBlogService, IScopedDependency
     {
         var url = RoutingConstants.ServerSide.Blog.UpdateCategory;
         var response = await _apiCaller.PutAsync(url, request, cancelationToken: cancellationToken);
-        if (response.IsSucceed is false) return Result.Failed(response.Message);
+        if (response.Succeeded is false) return Result.Failed(response.Message);
         return response;
     }
 
@@ -44,7 +44,7 @@ public class BlogService : IBlogService, IScopedDependency
     {
         var url = $"{RoutingConstants.ServerSide.Blog.DeleteCategory}?id={id}";
         var response = await _apiCaller.DeleteAsync(url, cancelationToken: cancellationToken);
-        if (response.IsSucceed is false) return Result.Failed(response.Message);
+        if (response.Succeeded is false) return Result.Failed(response.Message);
         return response;
     }
     #endregion
@@ -54,7 +54,7 @@ public class BlogService : IBlogService, IScopedDependency
     {
         var url = RoutingConstants.ServerSide.Blog.GetAllPost;
         var response = await _apiCaller.GetAsync<IEnumerable<PostResponseDto>>(url, cancelationToken: cancellationToken);
-        if (response.IsSucceed is false) return Result.Failed<IEnumerable<PostResponseDto>>(response.Message);
+        if (response.Succeeded is false) return Result.Failed<IEnumerable<PostResponseDto>>(response.Message);
         return response;
     }
 
@@ -62,7 +62,7 @@ public class BlogService : IBlogService, IScopedDependency
     {
         var url = RoutingConstants.ServerSide.Blog.GetPostById;
         var response = await _apiCaller.GetAsync<PostResponseDto>(url, cancelationToken: cancellationToken);
-        if (response.IsSucceed is false) return Result.Failed<PostResponseDto>(response.Message);
+        if (response.Succeeded is false) return Result.Failed<PostResponseDto>(response.Message);
         return response;
     }
 
@@ -70,7 +70,7 @@ public class BlogService : IBlogService, IScopedDependency
     {
         var url = RoutingConstants.ServerSide.Blog.CreatePost;
         var response = await _apiCaller.PostAsync(url, dto, cancelationToken: cancellationToken);
-        if (response.IsSucceed is false) return Result.Failed(response.Message);
+        if (response.Succeeded is false) return Result.Failed(response.Message);
         return response;
     }
 
@@ -78,7 +78,7 @@ public class BlogService : IBlogService, IScopedDependency
     {
         var url = RoutingConstants.ServerSide.Blog.UpdatePost;
         var response = await _apiCaller.PutAsync(url, dto, cancelationToken: cancellationToken);
-        if (response.IsSucceed is false) return Result.Failed(response.Message);
+        if (response.Succeeded is false) return Result.Failed(response.Message);
         return response;
     }
 
@@ -86,7 +86,7 @@ public class BlogService : IBlogService, IScopedDependency
     {
         var url = $"{RoutingConstants.ServerSide.Blog.DeletePost}?id={id}";
         var response = await _apiCaller.DeleteAsync(url, cancelationToken: cancellationToken);
-        if (response.IsSucceed is false) return Result.Failed(response.Message);
+        if (response.Succeeded is false) return Result.Failed(response.Message);
         return response;
     }
     #endregion

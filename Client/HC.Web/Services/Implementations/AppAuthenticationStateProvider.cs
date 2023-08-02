@@ -18,7 +18,7 @@ public class AppAuthenticationStateProvider : AuthenticationStateProvider
     {
         var token = await _localStorageService.GetFromCookieAsync("access_token");
 
-        if (token.IsSucceed is false) return NotSignedInUser();
+        if (token.Succeeded is false) return NotSignedInUser();
 
         if (string.IsNullOrWhiteSpace(token.Data)) return NotSignedInUser();
 
