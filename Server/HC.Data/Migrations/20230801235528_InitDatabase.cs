@@ -87,7 +87,7 @@ namespace HC.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FullName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Age = table.Column<int>(type: "int", nullable: true),
                     Gender = table.Column<int>(type: "int", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
@@ -147,7 +147,6 @@ namespace HC.Data.Migrations
                     PreviewImageName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ScheduledPublishDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    PublishDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsPublished = table.Column<bool>(type: "bit", nullable: false),
                     LikeCount = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     CategoryId = table.Column<int>(type: "int", nullable: false),

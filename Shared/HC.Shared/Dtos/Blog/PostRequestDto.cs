@@ -10,4 +10,5 @@ public class PostRequestDto
     public string? Content { get; set; }
     public DateTime? ScheduledPublishDate { get; set; }
     public int CategoryId { get; set; }
+    public int AuthorUserId { get; set; }
 }

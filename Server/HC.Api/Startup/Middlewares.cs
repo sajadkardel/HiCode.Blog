@@ -7,6 +7,8 @@ public class Middlewares
 {
     public static void Use(IApplicationBuilder app, IHostEnvironment env, IConfiguration configuration)
     {
+        app.InitializeDatabase();
+
         app.UseCustomExceptionHandler();
 
         // Configure the HTTP request pipeline.

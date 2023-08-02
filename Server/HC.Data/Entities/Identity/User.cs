@@ -27,7 +27,6 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.ToTable(nameof(User), typeof(User).GetParentFolderName());
 
         builder.Property(p => p.IsActive).HasDefaultValue(true);
-        builder.Property(p => p.FullName).IsRequired().HasMaxLength(50);
-        builder.Property(p => p.FullName).IsRequired().HasMaxLength(50);
+        builder.Property(p => p.FullName).HasMaxLength(50);
     }
 }

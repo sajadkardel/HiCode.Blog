@@ -162,9 +162,6 @@ namespace HC.Data.Migrations
                     b.Property<string>("PreviewImageName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("PublishDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime?>("ScheduledPublishDate")
                         .HasColumnType("datetime2");
 
@@ -315,7 +312,6 @@ namespace HC.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FullName")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 

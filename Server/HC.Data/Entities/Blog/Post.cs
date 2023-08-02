@@ -11,7 +11,6 @@ public class Post : BaseEntity
     public string? PreviewImageName { get; set; }
     public string? Content { get; set; }
     public DateTime? ScheduledPublishDate { get; set; }
-    public DateTime? PublishDate { get; set; }
     public bool IsPublished { get; set; }
     public int LikeCount { get; set; }
     public int CategoryId { get; set; }

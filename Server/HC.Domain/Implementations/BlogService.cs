@@ -87,12 +87,12 @@ public class BlogService : IBlogService, IScopedDependency
 
         var result = posts.Select(x => new PostResponseDto
         {
+            Id = x.Id,
             Title = x.Title,
             Description = x.Description,
             Content = x.Content,
             //PreviewImage = new byte[0],
             CategoryId = x.CategoryId,
-            PublishDate = x.PublishDate,
             LikeCount = x.LikeCount,
             AuthorName = x.AuthorUser.FullName
         });
@@ -107,12 +107,12 @@ public class BlogService : IBlogService, IScopedDependency
 
         var result = new PostResponseDto
         {
+            Id = post.Id,
             Title = post.Title,
             Description = post.Description,
             Content = post.Content,
             //PreviewImage = new byte[0],
             CategoryId = post.CategoryId,
-            PublishDate = post.PublishDate,
             LikeCount = post.LikeCount,
             AuthorName = post.AuthorUser.FullName
         };
@@ -128,6 +128,7 @@ public class BlogService : IBlogService, IScopedDependency
             Description = request.Description,
             Content = request.Content,
             CategoryId = request.CategoryId,
+            AuthorUserId = request.AuthorUserId,
             PreviewImageName = request.PreviewImageName,
             ScheduledPublishDate = request.ScheduledPublishDate
         }, cancellationToken: cancellationToken);
