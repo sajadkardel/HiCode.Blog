@@ -1,19 +1,11 @@
-﻿@import '../Styles/abstracts/_colors.scss';
+﻿@import '../Styles/abstracts/_functions.scss';
 
 .main-body {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: column nowrap;
     width: 100%;
     min-height: 100vh;
     position: relative;
-    margin-top: rem(80px);
+    padding-top: rem(80px);
     box-sizing: border-box;
-
-    .main-nav {
-        width: 300px;
-    }
-
-    .main-content {
-        width: 100%;
-    }
 }

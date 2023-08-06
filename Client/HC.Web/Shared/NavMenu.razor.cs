@@ -8,6 +8,8 @@ public partial class NavMenu : AppBaseComponent
 {
     [Inject] protected IBlogService _blogService { get; set; } = default!;
 
+    private bool isExpandedMenu = false;
+
     private string? _error;
     private IEnumerable<CategoryResponseDto>? _categories;
 

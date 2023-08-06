@@ -1,2 +1,16 @@
-﻿.nav-container {
+﻿@import '../Styles/abstracts/_colors.scss';
+
+.nav-container {
+    display: none;
+    flex-flow: column nowrap;
+    position: fixed;
+    width: 300px;
+    min-height: 100%;
+    z-index: 1;
+    background-color: $FooterColor;
+    transition: width 0.5s;
+
+    &.avtive {
+        display: flex;
+    }
 }

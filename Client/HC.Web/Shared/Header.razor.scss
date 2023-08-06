@@ -19,6 +19,16 @@
     -webkit-backdrop-filter: blur(8.1px);
     border-bottom: 1px solid $BorderColor;
 
+    .nav-expander {
+        display: none;
+    }
+    
+    .header-menu {
+        display: flex;
+        flex-flow: row nowrap;
+        gap: 20px;
+    }
+
     .logo {
         border-radius: 10px;
         background-image: url('../wwwroot/images/icons/icon-512.svg');

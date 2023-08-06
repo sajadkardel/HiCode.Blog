@@ -1,38 +1,23 @@
 ﻿@inherits AppBaseComponent
 
-<div class="nav-container">
-
+<div class="nav-container @(isExpandedMenu ? "avtive" : "")">
+    <FluentNavMenu Class="items">
+        <FluentNavMenuGroup Text="مطالب">
+            <FluentNavMenuGroup Text="مفاهیم">
+                <FluentNavMenuLink Text="2-1"></FluentNavMenuLink>
+                <FluentNavMenuLink Text="2-2"></FluentNavMenuLink>
+                <FluentNavMenuLink Text="2-3"></FluentNavMenuLink>
+            </FluentNavMenuGroup>
+            <FluentNavMenuGroup Text="C# & .Net">
+                <FluentNavMenuLink Text="2-1"></FluentNavMenuLink>
+                <FluentNavMenuLink Text="2-2"></FluentNavMenuLink>
+                <FluentNavMenuLink Text="2-3"></FluentNavMenuLink>
+            </FluentNavMenuGroup>
+        </FluentNavMenuGroup>
+        <FluentNavMenuGroup Text="ابزارها">
+            <FluentNavMenuLink Text="2-1"></FluentNavMenuLink>
+            <FluentNavMenuLink Text="2-2"></FluentNavMenuLink>
+            <FluentNavMenuLink Text="2-3"></FluentNavMenuLink>
+        </FluentNavMenuGroup>
+    </FluentNavMenu>
 </div>
-<FluentTreeView Style="background-color: teal;" @bind-CurrentSelected=currentSelected OnExpandedChange="HandleOnExpandedChanged">
-    <FluentTreeItem Text="Root item 1">
-        <FluentTreeItem Text="Flowers">
-            <FluentTreeItem Disabled="true" Text="Daisy" />
-            <FluentTreeItem Text="Sunflower" />
-            <FluentTreeItem Text="Rose" />
-        </FluentTreeItem>
-        <FluentTreeItem Text="Nested item 2" />
-        <FluentTreeItem Text="Nested item 3" />
-    </FluentTreeItem>
-    <FluentTreeItem Text="Root item 2">
-        <FluentDivider></FluentDivider>
-        <FluentTreeItem Text="Flowers">
-            <FluentTreeItem Disabled="true" Text="Daisy" />
-            <FluentTreeItem Text="Sunflower" />
-            <FluentTreeItem Text="Rose" />
-        </FluentTreeItem>
-        <FluentTreeItem Text="Nested item 2" />
-        <FluentTreeItem Text="Nested item 3" />
-    </FluentTreeItem>
-    <FluentTreeItem Text="Root item 3 - Leaf Erikson" />
-</FluentTreeView>
-
-
-@code {
-    FluentTreeItem? currentSelected;
-    FluentTreeItem? currentAffected;
-
-    private void HandleOnExpandedChanged(FluentTreeItem item)
-    {
-        currentAffected = item;
-    }
-}
