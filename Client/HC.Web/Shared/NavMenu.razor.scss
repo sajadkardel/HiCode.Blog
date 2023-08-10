@@ -1,16 +1,31 @@
 ﻿@import '../Styles/abstracts/_colors.scss';
+@import '../Styles/abstracts/_media-queries.scss';
 
-.nav-container {
+.main-nav {
     display: none;
     flex-flow: column nowrap;
     position: fixed;
-    width: 300px;
+    width: 0;
     min-height: 100%;
     z-index: 1;
     background-color: $FooterColor;
     transition: width 0.5s;
 
+    .items {
+        display: none;
+    }
+
     &.avtive {
+        width: 300px;
+
+        .items {
+            display: block;
+        }
+    }
+
+
+
+    @include lt-lg {
         display: flex;
     }
 }

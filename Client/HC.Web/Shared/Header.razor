@@ -2,12 +2,22 @@
 
 <div class="main-header">
     <div class="header-menu">
-        <FluentButton Class="nav-expander" OnClick="OnExpanderClick">X</FluentButton>
+        <FluentButton Class="nav-expander" OnClick="OnExpanderClick">
+            <FluentIcon Icon="Icons.Regular.Size24.ContentSettings" />
+        </FluentButton>
         <div class="menu-items">
             <FluentAnchor Href="">مطالب</FluentAnchor>
             <FluentAnchor Href="">مطالب</FluentAnchor>
         </div>
         <FluentSearch Class="nav-search" Placeholder="جستجو..."></FluentSearch>
     </div>
-    <FluentAnchor Class="logo" Href="@RoutingConstants.ClientSide.Page.Index" Appearance="Appearance.Filled" />
+    <div class="header-detail">
+        <div class="social-link-group">
+            <a class="social-link twitter-link" target="_blank" href=""></a>
+            <a class="social-link github-link" target="_blank" href=""></a>
+            <a class="social-link youtube-link" target="_blank" href=""></a>
+            <a class="social-link linkedin-link" target="_blank" href=""></a>
+        </div>
+        <FluentAnchor Class="logo" Href="@RoutingConstants.ClientSide.Page.Index" Appearance="Appearance.Filled" />
+    </div>
 </div>

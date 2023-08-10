@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using HC.Web.Shared;
+using Microsoft.AspNetCore.Components;
 
-namespace HC.Web.Shared;
+namespace HC.Web.Components;
 
 public partial class BlogPostPreview : AppBaseComponent
 {
     [Parameter] public string Title { get; set; } = string.Empty;
     [Parameter] public string ShortDescription { get; set; } = string.Empty;
-    [Parameter] public string ImageSrc { get; set; } = "/images/icons/icon-512.svg";
+    [Parameter] public string ImageSrc { get; set; } = "/images/post-preview.jpeg";
     [Parameter] public string ImageAlt { get; set; } = "HiCode";
-
 
     protected override async Task OnInitializedAsync()
     {

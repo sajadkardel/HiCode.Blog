@@ -7,47 +7,48 @@
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: center;
-    width: 270px;
-    height: 470px;
+    width: inherit;
+    height: inherit;
+    min-width: 170px;
+    min-height: 270px;
     border-radius: 5px;
     padding: 10px;
-    background-color: $HeaderColor;
+    background-color: transparent;
     box-shadow: 0 3px 7px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid $BorderColor;
+    cursor: pointer;
+    overflow: hidden;
 
     &:hover {
-        background-color: $FooterColor;
-        /*width: 260px;
-        height: 460px;*/
+        background-color: $HeaderColor;
     }
 
     img {
         border-radius: 5px;
         width: 100%;
-        height: 200px;
+        height: 60%;
     }
 
     .content {
         display: flex;
         flex-flow: column nowrap;
         width: 100%;
-        height: 200px;
-        padding-top: 20px;
+        height: 40%;
+        margin-top: 15px;
+        overflow: hidden;
 
         .title {
-            font-size: 15px;
-            font-weight: 600;
+            font-size: 17px;
+            font-weight: bold;
             color: $TitleColor;
         }
 
         .text {
-            padding-top: 10px;
-            overflow: hidden;
+            height: 100%;
             color: $TextColor;
+            white-space: normal;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
-    }
-
-    .read-more {
-        width: 100%;
-        height: 100%;
     }
 }

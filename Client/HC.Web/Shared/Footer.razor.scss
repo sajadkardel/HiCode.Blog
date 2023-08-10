@@ -14,19 +14,23 @@
     z-index: 100;
 
     .social-link-group {
-        display: flex;
+        display: none;
         flex-flow: row nowrap;
         justify-content: center;
         align-items: center;
+        gap: 20px;
+
+        @include lt-lg {
+            display: flex;
+        }
 
         .social-link {
             cursor: pointer;
-            width: rem(32px);
-            height: rem(32px);
-            margin: 0 rem(10);
+            width: rem(48px);
+            height: rem(48px);
             border-radius: 50%;
             background-color: #888;
-            background-size: rem(28px);
+            background-size: rem(50px);
             background-position: center;
             background-repeat: no-repeat;
         }

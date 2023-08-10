@@ -26,6 +26,7 @@ html, body, #app {
     padding: 0;
     width: 100%;
     height: 100%;
+    box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     direction: rtl;
 }
@@ -35,11 +36,12 @@ html, body, #app {
 @import '../Shared/Header.razor.scss';
 @import '../Shared/Footer.razor.scss';
 @import '../Shared/NavMenu.razor.scss';
-@import '../Shared/LoadingComponent.razor.scss';
 @import '../Shared/MainLayout.razor.scss';
 @import '../Shared/NotAuthorizedComponent.razor.scss';
 @import '../Shared/PageNotFound.razor.scss';
-@import '../Shared/BlogPostPreview.razor.scss';
+
+// Components
+@import '../Components/BlogPostPreview.razor.scss';
 
 // Pages
 @import '../Pages/Index.razor.scss';

@@ -1,26 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <title>HiCode</title>
-        <base href="/" />
-        <link href="_content/Microsoft.Fast.Components.FluentUI/css/reboot.css" rel="stylesheet" /> <!--This is for FluentUi-->
-        <link href="BlazorApp3.styles.css" rel="stylesheet" /> <!--This is for FluentUi-->
-        <link href="styles/app.min.css" rel="stylesheet" />
-        <link rel="icon" type="image/svg" href="images/icons/favicon.svg" />
-        <link href="manifest.json" rel="manifest" />
-        <link rel="apple-touch-icon" sizes="512x512" href="images/icons/icon-512.svg" />
-        <link rel="apple-touch-icon" sizes="192x192" href="images/icons/icon-192.svg" />
-    </head>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>HiCode</title>
+    <base href="/" />
+    <link href="_content/Microsoft.Fast.Components.FluentUI/css/reboot.css" rel="stylesheet" /> <!--This is for FluentUi-->
+    <link href="BlazorApp3.styles.css" rel="stylesheet" /> <!--This is for FluentUi-->
+    <link href="styles/app.min.css" rel="stylesheet" />
+    <link rel="icon" type="image/svg" href="images/icons/favicon.svg" />
+    <link href="manifest.json" rel="manifest" />
+    <link rel="apple-touch-icon" sizes="512x512" href="images/icons/icon-512.svg" />
+    <link rel="apple-touch-icon" sizes="192x192" href="images/icons/icon-192.svg" />
 
-    <body>
-        <div id="app"></div>
+    <style>
+        .loading-container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0e0618;
+        }
 
-        <script src="_framework/blazor.webassembly.js"></script>
-        <script src="/scripts/app.js"></script>
-        <script>navigator.serviceWorker.register('service-worker.js');</script>
-    </body>
+        .wave {
+            width: 5px;
+            height: 100px;
+            background: linear-gradient(45deg, cyan, #fff);
+            margin: 10px;
+            animation: wave 1s linear infinite;
+            border-radius: 20px;
+        }
+
+        .wave:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .wave:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .wave:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        .wave:nth-child(5) {
+            animation-delay: 0.4s;
+        }
+
+        .wave:nth-child(6) {
+            animation-delay: 0.5s;
+        }
+
+        .wave:nth-child(7) {
+            animation-delay: 0.6s;
+        }
+
+        .wave:nth-child(8) {
+            animation-delay: 0.7s;
+        }
+
+        .wave:nth-child(9) {
+            animation-delay: 0.8s;
+        }
+
+        .wave:nth-child(10) {
+            animation-delay: 0.9s;
+        }
+
+        @keyframes wave {
+            0% {
+                transform: scale(0);
+            }
+
+            50% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+        <!--Loading-->
+        <div class="loading-container">
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+        </div>
+
+    </div>
+
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script src="/scripts/app.js"></script>
+    <script>navigator.serviceWorker.register('service-worker.js');</script>
+</body>
 
 </html>

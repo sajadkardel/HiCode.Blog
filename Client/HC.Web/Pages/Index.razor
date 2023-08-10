@@ -4,13 +4,32 @@
 <PageTitle>@PageTitleResource.Index</PageTitle>
 
 <div class="index-container">
-
-    <span class="title">آخرین مطالب</span>
-
-    <div class="recent-post">
-        @for (int i = 0; i < 10; i++)
+    <div class="recent-post-box">
+        @for (int i = 0; i < 2; i++)
         {
-            <BlogPostPreview />
+            <div class="post-container">
+                <BlogPostPreview ImageSrc="/images/post-preview2.webp" />
+            </div>
         }
+    </div>
+
+    <div class="carousel-box">
+        <FluentHorizontalScroll @ref="_carouselRef" Class="carousel" Speed="1000" FlippersHiddenFromAt="false">
+            @for (int i = 0; i < 10; i++)
+            {
+                <div class="content-box">
+                    <BlogPostPreview ImageSrc="/images/post-preview.jpeg" />
+                </div>
+            }
+        </FluentHorizontalScroll>
+
+        <div class="carousel-navigators">
+            <FluentButton Class="cn-btn" OnClick="() => _carouselRef.ScrollToPrevious()">
+                <FluentIcon Icon="Icons.Regular.Size24.ArrowRight" />
+            </FluentButton>
+            <FluentButton Class="cn-btn" OnClick="() => _carouselRef.ScrollToNext()">
+                <FluentIcon Icon="Icons.Regular.Size24.ArrowLeft" />
+            </FluentButton>
+        </div>
     </div>
 </div>
