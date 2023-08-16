@@ -1,0 +1,25 @@
+﻿@page "/blog/archive"
+@inherits AppBaseComponent
+
+<PageTitle>@PageTitleResource.BlogPost</PageTitle>
+
+<div class="archive-container">
+    <div class="posts">
+        @for (int i = 0; i < 10; i++)
+        {
+            <div class="post-container">
+                <BlogPostPreview ImageSrc="/images/post-preview2.webp" />
+            </div>
+        }
+    </div>
+
+    <div class="pagination">
+        <FluentButton>
+            <FluentIcon Icon="Icons.Regular.Size24.ArrowRight" />
+        </FluentButton>
+        <FluentButton>2</FluentButton>
+        <FluentButton>
+            <FluentIcon Icon="Icons.Regular.Size24.ArrowLeft" />
+        </FluentButton>
+    </div>
+</div>
