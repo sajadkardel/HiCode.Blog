@@ -37,7 +37,7 @@ public class AuthService : IAuthService, IScopedDependency
         if (tokenHandler.CanReadToken(response.Data.access_token))
         {
             var securityToken = tokenHandler.ReadJwtToken(response.Data.access_token);
-            await _localStorageService.SetToCookieAsync("access_token", response.Data.access_token, (DateTime.Now.Second - securityToken.ValidTo.Second), cancellationToken);
+            await _localStorageService.SetToCookieAsync("access_token", response.Data.access_token, (DateTimeOffset.Now.Second - securityToken.ValidTo.Second), cancellationToken);
             await _appAuthenticationStateProvider.RaiseAuthenticationStateHasChanged();
         }
 

@@ -6,13 +6,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HC.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitDatabase : Migration
+    public partial class InitializeDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
                 name: "Blog");
+
+            migrationBuilder.EnsureSchema(
+                name: "Common");
 
             migrationBuilder.EnsureSchema(
                 name: "Identity");
@@ -27,9 +30,9 @@ namespace HC.Data.Migrations
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     IconName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     ParentCategoryId = table.Column<int>(type: "int", nullable: true),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreateDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    LastModifyDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    DeleteDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     LastChangerUserId = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -42,6 +45,31 @@ namespace HC.Data.Migrations
                         principalSchema: "Blog",
                         principalTable: "Categories",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Media",
+                schema: "Common",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Alt = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhysicalPath = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: false),
+                    Size = table.Column<long>(type: "bigint", nullable: false),
+                    MediaSystemType = table.Column<int>(type: "int", nullable: false),
+                    MediaFileType = table.Column<int>(type: "int", nullable: false),
+                    MediaFileExtension = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
+                    CreateDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    LastModifyDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    DeleteDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LastChangerUserId = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Media", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -69,9 +97,9 @@ namespace HC.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreateDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    LastModifyDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    DeleteDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     LastChangerUserId = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -146,14 +174,14 @@ namespace HC.Data.Migrations
                     Description = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: true),
                     PreviewImageName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ScheduledPublishDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ScheduledPublishDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     IsPublished = table.Column<bool>(type: "bit", nullable: false),
                     LikeCount = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     AuthorUserId = table.Column<int>(type: "int", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreateDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    LastModifyDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    DeleteDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     LastChangerUserId = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -282,9 +310,9 @@ namespace HC.Data.Migrations
                     ParentCommentId = table.Column<int>(type: "int", nullable: true),
                     PostId = table.Column<int>(type: "int", nullable: false),
                     AuthorUserId = table.Column<int>(type: "int", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreateDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    LastModifyDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    DeleteDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     LastChangerUserId = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -322,9 +350,9 @@ namespace HC.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PostId = table.Column<int>(type: "int", nullable: false),
                     TagId = table.Column<int>(type: "int", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreateDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    LastModifyDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    DeleteDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     LastChangerUserId = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -448,6 +476,10 @@ namespace HC.Data.Migrations
             migrationBuilder.DropTable(
                 name: "Comments",
                 schema: "Blog");
+
+            migrationBuilder.DropTable(
+                name: "Media",
+                schema: "Common");
 
             migrationBuilder.DropTable(
                 name: "PostTags",
