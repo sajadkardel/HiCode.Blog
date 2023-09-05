@@ -58,13 +58,25 @@ public static class RoutingConstants
         public static class Page
         {
             public static string Index = "/";
-            public static string SignUp = "/sign-up";
-            public static string SignIn = "/sign-in";
-            public static string Post(int PostId) => $"/blog-post/{PostId}";
-            public static string News = "/news";
-            public static string Books = "/books";
-            public static string Users = "/users";
-            public static string Profile = "/profile";
+
+            public static class User
+            {
+                public const string SignUp = "/sign-up";
+                public const string SignIn = "/sign-in";
+                public const string Profile = "/profile";
+            }
+
+            public static class Blog
+            {
+                public const string Archive = "/blog/archive";
+                public static string Post(int PostId) => $"/blog/read-post/{PostId}";
+            }
+
+            public static class Admin
+            {
+                public const string Users = "/admin/users";
+                public const string NewPost = "/admin/new-post";
+            }
         }
     }
 }

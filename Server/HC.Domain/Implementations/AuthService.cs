@@ -66,10 +66,10 @@ public class AuthService : IAuthService, IScopedDependency
         JwtSecurityToken securityToken = tokenHandler.CreateJwtSecurityToken(new SecurityTokenDescriptor
         {
             Issuer = JwtSettings.Get().Issuer,
-            IssuedAt = DateTime.Now,
+            IssuedAt = DateTime.UtcNow,
             Audience = JwtSettings.Get().Audience,
-            NotBefore = DateTime.Now.AddMinutes(JwtSettings.Get().NotBeforeMinutes),
-            Expires = DateTime.Now.AddMinutes(JwtSettings.Get().ExpirationMinutes),
+            NotBefore = DateTime.UtcNow.AddMinutes(JwtSettings.Get().NotBeforeMinutes),
+            Expires = DateTime.UtcNow.AddMinutes(JwtSettings.Get().ExpirationMinutes),
             SigningCredentials = signingCredentials,
             EncryptingCredentials = encryptingCredentials,
             Subject = new ClaimsIdentity(claims)

@@ -30,11 +30,11 @@ namespace HC.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset>("CreateDate")
+                        .HasColumnType("datetimeoffset");
 
-                    b.Property<DateTime?>("DeleteDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset?>("DeleteDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("IconName")
                         .HasMaxLength(50)
@@ -46,8 +46,8 @@ namespace HC.Data.Migrations
                     b.Property<int>("LastChangerUserId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("LastModifyDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset?>("LastModifyDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -80,11 +80,11 @@ namespace HC.Data.Migrations
                         .HasMaxLength(3000)
                         .HasColumnType("nvarchar(3000)");
 
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset>("CreateDate")
+                        .HasColumnType("datetimeoffset");
 
-                    b.Property<DateTime?>("DeleteDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset?>("DeleteDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -92,8 +92,8 @@ namespace HC.Data.Migrations
                     b.Property<int>("LastChangerUserId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("LastModifyDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset?>("LastModifyDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<int>("LikeCount")
                         .HasColumnType("int");
@@ -132,11 +132,11 @@ namespace HC.Data.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset>("CreateDate")
+                        .HasColumnType("datetimeoffset");
 
-                    b.Property<DateTime?>("DeleteDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset?>("DeleteDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Description")
                         .HasMaxLength(2000)
@@ -151,8 +151,8 @@ namespace HC.Data.Migrations
                     b.Property<int>("LastChangerUserId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("LastModifyDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset?>("LastModifyDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<int>("LikeCount")
                         .ValueGeneratedOnAdd()
@@ -162,8 +162,8 @@ namespace HC.Data.Migrations
                     b.Property<string>("PreviewImageName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("ScheduledPublishDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset?>("ScheduledPublishDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -187,11 +187,11 @@ namespace HC.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset>("CreateDate")
+                        .HasColumnType("datetimeoffset");
 
-                    b.Property<DateTime?>("DeleteDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset?>("DeleteDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -199,8 +199,8 @@ namespace HC.Data.Migrations
                     b.Property<int>("LastChangerUserId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("LastModifyDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset?>("LastModifyDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<int>("PostId")
                         .HasColumnType("int");
@@ -225,11 +225,11 @@ namespace HC.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset>("CreateDate")
+                        .HasColumnType("datetimeoffset");
 
-                    b.Property<DateTime?>("DeleteDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset?>("DeleteDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -237,8 +237,8 @@ namespace HC.Data.Migrations
                     b.Property<int>("LastChangerUserId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("LastModifyDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset?>("LastModifyDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -248,6 +248,61 @@ namespace HC.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tags", "Blog");
+                });
+
+            modelBuilder.Entity("HC.Data.Entities.Common.Media", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Alt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("CreateDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("DeleteDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LastChangerUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset?>("LastModifyDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("MediaFileExtension")
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("nvarchar(12)");
+
+                    b.Property<int>("MediaFileType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MediaSystemType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("PhysicalPath")
+                        .IsRequired()
+                        .HasMaxLength(3000)
+                        .HasColumnType("nvarchar(3000)");
+
+                    b.Property<long>("Size")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Media", "Common");
                 });
 
             modelBuilder.Entity("HC.Data.Entities.Identity.Role", b =>

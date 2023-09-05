@@ -102,17 +102,17 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, int>
                 switch (item.State)
                 {
                     case EntityState.Added:
-                        entity.CreateDate = DateTime.Now;
+                        entity.CreateDate = DateTimeOffset.Now;
                         entity.IsDeleted = false;
                         break;
 
                     case EntityState.Modified:
-                        entity.LastModifyDate = DateTime.Now;
+                        entity.LastModifyDate = DateTimeOffset.Now;
                         break;
 
                     case EntityState.Deleted:
                         item.State = EntityState.Modified;
-                        entity.DeleteDate = DateTime.Now;
+                        entity.DeleteDate = DateTimeOffset.Now;
                         entity.IsDeleted = true;
                         break;
                 }

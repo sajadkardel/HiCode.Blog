@@ -45,10 +45,10 @@ html, body, #app {
 
 // Pages
 @import '../Pages/Index.razor.scss';
-@import '../Pages/SignUp.razor.scss';
-@import '../Pages/SignIn.razor.scss';
-@import '../Pages/BlogPost.razor.scss';
+@import '../Pages/User/SignUp.razor.scss';
+@import '../Pages/User/SignIn.razor.scss';
+@import '../Pages/Blog/ReadPost.razor.scss';
+@import '../Pages/Blog/Archive.razor.scss';
 
 // Pages => Admin
 @import '../Pages/Admin/Users.razor.scss';
-@import '../Pages/Admin/BlogCategories.razor.scss';

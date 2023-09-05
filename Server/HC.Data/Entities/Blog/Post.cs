@@ -10,7 +10,7 @@ public class Post : BaseEntity
     public string? Description { get; set; }
     public string? PreviewImageName { get; set; }
     public string? Content { get; set; }
-    public DateTime? ScheduledPublishDate { get; set; }
+    public DateTimeOffset? ScheduledPublishDate { get; set; }
     public bool IsPublished { get; set; }
     public int LikeCount { get; set; }
     public int CategoryId { get; set; }

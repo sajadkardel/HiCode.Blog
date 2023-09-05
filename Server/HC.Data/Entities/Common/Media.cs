@@ -10,12 +10,12 @@ public class Media : BaseEntity
     public string Name { get; set; } = default!;
     public string? Alt { get; set; }
     public string PhysicalPath { get; set; } = default!;
-    public MediaSystemType MediaSystemType { get; set; } = default!;
-    public MediaFileType MediaFileType { get; set; } = default!;
-    public MediaFileExtension MediaFileExtension { get; set; } = default!;
-    public int? SizeX { get; set; }
-    public int? SizeY { get; set; }
+    public long Size { get; set; }
+    public MediaSystemType MediaSystemType { get; set; }
+    public MediaFileType MediaFileType { get; set; }
+    public string MediaFileExtension { get; set; } = default!;
 }
+
 
 public class MediaConfiguration : IEntityTypeConfiguration<Media>
 {
@@ -25,8 +25,9 @@ public class MediaConfiguration : IEntityTypeConfiguration<Media>
 
         builder.Property(x => x.Name).IsRequired().HasMaxLength(128);
         builder.Property(x => x.PhysicalPath).IsRequired().HasMaxLength(3000);
+        builder.Property(x => x.Size).IsRequired();
         builder.Property(x => x.MediaSystemType).IsRequired();
         builder.Property(x => x.MediaFileType).IsRequired();
-        builder.Property(x => x.MediaFileExtension).IsRequired();
+        builder.Property(x => x.MediaFileExtension).IsRequired().HasMaxLength(12);
     }
 }
