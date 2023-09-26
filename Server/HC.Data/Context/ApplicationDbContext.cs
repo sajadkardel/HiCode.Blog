@@ -20,7 +20,7 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, int>
     {
         base.OnModelCreating(builder);
 
-        builder.Entity<IdentityUserRole<int>>().ToTable("UserRoles", typeof(User).GetParentFolderName());
+        //builder.Entity<IdentityUserRole<int>>().ToTable("UserRoles", typeof(User).GetParentFolderName());
         builder.Entity<IdentityRoleClaim<int>>().ToTable("RoleClaims", typeof(User).GetParentFolderName());
         builder.Entity<IdentityUserLogin<int>>().ToTable("UserLogins", typeof(User).GetParentFolderName());
         builder.Entity<IdentityUserToken<int>>().ToTable("UserTokens", typeof(User).GetParentFolderName());

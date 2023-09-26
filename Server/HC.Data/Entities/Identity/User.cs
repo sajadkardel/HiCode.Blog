@@ -28,5 +28,24 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(p => p.IsActive).HasDefaultValue(true);
         builder.Property(p => p.FullName).HasMaxLength(50);
+
+        #region Create Admin
+        const string userName = "Admin";
+        var appUser = new User
+        {
+            Id = 1,
+            UserName = userName,
+            FullName = userName,
+            NormalizedUserName = userName.ToUpperInvariant(),
+            NormalizedEmail = userName.ToUpperInvariant(),
+            SecurityStamp = Guid.NewGuid().ToString(),
+            IsActive = true,
+            Email = "admin@hicode.com",
+        };
+
+        var hasher = new PasswordHasher<User>();
+        appUser.PasswordHash = hasher.HashPassword(appUser, "123456");
+        builder.HasData(appUser);
+        #endregion
     }
 }
