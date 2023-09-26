@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HC.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230905212850_InitializeDatabase")]
+    [Migration("20230926132301_InitializeDatabase")]
     partial class InitializeDatabase
     {
         /// <inheritdoc />
@@ -342,6 +342,15 @@ namespace HC.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("Roles", "Identity");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "System Admin",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("HC.Data.Entities.Identity.User", b =>
@@ -428,6 +437,26 @@ namespace HC.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("Users", "Identity");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "b49a5801-50af-4b6c-9bc6-00d325009bb0",
+                            Email = "admin@hicode.com",
+                            EmailConfirmed = false,
+                            FullName = "Admin",
+                            IsActive = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHx9PYCVWyjccBEyh08SwiXxIcj95oY3T2M2s3jvDnPdO204REwO6XuuUhxUQuL5pA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "0438a3b5-ba8e-4dc4-a5f5-2a69cd1aaeb2",
+                            TwoFactorEnabled = false,
+                            UserName = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -511,7 +540,9 @@ namespace HC.Data.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("UserRoles", "Identity");
+                    b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
@@ -531,6 +562,20 @@ namespace HC.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("UserTokens", "Identity");
+                });
+
+            modelBuilder.Entity("HC.Data.Entities.Identity.UserRole", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserRole<int>");
+
+                    b.ToTable("UserRoles", "Identity");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 1
+                        });
                 });
 
             modelBuilder.Entity("HC.Data.Entities.Blog.Category", b =>
@@ -653,6 +698,15 @@ namespace HC.Data.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HC.Data.Entities.Identity.UserRole", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", null)
+                        .WithOne()
+                        .HasForeignKey("HC.Data.Entities.Identity.UserRole", "UserId", "RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 

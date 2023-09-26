@@ -164,6 +164,32 @@ namespace HC.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AspNetUserRoles",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserRoles_Roles_RoleId",
+                        column: x => x.RoleId,
+                        principalSchema: "Identity",
+                        principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_AspNetUserRoles_Users_UserId",
+                        column: x => x.UserId,
+                        principalSchema: "Identity",
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Posts",
                 schema: "Blog",
                 columns: table => new
@@ -250,33 +276,6 @@ namespace HC.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserRoles",
-                schema: "Identity",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    RoleId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserRoles", x => new { x.UserId, x.RoleId });
-                    table.ForeignKey(
-                        name: "FK_UserRoles_Roles_RoleId",
-                        column: x => x.RoleId,
-                        principalSchema: "Identity",
-                        principalTable: "Roles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_UserRoles_Users_UserId",
-                        column: x => x.UserId,
-                        principalSchema: "Identity",
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "UserTokens",
                 schema: "Identity",
                 columns: table => new
@@ -291,6 +290,39 @@ namespace HC.Data.Migrations
                     table.PrimaryKey("PK_UserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
                         name: "FK_UserTokens_Users_UserId",
+                        column: x => x.UserId,
+                        principalSchema: "Identity",
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserRoles",
+                schema: "Identity",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserRoles", x => new { x.UserId, x.RoleId });
+                    table.ForeignKey(
+                        name: "FK_UserRoles_AspNetUserRoles_UserId_RoleId",
+                        columns: x => new { x.UserId, x.RoleId },
+                        principalTable: "AspNetUserRoles",
+                        principalColumns: new[] { "UserId", "RoleId" },
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserRoles_Roles_RoleId",
+                        column: x => x.RoleId,
+                        principalSchema: "Identity",
+                        principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserRoles_Users_UserId",
                         column: x => x.UserId,
                         principalSchema: "Identity",
                         principalTable: "Users",
@@ -374,6 +406,34 @@ namespace HC.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.InsertData(
+                schema: "Identity",
+                table: "Roles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
+                values: new object[] { 1, null, "System Admin", "Admin", "ADMIN" });
+
+            migrationBuilder.InsertData(
+                schema: "Identity",
+                table: "Users",
+                columns: new[] { "Id", "AccessFailedCount", "Age", "ConcurrencyStamp", "Email", "EmailConfirmed", "FullName", "Gender", "IsActive", "LastLoginDate", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { 1, 0, null, "b49a5801-50af-4b6c-9bc6-00d325009bb0", "admin@hicode.com", false, "Admin", null, true, null, false, null, "ADMIN", "ADMIN", "AQAAAAIAAYagAAAAEHx9PYCVWyjccBEyh08SwiXxIcj95oY3T2M2s3jvDnPdO204REwO6XuuUhxUQuL5pA==", null, false, "0438a3b5-ba8e-4dc4-a5f5-2a69cd1aaeb2", false, "Admin" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { 1, 1 });
+
+            migrationBuilder.InsertData(
+                schema: "Identity",
+                table: "UserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { 1, 1 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUserRoles_RoleId",
+                table: "AspNetUserRoles",
+                column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Categories_ParentCategoryId",
@@ -514,12 +574,15 @@ namespace HC.Data.Migrations
                 schema: "Blog");
 
             migrationBuilder.DropTable(
-                name: "Roles",
-                schema: "Identity");
+                name: "AspNetUserRoles");
 
             migrationBuilder.DropTable(
                 name: "Categories",
                 schema: "Blog");
+
+            migrationBuilder.DropTable(
+                name: "Roles",
+                schema: "Identity");
 
             migrationBuilder.DropTable(
                 name: "Users",

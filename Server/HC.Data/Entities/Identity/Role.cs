@@ -18,5 +18,16 @@ public class RoleConfiguration : IEntityTypeConfiguration<Role>
 
         builder.Property(p => p.Name).IsRequired().HasMaxLength(50);
         builder.Property(p => p.Description).IsRequired().HasMaxLength(200);
+
+        #region Create Admin
+        const string roleName = "Admin";
+        builder.HasData(new Role
+        {
+            Id = 1,
+            Name = roleName,
+            NormalizedName = roleName.ToUpperInvariant(),
+            Description = "System Admin"
+        });
+        #endregion
     }
 }
