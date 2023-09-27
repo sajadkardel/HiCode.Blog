@@ -2,16 +2,16 @@
 
 <ErrorBoundary>
     <ChildContent>
-
         <FluentDesignSystemProvider FillColor="#17264d" NeutralBaseColor="#eff6ff" AccentBaseColor="#2563ec" Direction="LocalizationDirection.rtl">
+
             <Header />
             <NavMenu />
             <main class="main-body">
                 @Body
             </main>
             <Footer />
-        </FluentDesignSystemProvider>
 
+        </FluentDesignSystemProvider>
     </ChildContent>
     <ErrorContent Context="ex">
         <p class="error">@ex.Message</p>
