@@ -1,17 +1,18 @@
 ﻿@import '../Styles/abstracts/_colors.scss';
 @import '../Styles/abstracts/_functions.scss';
 @import '../Styles/abstracts/_media-queries.scss';
+@import '../Styles/abstracts/_vars.scss';
 
 .main-footer {
     display: flex;
-    flex-flow: column nowrap;
-    justify-content: space-evenly;
     align-items: center;
+    justify-content: center;
+    position: relative;
     width: 100%;
-    min-height: rem(90px);
+    height: $FooterHeight;
     background-color: $FooterColor;
     border-top: 1px solid $BorderColor;
-    z-index: 100;
+    z-index: 10;
 
     .social-link-group {
         display: none;
