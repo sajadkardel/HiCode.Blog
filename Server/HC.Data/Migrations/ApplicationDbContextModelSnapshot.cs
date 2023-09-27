@@ -440,7 +440,7 @@ namespace HC.Data.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b49a5801-50af-4b6c-9bc6-00d325009bb0",
+                            ConcurrencyStamp = "54abf752-390e-44bf-b3ba-9a663416be6b",
                             Email = "admin@hicode.com",
                             EmailConfirmed = false,
                             FullName = "Admin",
@@ -448,9 +448,9 @@ namespace HC.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHx9PYCVWyjccBEyh08SwiXxIcj95oY3T2M2s3jvDnPdO204REwO6XuuUhxUQuL5pA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEE3gVn/Zo6YcKZMLkA8i2h+JfCnXReOmSS0ThL2NojnjRKxHQJ48nSz8/bFs1yaonA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0438a3b5-ba8e-4dc4-a5f5-2a69cd1aaeb2",
+                            SecurityStamp = "7fa92506-89e4-401c-8cb0-a4290135f273",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });

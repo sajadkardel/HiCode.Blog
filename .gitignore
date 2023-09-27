@@ -363,6 +363,6 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # HC
-/Client/HC.Web/wwwroot/scripts/app*.js
+/Client/HC.Web/wwwroot/scripts/*.js
 /**/*.css
 *.map
