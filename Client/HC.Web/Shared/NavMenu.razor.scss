@@ -16,6 +16,7 @@
 
     &.deactive {
         width: 0;
+<<<<<<< HEAD
 
         @include gt-md {
             width: $NavMenuWidth;
@@ -26,6 +27,14 @@
     &::-webkit-scrollbar {
         width: 3px;
     }
+=======
+    }
+
+    /* width */
+    &::-webkit-scrollbar {
+        width: 3px;
+    }
+>>>>>>> d19f618a4461ed9ca1f7a03b5263c4377b1828ae
     /* Track */
     &::-webkit-scrollbar-track {
         background-color: dimgrey;
