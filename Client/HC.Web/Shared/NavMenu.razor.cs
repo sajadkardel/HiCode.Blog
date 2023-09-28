@@ -1,20 +1,18 @@
 ﻿using HC.Shared.Dtos.Blog;
 using HC.Shared.Services.Contracts;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.Extensions.Logging;
 
 namespace HC.Web.Shared;
 
 public partial class NavMenu : AppBaseComponent
 {
-    [Inject] protected IBlogService _blogService { get; set; } = default!;
+    [Parameter] public bool IsOpenNav { get; set; }
+    [Parameter] public EventCallback OnToggleNav { get; set; }
 
-    private bool isExpandedMenu = false;
-
-    private string? _error;
-    private IEnumerable<CategoryResponseDto>? _categories;
-
-    protected override async Task OnInitializedAsync()
+    private async Task ToggleNav()
     {
-        await base.OnInitializedAsync();
+        //await OnToggleNav.InvokeAsync();
     }
 }

@@ -4,9 +4,10 @@
     <ChildContent>
         <FluentDesignSystemProvider FillColor="#17264d" NeutralBaseColor="#eff6ff" AccentBaseColor="#2563ec" Direction="LocalizationDirection.rtl">
 
-            <Header />
-            <NavMenu />
+            <Header OnToggleNav="ToggleNavHandler" IsOpenNav="@_isOpenNav" />
+            <NavMenu OnToggleNav="ToggleNavHandler" IsOpenNav="@_isOpenNav" />
             <main class="main-body">
+                <div class="overlay @(_isOpenNav ? "show" : "")" @onclick="ToggleNavHandler"></div>
                 @Body
             </main>
             <Footer />
