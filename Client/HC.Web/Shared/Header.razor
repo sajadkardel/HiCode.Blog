@@ -2,13 +2,9 @@
 
 <div class="main-header">
     <div class="header-menu">
-        <FluentButton Class="nav-expander" OnClick="OnExpanderClick">
-            <FluentIcon Icon="Icons.Regular.Size24.ContentSettings" />
+        <FluentButton Class="nav-expander" OnClick="ToggleNav">
+            <FluentIcon Value="@(new Icons.Regular.Size24.Filter())" />
         </FluentButton>
-        <div class="menu-items">
-            <FluentAnchor Href="@RoutingConstants.ClientSide.Page.Blog.Archive">آرشیو</FluentAnchor>
-            @*<FluentAnchor Href="">مطالب</FluentAnchor>*@
-        </div>
         <FluentSearch Class="nav-search" Placeholder="جستجو..."></FluentSearch>
     </div>
     <div class="header-detail">

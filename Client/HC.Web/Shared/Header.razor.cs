@@ -1,14 +1,15 @@
 ﻿
+using Microsoft.AspNetCore.Components;
+
 namespace HC.Web.Shared;
 
 public partial class Header : AppBaseComponent
 {
-    private bool isExpandedMenu = true;
+    [Parameter] public bool IsOpenNav { get; set; }
+    [Parameter] public EventCallback OnToggleNav { get; set; }
 
-    private void OnExpanderClick()
+    private async Task ToggleNav()
     {
-        isExpandedMenu = !isExpandedMenu;
-
-        // Notify to NavMenu to width 0px or 300px
+        await OnToggleNav.InvokeAsync();
     }
 }

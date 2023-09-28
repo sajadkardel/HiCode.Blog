@@ -1,23 +1,32 @@
 ﻿@inherits AppBaseComponent
 
-<div class="main-nav @(isExpandedMenu ? "avtive" : "")">
-    <FluentNavMenu Class="items">
-        <FluentNavMenuGroup Text="مطالب">
-            <FluentNavMenuGroup Text="مفاهیم">
-                <FluentNavMenuLink Text="2-1"></FluentNavMenuLink>
-                <FluentNavMenuLink Text="2-2"></FluentNavMenuLink>
-                <FluentNavMenuLink Text="2-3"></FluentNavMenuLink>
+<div class="main-nav @(IsOpenNav ? "avtive" : "deactive")">
+    <FluentNavMenu OnAction="ToggleNav">
+        <FluentNavMenuLink Text="Item 1" Icon="@(new Icons.Regular.Size24.Home())" Href="/" />
+        <FluentNavMenuLink Text="Item 2" Href="/" />
+        <FluentNavMenuGroup Text="Item 3">
+            <FluentNavMenuLink Text="Item 3.1" Icon="@(new Icons.Regular.Size24.LeafOne())" Href="/" />
+            <FluentNavMenuLink Text="Item 3.2" Icon="@(new Icons.Regular.Size24.LeafTwo())" Href="/" />
+        </FluentNavMenuGroup>
+        <FluentNavMenuGroup Text="Item 4">
+            <FluentNavMenuLink Text="Item 4.1" Href="/" />
+            <FluentNavMenuLink Text="Item 4.2" Icon="@(new Icons.Regular.Size24.LeafOne())" Href="/" />
+        </FluentNavMenuGroup>
+        <FluentNavMenuGroup Text="Item 5">
+            <FluentNavMenuLink Text="Item 5.1" Icon="@(new Icons.Regular.Size24.LeafTwo())" Href="/" />
+            <FluentNavMenuGroup Text="Item 5.2">
+                <FluentNavMenuLink Text="Item 5.2.1" Href="/" />
+                <FluentNavMenuLink Text="Item 5.2.2" Href="/" />
             </FluentNavMenuGroup>
-            <FluentNavMenuGroup Text="C# & .Net">
-                <FluentNavMenuLink Text="2-1"></FluentNavMenuLink>
-                <FluentNavMenuLink Text="2-2"></FluentNavMenuLink>
-                <FluentNavMenuLink Text="2-3"></FluentNavMenuLink>
+            <FluentNavMenuGroup Text="Item 5.3">
+                <FluentNavMenuLink Text="Item 5.3.1" Icon="@(new Icons.Regular.Size24.LeafOne())" Href="/" />
+                <FluentNavMenuLink Text="Item 5.3.2" Href="/" />
             </FluentNavMenuGroup>
         </FluentNavMenuGroup>
-        <FluentNavMenuGroup Text="ابزارها">
-            <FluentNavMenuLink Text="2-1"></FluentNavMenuLink>
-            <FluentNavMenuLink Text="2-2"></FluentNavMenuLink>
-            <FluentNavMenuLink Text="2-3"></FluentNavMenuLink>
+        <FluentNavMenuGroup Text="Items with Href">
+            <FluentNavMenuLink Text="Go to Bing" Icon="@(new Icons.Regular.Size24.LeafOne())" Href="/" />
+            <FluentNavMenuLink Text="Go to home page" Icon="@(new Icons.Regular.Size24.Home())" Href="/" />
         </FluentNavMenuGroup>
+        <FluentNavMenuLink Text="Last item" Icon="@(new Icons.Regular.Size24.LeafThree())" Disabled="true" Href="/" />
     </FluentNavMenu>
 </div>
