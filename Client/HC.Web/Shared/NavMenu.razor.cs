@@ -1,18 +1,28 @@
-﻿using HC.Shared.Dtos.Blog;
-using HC.Shared.Services.Contracts;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Routing;
+using Microsoft.JSInterop;
 
 namespace HC.Web.Shared;
 
-public partial class NavMenu : AppBaseComponent
+public partial class NavMenu : AppBaseComponent, IDisposable
 {
+    [Inject] public NavigationManager Navigation { get; set; } = default!;
+
     [Parameter] public bool IsOpenNav { get; set; }
     [Parameter] public EventCallback OnToggleNav { get; set; }
 
-    private async Task ToggleNav()
+    protected override void OnInitialized()
     {
-        //await OnToggleNav.InvokeAsync();
+        Navigation.LocationChanged += HandleLocationChanged;
+    }
+
+    private void HandleLocationChanged(object sender, LocationChangedEventArgs args)
+    {
+        OnToggleNav.InvokeAsync().GetAwaiter();
+    }
+
+    public void Dispose()
+    {
+        Navigation.LocationChanged -= HandleLocationChanged;
     }
 }

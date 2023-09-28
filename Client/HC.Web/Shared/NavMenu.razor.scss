@@ -16,6 +16,10 @@
 
     &.deactive {
         width: 0;
+
+        @include gt-md {
+            width: $NavMenuWidth;
+        }
     }
 
     /* width */

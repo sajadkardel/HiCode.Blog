@@ -6,7 +6,7 @@ namespace HC.Web.Shared;
 
 public partial class MainLayout
 {
-    private bool _isOpenNav = true;
+    private bool _isOpenNav;
 
     [Inject] private IJSRuntime _jsRuntime { get; set; } = default!;
 
