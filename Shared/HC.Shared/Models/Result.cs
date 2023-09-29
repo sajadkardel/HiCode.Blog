@@ -1,6 +1,5 @@
 ﻿using HC.Shared.Enums;
 using HC.Shared.Extensions;
-using System.Diagnostics;
 
 namespace HC.Shared.Models;
 
@@ -8,129 +7,178 @@ public class Result
 {
     public bool Succeeded { get; set; }
     public ResultStatusCode StatusCode { get; set; }
-    public string Message { get; set; }
-
-    public Result(bool succeeded, ResultStatusCode statusCode = ResultStatusCode.Continue, string message = "")
-    {
-        Succeeded = succeeded;
-        StatusCode = statusCode;
-        Message = message;
-    }
+    public string Message { get; set; } = string.Empty;
 
     #region Success
-    [DebuggerStepThrough]
     public static Result Success()
     {
-        return new Result(true, ResultStatusCode.OK, ResultStatusCode.OK.ToDisplay());
+        return new Result
+        {
+            Succeeded = true,
+            StatusCode = ResultStatusCode.OK,
+            Message = ResultStatusCode.OK.ToDisplay()
+        };
     }
 
-    [DebuggerStepThrough]
     public static Result<T> Success<T>(T data)
     {
-        return new Result<T>(data ,true, ResultStatusCode.OK, ResultStatusCode.OK.ToDisplay());
+        return new Result<T>
+        {
+            Data = data ,
+            Succeeded = true,
+            StatusCode = ResultStatusCode.OK,
+            Message = ResultStatusCode.OK.ToDisplay()
+        };
     }
 
-    [DebuggerStepThrough]
     public static Result Success(ResultStatusCode statusCode)
     {
-        return new Result(true, statusCode, statusCode.ToDisplay());
+        return new Result
+        {
+            Succeeded = true,
+            StatusCode = statusCode,
+            Message = statusCode.ToDisplay()
+        };
     }
 
-    [DebuggerStepThrough]
     public static Result<T> Success<T>(T data, ResultStatusCode statusCode)
     {
-        return new Result<T>(data, true, statusCode, statusCode.ToDisplay());
+        return new Result<T>
+        {
+            Data = data,
+            Succeeded = true,
+            StatusCode = statusCode,
+            Message = statusCode.ToDisplay()
+        };
     }
 
-    [DebuggerStepThrough]
     public static Result Success(string message)
     {
-        return new Result(true, ResultStatusCode.OK, message);
+        return new Result
+        {
+            Succeeded = true,
+            StatusCode = ResultStatusCode.OK,
+            Message = message
+        };
     }
 
-    [DebuggerStepThrough]
     public static Result<T> Success<T>(T data, string message)
     {
-        return new Result<T>(data, true, ResultStatusCode.OK, message);
+        return new Result<T>
+        {
+            Data = data,
+            Succeeded = true,
+            StatusCode = ResultStatusCode.OK,
+            Message = message
+        };
     }
 
-    [DebuggerStepThrough]
     public static Result Success(ResultStatusCode statusCode, string message)
     {
-        return new Result(true, statusCode, message);
+        return new Result
+        {
+            Succeeded = true,
+            StatusCode = statusCode,
+            Message = message
+        };
     }
 
-    [DebuggerStepThrough]
     public static Result<T> Success<T>(T data, ResultStatusCode statusCode, string message)
     {
-        return new Result<T>(data, true, statusCode, message);
+        return new Result<T>
+        {
+            Data = data,
+            Succeeded = true,
+            StatusCode = statusCode,
+            Message = message
+        };
     }
     #endregion
 
     #region Failed
-    [DebuggerStepThrough]
     public static Result Failed()
     {
-        return new Result(false, ResultStatusCode.OK, ResultStatusCode.OK.ToDisplay());
+        return new Result
+        {
+            Succeeded = false,
+            StatusCode = ResultStatusCode.InternalServerError,
+            Message = ResultStatusCode.InternalServerError.ToDisplay()
+        };
     }
 
-    [DebuggerStepThrough]
     public static Result<T> Failed<T>()
     {
-        return new Result<T>(false, ResultStatusCode.OK, ResultStatusCode.OK.ToDisplay());
+        return new Result<T>
+        {
+            Succeeded = false,
+            StatusCode = ResultStatusCode.InternalServerError,
+            Message = ResultStatusCode.InternalServerError.ToDisplay()
+        };
     }
 
-    [DebuggerStepThrough]
     public static Result Failed(ResultStatusCode statusCode)
     {
-        return new Result(false, statusCode, statusCode.ToDisplay());
+        return new Result
+        {
+            Succeeded = false,
+            StatusCode = statusCode,
+            Message = statusCode.ToDisplay()
+        };
     }
 
-    [DebuggerStepThrough]
     public static Result<T> Failed<T>(ResultStatusCode statusCode)
     {
-        return new Result<T>(false, statusCode, statusCode.ToDisplay());
+        return new Result<T>
+        {
+            Succeeded = false,
+            StatusCode = statusCode,
+            Message = statusCode.ToDisplay()
+        };
     }
 
-    [DebuggerStepThrough]
     public static Result Failed(string message)
     {
-        return new Result(false, ResultStatusCode.OK, message);
+        return new Result
+        {
+            Succeeded = false,
+            StatusCode = ResultStatusCode.InternalServerError,
+            Message = message
+        };
     }
 
-    [DebuggerStepThrough]
     public static Result<T> Failed<T>(string message)
     {
-        return new Result<T>(false, ResultStatusCode.OK, message);
+        return new Result<T>
+        {
+            Succeeded = false,
+            StatusCode = ResultStatusCode.InternalServerError,
+            Message = message
+        };
     }
 
-    [DebuggerStepThrough]
     public static Result Failed(ResultStatusCode statusCode, string message)
     {
-        return new Result(false, statusCode, message);
+        return new Result
+        {
+            Succeeded = false,
+            StatusCode = statusCode,
+            Message = message
+        };
     }
 
-    [DebuggerStepThrough]
     public static Result<T> Failed<T>(ResultStatusCode statusCode, string message)
     {
-        return new Result<T>(false, statusCode, message);
+        return new Result<T>
+        {
+            Succeeded = false,
+            StatusCode = statusCode,
+            Message = message
+        };
     }
     #endregion
 }
 
-
 public class Result<TData> : Result
 {
-    public Result(bool succeeded, ResultStatusCode statusCode = ResultStatusCode.Continue, string message = "")
-        : base(succeeded, statusCode, message)
-    {
-    }
-
-    public Result(TData data, bool succeeded, ResultStatusCode statusCode, string message = "") 
-        : base(succeeded, statusCode, message)
-    {
-        Data = data;
-    }
-
     public TData Data { get; set; } = default!;
 }
